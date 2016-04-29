@@ -1,18 +1,17 @@
-source ~/.zplug/zplug
+source /home/se/.config/antigen/antigen.zsh
 
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/heroku", from:oh-my-zsh
-zplug "plugins/debian", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-#zplug "zsh-users/zsh-autosuggestions"
+antigen use oh-my-zsh
 
-# must be last plugins
-zplug "zsh-users/zsh-syntax-highlighting"
-#zplug "plugins/history-substring-search", from:oh-my-zsh
+antigen bundle git
+antigen bundle heroku
+antigen bundle debian
+antigen bundle tmux
+antigen bundle zsh-users/zsh-syntax-highlighting
 
-zplug "themes/bira", from:oh-my-zsh
+antigen theme kphoen
+#antigen theme bira
 
-zplug load
+antigen apply
 
 export GOROOT=/usr/local/go
 export GOPATH=/home/se/programs/go_path
@@ -22,3 +21,5 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/home/se/programs/elixir/bin:/home/se/
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.cargo/bin:$PATH"
