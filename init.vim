@@ -13,6 +13,9 @@ set number         "show line numbers
 set colorcolumn=100 " 100 columns per line
 set relativenumber
 
+" Leader Key is SPC
+let mapleader="\<Space>"
+
 " vim-plug
 call plug#begin('$HOME/.config/nvim/bundle')
 let g:plug_threads = 4
@@ -30,15 +33,15 @@ Plug 'Shougo/vimfiler.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'Shougo/deoplete.nvim'
-"Plug 'Rip-Rip/clang_complete'
+"Plug 'Shougo/deoplete.nvim'
 Plug 'Valloric/YouCompleteMe'
+Plug 'lyuts/vim-rtags'
 Plug 'benekastah/neomake'
-Plug 'elixir-lang/vim-elixir'
-Plug 'wting/rust.vim'
+"Plug 'wting/rust.vim'
 Plug 'fatih/vim-go'
-Plug 'lambdatoast/elm.vim'
 Plug 'vim-scripts/Arduino-syntax-file'
+Plug 'sheerun/vim-polyglot'
+Plug 'othree/javascript-libraries-syntax.vim'
 
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
@@ -51,8 +54,13 @@ Plug 'bling/vim-airline'
 Plug 'chazy/cscope_maps'
 Plug 'sjl/gundo.vim'
 Plug 'vim-scripts/Colour-Sampler-Pack'
-Plug 'morhetz/gruvbox'
 Plug 'godlygeek/tabular'
+
+Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'gwutz/vim-materialtheme'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'jdkanani/vim-material-theme'
 
 Plug 'vim-scripts/gnupg.vim'
 
@@ -104,9 +112,6 @@ autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
 let g:ycm_rust_src_path = '/usr/local/rust-src/src'
 
-" syntastic
-let g:syntastic_cpp_compiler_options="-std=c++11 -Wall -Wextra"
-
 " Search / Highlight
 set hlsearch
 set incsearch
@@ -117,22 +122,21 @@ set showcmd
 set cursorline
 
 " Colours
+set termguicolors
 colorscheme gruvbox
 set background=dark
 " before: wombat
 
-" Runtime settings
-runtime ftplugin/man.vim
-
 " ctags
 " Build tags of your own project with leader-tt
-nmap <Leader>tt :call UpdateTags()<CR>
+nmap <Leader>tc :call UpdateTags()<CR>
 
 
 " file / buffer handling
-nmap <silent> <Leader>ntt :NERDTreeToggle<CR>
-nmap <silent> <Leader>ntf :NERDTreeFind<CR>
-nmap <silent> <Leader>tb :TagbarToggle<CR>
+nmap <silent> <Leader>ft :NERDTreeToggle<CR>
+nmap <silent> <Leader>ff :NERDTreeFind<CR>
+nmap <silent> <Leader>tt :TagbarToggle<CR>
+nmap <silent> <Leader>bb :ToggleBufExplorer<CR>
 
 " terminal mode mappings
 tnoremap <Esc> <C-\><C-n>
@@ -146,8 +150,8 @@ nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
 " Clang format
-nmap <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.7.py<cr>
-nmap <Leader>cf :!clang-format-3.7 -style=file -i %:p<cr>:e %<cr>
+nmap <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<cr>
+nmap <Leader>bf :!clang-format-3.8 -style=file -i %:p<cr>:e %<cr>
 
 " vim-airline
 let g:airline_powerline_fonts = 1
@@ -159,8 +163,8 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 nmap <Leader>gv :!cd %:p:h ; find . -name "%:t" -exec gitk --all {} \; &<CR><CR>
 nmap <Leader>ga :!cd %:p:h ; gitk --all &<CR><CR>
 nmap <Leader>gg :!cd %:p:h ; git gui &<CR><CR>
-nmap <Leader>tv :!cd %:p:h ; find . -name "%:t" -exec tig -- {} \;<CR><CR>
-nmap <Leader>ta :!tig<CR><CR>
+nmap <Leader>gt :!cd %:p:h ; find . -name "%:t" -exec tig -- {} \;<CR><CR>
+nmap <Leader>gi :!tig<CR><CR>
 
 " Functions
 func UpdateTags()
@@ -170,14 +174,15 @@ endfunc
 
 " fzf
 nmap <silent> <C-p> :GitFiles<CR>
+nmap <leader><Space> <plug>(fzf-maps-n)
 " let g:fzf_layout = { 'window': 'enew' }
 
 " unite
-nnoremap <silent> ,ff :<C-u>Unite -no-split -start-insert -buffer-name=unite-file file_rec/neovim<CR>
-nnoremap <silent> ,fr :<C-u>Unite -no-split -start-insert -buffer-name=unite-file file_rec/async<CR>
-nnoremap <silent> ,fg :<C-u>Unite -no-split -start-insert -buffer-name=unite-file file_rec/git:--cached:--others:--exclude-standard<CR>
-nnoremap <silent> ,b :<C-u>Unite -no-split -buffer-name=unite-buffer buffer<CR>
-nnoremap <silent> ,g :<C-u>Unite -no-split -buffer-name=unite-grep grep:.<CR>
+nnoremap <silent> <Leader>uf :<C-u>Unite -no-split -start-insert -buffer-name=unite-file file_rec/neovim<CR>
+nnoremap <silent> <Leader>ur :<C-u>Unite -no-split -start-insert -buffer-name=unite-file file_rec/async<CR>
+nnoremap <silent> <Leader>ug :<C-u>Unite -no-split -start-insert -buffer-name=unite-file file_rec/git:--cached:--others:--exclude-standard<CR>
+nnoremap <silent> <Leader>ub :<C-u>Unite -no-split -buffer-name=unite-buffer buffer<CR>
+nnoremap <silent> <Leader>/ :<C-u>Unite -no-split -buffer-name=unite-grep grep:.<CR>
 
 " call unite#custom#source('file_rec/neovim', 'matchers', 'matcher_fuzzy')
 
