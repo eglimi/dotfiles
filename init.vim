@@ -8,10 +8,14 @@ set enc=utf8     "character encoding is UTF-8
 set laststatus=2 "always show status line
 set bs=2         "backspace handling
 
+" Use ripgrep for grepping
+set grepprg=rg\ --vimgrep
+
 " Numbering
 set number         "show line numbers
 set colorcolumn=100 " 100 columns per line
 set relativenumber
+set inccommand=split "live substitution
 
 " Leader Key is SPC
 let mapleader="\<Space>"
@@ -21,10 +25,12 @@ call plug#begin('$HOME/.config/nvim/bundle')
 let g:plug_threads = 4
 
 " Plugins
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimproc.vim'
 
-Plug 'majutsushi/tagbar'
+Plug 'sheerun/vim-polyglot'
+
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+
+"Plug 'majutsushi/tagbar'
 Plug 'jlanzarotta/bufexplorer'
 " Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
@@ -33,14 +39,17 @@ Plug 'Shougo/vimfiler.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 
-"Plug 'Shougo/deoplete.nvim'
-Plug 'Valloric/YouCompleteMe'
-Plug 'lyuts/vim-rtags'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go'
+Plug 'carlitux/deoplete-ternjs'
+
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'lyuts/vim-rtags'
 Plug 'benekastah/neomake'
-"Plug 'wting/rust.vim'
+Plug 'wting/rust.vim'
 Plug 'fatih/vim-go'
+Plug 'awetzel/elixir.nvim'
 Plug 'vim-scripts/Arduino-syntax-file'
-Plug 'sheerun/vim-polyglot'
 Plug 'othree/javascript-libraries-syntax.vim'
 
 Plug 'Shougo/neosnippet'
@@ -58,9 +67,8 @@ Plug 'godlygeek/tabular'
 
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'gwutz/vim-materialtheme'
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'jdkanani/vim-material-theme'
+Plug 'romainl/Apprentice'
+Plug 'dracula/vim'
 
 Plug 'vim-scripts/gnupg.vim'
 
@@ -96,7 +104,7 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set noequalalways
 
 " Deoplete
-"let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 let g:clang_complete_auto = 1
 let g:clang_auto_select = 0
 let g:clang_make_default_keymappings = 0
@@ -123,7 +131,7 @@ set cursorline
 
 " Colours
 set termguicolors
-colorscheme gruvbox
+colorscheme dracula
 set background=dark
 " before: wombat
 
@@ -176,28 +184,15 @@ endfunc
 nmap <silent> <C-p> :GitFiles<CR>
 nmap <leader><Space> <plug>(fzf-maps-n)
 " let g:fzf_layout = { 'window': 'enew' }
+"nnoremap <C-p> :FuzzyOpen<CR>
 
-" unite
-nnoremap <silent> <Leader>uf :<C-u>Unite -no-split -start-insert -buffer-name=unite-file file_rec/neovim<CR>
-nnoremap <silent> <Leader>ur :<C-u>Unite -no-split -start-insert -buffer-name=unite-file file_rec/async<CR>
-nnoremap <silent> <Leader>ug :<C-u>Unite -no-split -start-insert -buffer-name=unite-file file_rec/git:--cached:--others:--exclude-standard<CR>
-nnoremap <silent> <Leader>ub :<C-u>Unite -no-split -buffer-name=unite-buffer buffer<CR>
-nnoremap <silent> <Leader>/ :<C-u>Unite -no-split -buffer-name=unite-grep grep:.<CR>
-
-" call unite#custom#source('file_rec/neovim', 'matchers', 'matcher_fuzzy')
-
-if executable('pt')
-  let g:unite_source_grep_command = 'pt'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
-  let g:unite_source_grep_recursive_opt = ''
-  let g:unite_source_grep_encoding = 'utf-8'
-	let g:unite_source_rec_async_command = 
-				\ ['pt', '--nogroup', '--nocolor', '-l', '']
-endif
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-endfunction
+" denite
+" Change mappings.
+call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+call denite#custom#var('grep', 'command', ['rg'])
+nnoremap <silent> <Leader>uf :<C-u>Denite file_rec<CR>
+nnoremap <silent> <Leader>ub :<C-u>Denite buffer<CR>
+nnoremap <silent> <Leader>uj :<C-u>Denite outline<CR>
+nnoremap <silent> <Leader>/ :<C-u>Denite grep:.<CR>
 
