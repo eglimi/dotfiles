@@ -13,8 +13,8 @@ set grepprg=rg\ --vimgrep
 
 " Numbering
 set number         "show line numbers
-set colorcolumn=100 " 100 columns per line
 set relativenumber
+set colorcolumn=100 " 100 columns per line
 set inccommand=split "live substitution
 
 " Leader Key is SPC
@@ -22,7 +22,7 @@ let mapleader="\<Space>"
 
 " vim-plug
 call plug#begin('$HOME/.config/nvim/bundle')
-let g:plug_threads = 4
+let g:plug_threads = 8
 
 " Plugins
 
@@ -34,7 +34,6 @@ Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'jlanzarotta/bufexplorer'
 " Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'Shougo/vimfiler.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
@@ -42,33 +41,40 @@ Plug 'junegunn/fzf.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go'
 Plug 'carlitux/deoplete-ternjs'
+Plug 'zchee/deoplete-clang'
+Plug 'Shougo/neoinclude.vim'
 
+" Languages
 "Plug 'Valloric/YouCompleteMe'
 "Plug 'lyuts/vim-rtags'
 Plug 'benekastah/neomake'
 Plug 'wting/rust.vim'
 Plug 'fatih/vim-go'
-Plug 'awetzel/elixir.nvim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'thinca/vim-ref'
+Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 Plug 'vim-scripts/Arduino-syntax-file'
 Plug 'othree/javascript-libraries-syntax.vim'
 
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'scrooloose/nerdcommenter'
 
 Plug 'tpope/vim-fugitive'
+Plug 'idanarye/vim-merginal'
 Plug 'gregsexton/gitv'
-
-Plug 'mhinz/vim-signify'
-Plug 'bling/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'itchyny/lightline.vim'
 Plug 'chazy/cscope_maps'
+"Plug 'ludovicchabant/vim-gutentags'
 Plug 'sjl/gundo.vim'
 Plug 'vim-scripts/Colour-Sampler-Pack'
-Plug 'godlygeek/tabular'
+Plug 'junegunn/vim-easy-align'
 
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'romainl/Apprentice'
-Plug 'dracula/vim'
 
 Plug 'vim-scripts/gnupg.vim'
 
@@ -105,6 +111,8 @@ set noequalalways
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path = "/usr/lib/llvm-3.9/lib/libclang.so.1"
+let g:deoplete#sources#clang#clang_header = "/usr/lib/clang/3.9/include"
 let g:clang_complete_auto = 1
 let g:clang_auto_select = 0
 let g:clang_make_default_keymappings = 0
@@ -128,12 +136,73 @@ set smartcase
 set showmatch
 set showcmd
 set cursorline
+set noshowmode " don't show mode, we use statusline
+
+" statusline / lightline
+let g:lightline = {
+	\ 'colorscheme': 'gruvbox',
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'fugitive', 'readonly', 'winnbr', 'filename', 'modified' ] ]
+	\ },
+	\ 'inactive': {
+	\   'left': [ [ 'winnbr', 'filename' ] ]
+	\ },
+	\ 'component_function': {
+	\   'winnbr': 'LightlineWinNbr',
+	\   'fugitive': 'LightlineFugitive',
+	\   'readonly': 'LightlineReadonly',
+	\   'modified': 'LightlineModified'
+	\ },
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' }
+	\ }
+
+function! LightlineWinNbr()
+	let nbr = tabpagewinnr(tabpagenr())
+	return '# '.nbr
+endfunction
+
+function! LightlineFugitive()
+	if exists("*fugitive#head")
+		let branch = fugitive#head()
+		return branch !=# '' ? ' '.branch : ''
+	endif
+	return ''
+endfunction
+
+function! LightlineReadonly()
+	if &readonly
+		return ""
+	else
+		return ""
+	endif
+endfunction
+
+function! LightlineModified()
+	if &modified
+		return "+"
+	else
+		return ""
+	endif
+endfunction
+
+let i = 1
+while i <= 9
+	execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
+	let i = i + 1
+endwhile
 
 " Colours
 set termguicolors
-colorscheme dracula
 set background=dark
+colorscheme gruvbox
+" hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+" hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 " before: wombat
+
+let g:gruvbox_italicize_comments=0
+let g:gruvbox_invert_selection=0
 
 " ctags
 " Build tags of your own project with leader-tt
@@ -144,7 +213,6 @@ nmap <Leader>tc :call UpdateTags()<CR>
 nmap <silent> <Leader>ft :NERDTreeToggle<CR>
 nmap <silent> <Leader>ff :NERDTreeFind<CR>
 nmap <silent> <Leader>tt :TagbarToggle<CR>
-nmap <silent> <Leader>bb :ToggleBufExplorer<CR>
 
 " terminal mode mappings
 tnoremap <Esc> <C-\><C-n>
@@ -158,11 +226,8 @@ nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
 " Clang format
-nmap <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<cr>
-nmap <Leader>bf :!clang-format-3.8 -style=file -i %:p<cr>:e %<cr>
-
-" vim-airline
-let g:airline_powerline_fonts = 1
+nmap <C-K> :pyf /usr/share/vim/addons/syntax/clang-format.py<cr>
+nmap <Leader>fc :!clang-format -style=file -i %:p<cr>:e %<cr>
 
 " go-vim
 au FileType go nmap <Leader>gd <Plug>(go-doc)
@@ -181,8 +246,9 @@ func UpdateTags()
 endfunc
 
 " fzf
-nmap <silent> <C-p> :GitFiles<CR>
+"nmap <silent> <C-p> :GitFiles<CR>
 nmap <leader><Space> <plug>(fzf-maps-n)
+nmap <leader>w :call fzf#vim#windows(0)<CR>
 " let g:fzf_layout = { 'window': 'enew' }
 "nnoremap <C-p> :FuzzyOpen<CR>
 
@@ -191,8 +257,10 @@ nmap <leader><Space> <plug>(fzf-maps-n)
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 call denite#custom#var('grep', 'command', ['rg'])
-nnoremap <silent> <Leader>uf :<C-u>Denite file_rec<CR>
-nnoremap <silent> <Leader>ub :<C-u>Denite buffer<CR>
-nnoremap <silent> <Leader>uj :<C-u>Denite outline<CR>
+call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+nnoremap <silent> <C-p> :<C-u>Denite `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+nnoremap <silent> <Leader>bb :<C-u>Denite buffer<CR>
+nnoremap <silent> <Leader>bj :<C-u>Denite outline<CR>
 nnoremap <silent> <Leader>/ :<C-u>Denite grep:.<CR>
 
