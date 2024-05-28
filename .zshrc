@@ -15,7 +15,6 @@ export PODMAN_IGNORE_CGROUPSV1_WARNING=1
 
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
-#eval "$(direnv hook zsh)"
 eval "$(mise activate zsh)"
 
 source $HOME/.aliases
