@@ -8,6 +8,7 @@ now(function()
 	require('mini.surround').setup({})
 	require('mini.trailspace').setup({})
 	require('mini.align').setup({})
+	require('mini.bracketed').setup({})
 	local indentscope = require('mini.indentscope')
 	indentscope.setup({
 		draw = {
