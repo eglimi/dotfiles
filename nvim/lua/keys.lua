@@ -1,9 +1,3 @@
--- General mapping (I never use them)
---vim.keymap.set('n', 'gh', '0', { desc = "Go to the beginning of the line" })
---vim.keymap.set('n', 'gs', '^', { desc = "Go to the start of the line" })
---vim.keymap.set('n', 'gl', '$', { desc = "Go to the end of the line" })
---vim.keymap.set('n', '<leader>u', '<ESC>:up<CR>', { desc = "Save file." })
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
