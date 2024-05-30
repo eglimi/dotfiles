@@ -35,10 +35,12 @@ local on_attach = function(client, bufnr)
 end
 
 local lspconfig = require('lspconfig')
+local cap_no_snippets = { textDocument = { completion = { completionItem = { snippetSupport = false } } } }
 
 local servers = { 'clangd', 'gopls' }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
+    capabilities = cap_no_snippets,
     on_attach = on_attach,
     autostart = false,
   }
@@ -46,11 +48,12 @@ end
 
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
+  capabilities = cap_no_snippets,
   settings = {
     ['rust-analyzer'] = {
       diagnostics = {
         enable = false,
-      }
+      },
     }
   }
 }
@@ -69,6 +72,7 @@ require 'lspconfig'.ltex.setup {
 
 require('lspconfig').typos_lsp.setup({
   on_attach = on_attach,
+  capabilities = cap_no_snippets,
   autostart = true,
   init_options = {
     -- Custom config. Used together with any workspace config files, taking precedence for
