@@ -54,14 +54,8 @@ vim.opt.winbar = '%=%m %t%='
 
 require('plugins')
 
-
-later(function()
-  -- Colorscheme
-  vim.opt.background = 'dark' -- light
-  --vim.cmd.colorscheme "catppuccin-mocha"
-  -- vim.cmd.colorscheme "randomhue"
-  require('mini.hues').setup({ background = '#10262c', foreground = '#c0c8cb' })
-end)
+-- Colorscheme
+require('mini.hues').setup({ background = '#10262c', foreground = '#c0c8cb' })
 
 require("keys")
 require("emojis")
