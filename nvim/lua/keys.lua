@@ -27,16 +27,14 @@ vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" }
 vim.keymap.set("n", "+", require("mini.files").open, { desc = "Open mini.files explorer" })
 
 -- Git
-vim.keymap.set("n", "<leader>gs", "<cmd>G<cr>", { desc = "Git status" })
-vim.keymap.set("n", "<leader>gv", ":GV<cr>", { desc = "Git log (GV)" })
 vim.keymap.set("n", "<leader>gl", "<cmd>0G log --oneline --graph --all --decorate<cr>", { desc = "Git log pretty" })
 vim.keymap.set("n", "<leader>gdm", ":DiffviewOpen --imply-local master...HEAD<cr>", { desc = "Diffview diff to master" })
 vim.keymap.set("n", "<leader>gdn", ":DiffviewOpen --imply-local main...HEAD<cr>", { desc = "Diffview diff to main" })
 vim.keymap.set("n", "<leader>gdf", ":DiffviewFileHistory %<cr>", { desc = "Diffview file history" })
 vim.keymap.set("n", "<leader>gdc", ":DiffviewClose<cr>", { desc = "Diffview close" })
 vim.keymap.set("n", "<leader>gdd", function() require("mini.diff").toggle_overlay() end, { desc = "Toggle diff overlay" })
-local rhs = '<Cmd>lua MiniGit.show_at_cursor()<CR>'
-vim.keymap.set({ 'n', 'x' }, '<Leader>gs', rhs, { desc = 'Git show at cursor' })
+local rhs = '<cmd>lua MiniGit.show_at_cursor()<CR>'
+vim.keymap.set({ 'n', 'x' }, '<leader>gs', rhs, { desc = 'Git show at cursor' })
 
 -- Formatting Markdown table in visual mode
 vim.keymap.set("v", "<space>ft", ":'<,'>EasyAlign *|<CR>", { desc = "Align Markdown table" })
