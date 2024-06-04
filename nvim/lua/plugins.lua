@@ -28,41 +28,6 @@ now(function()
 
 	require('mini.git').setup({})
 
-	-- require('mini.pick').setup({
-	-- 	mappings = {
-	-- 		choose_marked = "<C-CR>",
-	-- 	}
-	-- })
-
-	-- local miniclue = require('mini.clue')
-	-- miniclue.setup({
-	-- 	window = {
-	-- 		delay = 400,
-	-- 	},
-	-- 	triggers = {
-	-- 		-- Leader triggers
-	-- 		{ mode = 'n', keys = '<leader>' },
-	-- 		-- Built-in completion
-	-- 		--{ mode = 'i', keys = '<C-x>' },
-	-- 		-- `g` key
-	-- 		--{ mode = 'n', keys = 'g' },
-	-- 		-- Window commands
-	-- 		--{ mode = 'n', keys = '<C-w>' },
-	-- 		-- `z` key
-	-- 		{ mode = 'n', keys = 'z' },
-	-- 	},
-	-- 	clues = {
-	-- 		-- Descriptions for <Leader> mapping groups
-	-- 		{ mode = 'n', keys = '<Leader>h', desc = '+Git' },
-	-- 		miniclue.gen_clues.builtin_completion(),
-	-- 		--miniclue.gen_clues.g(),
-	-- 		miniclue.gen_clues.marks(),
-	-- 		miniclue.gen_clues.registers(),
-	-- 		--miniclue.gen_clues.windows(),
-	-- 		miniclue.gen_clues.z(),
-	-- 	},
-	-- })
-
 	require('mini.ai').setup({})
 
 end)
