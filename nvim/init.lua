@@ -55,7 +55,11 @@ vim.opt.winbar = '%=%m %t%='
 require('plugins')
 
 -- Colorscheme
-require('mini.hues').setup({ background = '#10262c', foreground = '#c0c8cb' })
+-- require('mini.hues').setup({ background = '#10262c', foreground = '#c0c8cb' })
+later(function()
+  vim.o.background = "dark"
+  vim.cmd [[ colorscheme gruvbox-material ]]
+end)
 
 require("keys")
 require("emojis")
