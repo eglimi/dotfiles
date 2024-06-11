@@ -22,6 +22,7 @@ vim.g.maplocalleader = ","
 -- Global options
 vim.opt.termguicolors = true
 vim.opt.inccommand = 'split'
+vim.opt.scrolloff = 2
 
 vim.opt.number = true
 vim.opt.relativenumber = true
