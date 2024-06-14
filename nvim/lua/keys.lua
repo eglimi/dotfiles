@@ -27,7 +27,9 @@ vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" }
 vim.keymap.set("n", "+", require("mini.files").open, { desc = "Open mini.files explorer" })
 
 -- Git
-vim.keymap.set("n", "<leader>gl", "<cmd>0G log --oneline --graph --all --decorate<cr>", { desc = "Git log pretty" })
+vim.g.fugitive_summary_format = "%cs || %<(20,trunc)%an || %s"
+vim.keymap.set("n", "<leader>gll", "<cmd>0G log --oneline --graph --all --decorate<cr>", { desc = "Git log pretty" })
+vim.keymap.set("n", "<leader>glf", "<cmd>0Gclog<cr>", { desc = "Git log current file" })
 vim.keymap.set("n", "<leader>gdm", ":DiffviewOpen --imply-local master...HEAD<cr>", { desc = "Diffview diff to master" })
 vim.keymap.set("n", "<leader>gdn", ":DiffviewOpen --imply-local main...HEAD<cr>", { desc = "Diffview diff to main" })
 vim.keymap.set("n", "<leader>gdf", ":DiffviewFileHistory %<cr>", { desc = "Diffview file history" })
