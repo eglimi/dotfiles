@@ -31,9 +31,9 @@ config.colors = {
 	},
 }
 
-config.enable_tab_bar = false
+config.enable_tab_bar = true
 config.tab_bar_at_bottom = true
-config.use_fancy_tab_bar = false
+config.use_fancy_tab_bar = true
 config.window_padding = {left = 0, right = 0, top = 0, bottom = 0}
 config.window_decorations = "TITLE|RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
@@ -102,26 +102,6 @@ table.insert(config.keys, {
 		end),
 	}
 })
-
--- Helper function to get the basename of a path
-function basename(s)
-  return string.gsub(s, '(.*[/\\])(.*)', '%2')
-end
-
--- Show tab index and info in the tab.
--- If the tab has a title that set explicitly, show that. Otherwise, show the process name.
-wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-	local title = tab.tab_title
-	if title and #title > 0 then
-		local tab_name = wezterm.truncate_right(title, 12)
-		return wezterm.pad_right(' ' .. tab.tab_index+1 .. ': ' .. tab_name .. ' ', 8)
-	end
-	-- local info = wezterm.truncate_right(basename(tab.active_pane.foreground_process_name), 12)
-	-- return wezterm.pad_right(' ' .. tab.tab_index+1 .. ': ' .. info .. ' ', 8)
-	-- For now, just return the index, as it is faster to compute.
-	-- The process name would be useful, but it isn't always there.
-	return wezterm.pad_right(' [' .. tab.tab_index+1 .. '] ', 8)
-end)
 
 -- start maximize. Useful when not working on a tiling wm.
 -- On Ubuntu, use Win-Up / Down to maximize and toggle
