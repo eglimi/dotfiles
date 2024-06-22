@@ -60,13 +60,6 @@ end
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
   capabilities = cap_no_snippets,
-  settings = {
-    ['rust-analyzer'] = {
-      diagnostics = {
-        enable = false,
-      },
-    }
-  }
 }
 
 require 'lspconfig'.ltex.setup {
