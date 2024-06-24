@@ -70,7 +70,7 @@ now(function()
 		},
 		keymap = {
 			fzf = {
-				["ctrl-q"] = "select-all+accept",
+				["ctrl-q"] = "select-all",
 			},
 		},
 	})
@@ -114,6 +114,7 @@ end)
 
 now(function()
 	add('tpope/vim-fugitive')
+	require("fugitive-handler")
 	add('junegunn/gv.vim')
 	add('yorickpeterse/nvim-window')
 end)
