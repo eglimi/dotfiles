@@ -12,7 +12,7 @@ config.font = wezterm.font_with_fallback {
 	"Monaspace Neon",
 	{ family = "Monaspace Radon", style = "Italic" },
 }
-config.font_size = 15.0
+config.font_size = 14.0
 
 config.color_scheme = "Gruvbox Dark (Gogh)"
 
