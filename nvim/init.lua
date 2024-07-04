@@ -19,6 +19,8 @@ local later = MiniDeps.later
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+vim.opt.clipboard = "unnamedplus"
+
 -- Global options
 vim.opt.termguicolors = true
 vim.opt.inccommand = 'split'

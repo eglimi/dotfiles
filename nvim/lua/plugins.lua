@@ -101,14 +101,22 @@ now(function()
 	})
 end)
 
-now(function()
-	add('github/copilot.vim')
+later(function()
+	-- add('github/copilot.vim')
+	add("zbirenbaum/copilot.lua")
+	require("copilot").setup({
+		suggestion = {
+			keymap = {
+				accept = "<tab>"
+			}
+		}
+	})
 	add('neovim/nvim-lspconfig')
 	require('user/lsp')
 	require('user/go')
 end)
 
-now(function()
+later(function()
 	add('tpope/vim-fugitive')
 	require("fugitive-handler")
 	add('junegunn/gv.vim')
