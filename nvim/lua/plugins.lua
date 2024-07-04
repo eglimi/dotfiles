@@ -9,6 +9,7 @@ now(function()
 	require('mini.trailspace').setup({})
 	require('mini.align').setup({})
 	require('mini.bracketed').setup({})
+	require('mini.icons').setup({})
 	local indentscope = require('mini.indentscope')
 	indentscope.setup({
 		draw = {
@@ -30,11 +31,6 @@ now(function()
 
 	require('mini.ai').setup({})
 
-end)
-
-now(function()
-	add('nvim-tree/nvim-web-devicons')
-	require('nvim-web-devicons').setup({})
 end)
 
 now(function()
