@@ -63,11 +63,20 @@ link_tmux()
 		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	fi
 	ln -sf ~/.config/dotfiles/.tmux.conf ~/.tmux.conf
+	echo "successfully created link for tmux"
 }
 
 link_zsh()
 {
 	ln -sf ~/.config/dotfiles/.zshrc ~/.zshrc
+	echo "successfully created link for zsh"
+}
+
+link_sheldon()
+{
+	check_existing "sheldon"
+	ln -sf ~/.config/dotfiles/sheldon ~/.config/
+	echo "successfully created link for sheldon"
 }
 
 if [[ "$*" == "kitty" ]]; then link_kitty "YES"; fi
@@ -75,6 +84,7 @@ if [[ "$*" == "nvim" ]]; then link_nvim "YES"; fi
 if [[ "$*" == "wezterm" ]]; then link_wezterm "YES"; fi
 if [[ "$*" == "tmux" ]]; then link_tmux "YES"; fi
 if [[ "$*" == "zsh" ]]; then link_zsh "YES"; fi
+if [[ "$*" == "sheldon" ]]; then link_sheldon "YES"; fi
 
 if [[ "$*" == "all" ]]
 then
@@ -83,5 +93,6 @@ then
 	link_wezterm
 	link_tmux
 	link_zsh
+	link_sheldon
 fi
 
