@@ -1,0 +1,16 @@
+add_newline = false
+[character]
+success_symbol = "[✓](bold green)"
+error_symbol = "[✗](bold red)"
+[cmd_duration]
+disabled = true
+[localip]
+disabled = false
+ssh_only = true
+[memory_usage]
+disabled = false
+threshold = 80
+[status]
+disabled = false
+format = "[$status]($style) "
+style = "bg:red fg:white"

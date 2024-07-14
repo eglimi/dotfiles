@@ -17,7 +17,7 @@ check_existing()
 		return 0
 	fi
 
-	if [[ -d ~/.config/${name} ]]
+	if [[ -e ~/.config/${name} ]]
 	then
 		mkdir -p ~/.config/dotfiles_backup
 		mv -f ~/.config/${name} ~/.config/dotfiles_backup
@@ -79,12 +79,20 @@ link_sheldon()
 	echo "successfully created link for sheldon"
 }
 
+link_starship()
+{
+	check_existing "starship.toml"
+	ln -sf ~/.config/dotfiles/starship.toml ~/.config/starship.toml
+	echo "successfully created link for starship"
+}
+
 if [[ "$*" == "kitty" ]]; then link_kitty "YES"; fi
 if [[ "$*" == "nvim" ]]; then link_nvim "YES"; fi
 if [[ "$*" == "wezterm" ]]; then link_wezterm "YES"; fi
 if [[ "$*" == "tmux" ]]; then link_tmux "YES"; fi
 if [[ "$*" == "zsh" ]]; then link_zsh "YES"; fi
 if [[ "$*" == "sheldon" ]]; then link_sheldon "YES"; fi
+if [[ "$*" == "starship" ]]; then link_starship "YES"; fi
 
 if [[ "$*" == "all" ]]
 then
@@ -94,5 +102,6 @@ then
 	link_tmux
 	link_zsh
 	link_sheldon
+	link_starship
 fi
 
