@@ -43,6 +43,8 @@ now(function()
 			conceallevel = 0,
 		},
 	})
+	add('stevearc/quicker.nvim')
+	require('quicker').setup()
 end)
 
 now(function()
