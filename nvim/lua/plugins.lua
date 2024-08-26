@@ -113,6 +113,13 @@ later(function()
 			}
 		}
 	})
+	add("robitx/gp.nvim")
+	require("gp").setup({
+		providers = {
+			openai = { disable = true },
+			copilot = { disable = false },
+		},
+	})
 	add('neovim/nvim-lspconfig')
 	require('user/lsp')
 	require('user/go')

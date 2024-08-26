@@ -42,6 +42,13 @@ vim.keymap.set("n", "<leader>gdd", function() require("mini.diff").toggle_overla
 local rhs = '<cmd>lua MiniGit.show_at_cursor()<CR>'
 vim.keymap.set({ 'n', 'x' }, '<leader>gs', rhs, { desc = 'Git show at cursor' })
 
+-- Copilot / AI
+local function gptOptions(desc)
+    return { noremap = true, silent = true, nowait = true, desc = "AI prompt " .. desc, }
+end
+vim.keymap.set({"n", "i"}, "<C-g>c", "<cmd>GpChatNew<cr>", gptOptions("New Chat"))
+vim.keymap.set({"n", "i"}, "<C-g>t", "<cmd>GpChatToggle<cr>", gptOptions("Toggle Chat"))
+
 -- Formatting Markdown table in visual mode
 vim.keymap.set("v", "<space>ft", ":'<,'>EasyAlign *|<CR>", { desc = "Align Markdown table" })
 
