@@ -116,6 +116,7 @@ later(function()
 			}
 		}
 	})
+
 	add("robitx/gp.nvim")
 	require("gp").setup({
 		providers = {
@@ -123,6 +124,16 @@ later(function()
 			copilot = { disable = false },
 		},
 	})
+
+	-- add({
+	-- 	source = 'CopilotC-Nvim/CopilotChat.nvim',
+	-- 	depends = { { source = 'zbirenbaum/copilot.lua' }, { source = 'nvim-lua/plenary.nvim'}, },
+	-- 	hooks = {
+	-- 		post_install = function(opts) vim.system({'make', 'tiktoken'}, { cwd = opts.path }) end,
+	-- 	},
+	-- })
+	-- require("CopilotChat").setup { }
+
 	add('neovim/nvim-lspconfig')
 	require('user/lsp')
 	require('user/go')
