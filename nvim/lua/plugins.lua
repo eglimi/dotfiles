@@ -110,7 +110,8 @@ later(function()
 		panel = { enabled = false, },
 		suggestion = {
 			enabled = true,
-			auto_trigger = true,
+			auto_trigger = false,
+			hide_during_completion = false,
 			keymap = {
 				accept = "<tab>",
 			}
