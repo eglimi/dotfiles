@@ -7,15 +7,10 @@ config.default_prog = { "/bin/zsh" }
 
 front_end = "WebGL"
 
-config.font = wezterm.font_with_fallback {
-	"Hack",
-	{ family = "Hack, Regular Italic", style = "Italic" },
-}
---config.font = wezterm.font_with_fallback {
---	"Monaspace Neon",
---	{ family = "Monaspace Radon", style = "Italic" },
---}
-config.font_size = 15.0
+-- config.font = wezterm.font("Hack")
+-- config.font = wezterm.font("Codelia")
+config.font = wezterm.font("Comic Code")
+config.font_size = 16.0
 
 config.color_scheme = "Gruvbox Dark (Gogh)"
 
