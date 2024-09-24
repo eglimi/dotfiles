@@ -8,6 +8,7 @@ config.default_prog = { "/bin/zsh" }
 front_end = "WebGL"
 
 -- config.font = wezterm.font("Hack")
+-- config.font = wezterm.font("MonoLisa")
 -- config.font = wezterm.font("Codelia")
 config.font = wezterm.font("Comic Code")
 config.font_size = 16.0
