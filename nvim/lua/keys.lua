@@ -31,13 +31,15 @@ vim.keymap.set("n", "+", require("mini.files").open, { desc = "Open mini.files e
 
 -- Git
 vim.g.fugitive_summary_format = "%cs || %<(20,trunc)%an || %s"
+vim.keymap.set("n", "<leader>gg", "<cmd>0G<cr>", { desc = "Git open interactive view" })
 vim.keymap.set("n", "<leader>gll", "<cmd>0G log --oneline --graph --all --decorate<cr>", { desc = "Git log pretty" })
 vim.keymap.set("n", "<leader>glf", "<cmd>0Gclog<cr>", { desc = "Git log current file" })
 vim.keymap.set("n", "<leader>gb",  "<cmd>GBrowse<cr>", { desc = "GBrowse" })
-vim.keymap.set("n", "<leader>gdm", ":DiffviewOpen --imply-local master...HEAD<cr>", { desc = "Diffview diff to master" })
-vim.keymap.set("n", "<leader>gdn", ":DiffviewOpen --imply-local main...HEAD<cr>", { desc = "Diffview diff to main" })
-vim.keymap.set("n", "<leader>gdf", ":DiffviewFileHistory %<cr>", { desc = "Diffview file history" })
-vim.keymap.set("n", "<leader>gdc", ":DiffviewClose<cr>", { desc = "Diffview close" })
+vim.keymap.set("n", "<leader>gdv", "<cmd>Gvdiffsplit<cr>", { desc = "Git diff in vertical split" })
+-- vim.keymap.set("n", "<leader>gdm", ":DiffviewOpen --imply-local master...HEAD<cr>", { desc = "Diffview diff to master" })
+-- vim.keymap.set("n", "<leader>gdn", ":DiffviewOpen --imply-local main...HEAD<cr>", { desc = "Diffview diff to main" })
+-- vim.keymap.set("n", "<leader>gdf", ":DiffviewFileHistory %<cr>", { desc = "Diffview file history" })
+-- vim.keymap.set("n", "<leader>gdc", ":DiffviewClose<cr>", { desc = "Diffview close" })
 vim.keymap.set("n", "<leader>gdd", function() require("mini.diff").toggle_overlay() end, { desc = "Toggle diff overlay" })
 local rhs = '<cmd>lua MiniGit.show_at_cursor()<CR>'
 vim.keymap.set({ 'n', 'x' }, '<leader>gs', rhs, { desc = 'Git show at cursor' })
