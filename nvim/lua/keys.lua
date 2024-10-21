@@ -70,6 +70,10 @@ local keys = {
   ['ctrl-y_cr'] = keycode('<C-y><CR>'),
 }
 
+-- lazygit / lazyjj
+vim.keymap.set("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>jj", "<cmd>lua _lazyjj_toggle()<CR>", {noremap = true, silent = true})
+
 _G.cr_action = function()
   if vim.fn.pumvisible() ~= 0 then
     -- If popup is visible, confirm selected item or add new line otherwise
@@ -110,3 +114,4 @@ autocmd("FileType", {
     pattern = { "json" },
     command = "set formatprg=jq",
 })
+
