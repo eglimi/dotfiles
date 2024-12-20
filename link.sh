@@ -56,6 +56,16 @@ link_wezterm()
 	fi
 }
 
+link_ghostty()
+{
+	check_existing "ghostty"
+	if [[ $? -ne 0 ]]
+	then
+		ln -sf ~/.config/dotfiles/ghostty ~/.config/
+		echo "successfully created link for ghostty"
+	fi
+}
+
 link_tmux()
 {
 	if [[ ! -d ~/.tmux/plugins/tpm ]]
@@ -89,6 +99,7 @@ link_starship()
 if [[ "$*" == "kitty" ]]; then link_kitty "YES"; fi
 if [[ "$*" == "nvim" ]]; then link_nvim "YES"; fi
 if [[ "$*" == "wezterm" ]]; then link_wezterm "YES"; fi
+if [[ "$*" == "ghostty" ]]; then link_ghostty "YES"; fi
 if [[ "$*" == "tmux" ]]; then link_tmux "YES"; fi
 if [[ "$*" == "zsh" ]]; then link_zsh "YES"; fi
 if [[ "$*" == "sheldon" ]]; then link_sheldon "YES"; fi
@@ -99,6 +110,7 @@ then
 	link_kitty
 	link_nvim
 	link_wezterm
+	link_ghostty
 	link_tmux
 	link_zsh
 	link_sheldon

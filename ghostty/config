@@ -1,0 +1,16 @@
+theme = GruvboxDark
+
+font-family = Comic Code
+font-size = 16
+# Disable ligatures
+font-feature = -dlig
+
+cursor-color = E91E63
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+gtk-titlebar = false
+gtk-tabs-location = bottom
+gtk-wide-tabs = false
+
+keybind = ctrl+j>c=new_tab
