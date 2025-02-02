@@ -45,17 +45,11 @@ local rhs = '<cmd>lua MiniGit.show_at_cursor()<CR>'
 vim.keymap.set({ 'n', 'x' }, '<leader>gs', rhs, { desc = 'Git show at cursor' })
 
 -- Copilot / AI
-local function gptOptions(desc)
-    return { noremap = true, silent = true, nowait = true, desc = "AI prompt " .. desc, }
-end
-vim.keymap.set({"n", "i"}, "<C-g>c", "<cmd>GpChatNew<cr>", gptOptions("new chat"))
-vim.keymap.set({"n", "i"}, "<C-g>t", "<cmd>GpChatToggle<cr>", gptOptions("toggle chat"))
-vim.keymap.set({"n", "i"}, "<C-g>f", "<cmd>GpChatFinder<cr>", gptOptions("chat finder"))
-vim.keymap.set({"n", "i"}, "<C-g>a", "<cmd>GpAppend<cr>", gptOptions("append (after)"))
-vim.keymap.set("v", "<C-g>a", ":<C-u>'<,'>GpAppend<cr>", gptOptions("Visual append (after)"))
+vim.keymap.set({"n"}, "<leader>cc", require("codecompanion").chat(), { desc = "New AI chat" })
+vim.keymap.set({"n"}, "<leader>ct", require("codecompanion").toggle(), { desc = "Toggle AI chat" })
 
 -- Formatting Markdown table in visual mode
-vim.keymap.set("v", "<space>ft", ":'<,'>EasyAlign *|<CR>", { desc = "Align Markdown table" })
+vim.keymap.set("v", "<leader>ft", ":'<,'>EasyAlign *|<CR>", { desc = "Align Markdown table" })
 
 -- Escape in terminal mode
 vim.keymap.set('t', [[<Esc>]], [[<C-\><C-n>]], { desc = "Escape terminal mode" } )

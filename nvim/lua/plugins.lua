@@ -18,17 +18,12 @@ now(function()
 		},
 		symbol = '⋮',
 	})
-
 	require('mini.statusline').setup({
 		set_vim_settings = false
 	})
-
 	require('mini.notify').setup({})
-
 	require('mini.diff').setup({})
-
 	require('mini.git').setup({})
-
 	require('mini.ai').setup({})
 
 end)
@@ -104,12 +99,11 @@ now(function()
 end)
 
 later(function()
-	-- add('github/copilot.vim')
 	add("zbirenbaum/copilot.lua")
 	require("copilot").setup({
 		panel = { enabled = false, },
 		suggestion = {
-			enabled = true,
+			enabled = false,
 			auto_trigger = false,
 			hide_during_completion = false,
 			keymap = {
@@ -118,22 +112,32 @@ later(function()
 		}
 	})
 
-	add("robitx/gp.nvim")
-	require("gp").setup({
-		providers = {
-			openai = { disable = true },
-			copilot = { disable = false },
+	add({
+		source = 'olimorris/codecompanion.nvim',
+		depends = {
+			'nvim-lua/plenary.nvim',
+			'nvim-treesitter/nvim-treesitter',
+		}
+	})
+	require('codecompanion').setup({
+		strategies = {
+			chat = {
+				adapter = "copilot"
+			},
+			inline = nil,
+		},
+		adapters = {
+			copilot = function()
+				return require("codecompanion.adapters").extend("copilot", {
+					schema = {
+						model = {
+							default = "claude-3.5-sonnet"
+						},
+					},
+				})
+			end,
 		},
 	})
-
-	-- add({
-	-- 	source = 'CopilotC-Nvim/CopilotChat.nvim',
-	-- 	depends = { { source = 'zbirenbaum/copilot.lua' }, { source = 'nvim-lua/plenary.nvim'}, },
-	-- 	hooks = {
-	-- 		post_install = function(opts) vim.system({'make', 'tiktoken'}, { cwd = opts.path }) end,
-	-- 	},
-	-- })
-	-- require("CopilotChat").setup { }
 
 	add('neovim/nvim-lspconfig')
 	require('user/lsp')
@@ -159,7 +163,6 @@ end)
 
 later(function()
 	-- Colorscheme
-	-- Currently using mini.hues random scheme
 	--add("rmehri01/onenord.nvim")
 	--add("EdenEast/nightfox.nvim")
 	-- add("rebelot/kanagawa.nvim")
