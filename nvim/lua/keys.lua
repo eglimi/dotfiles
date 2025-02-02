@@ -45,8 +45,8 @@ local rhs = '<cmd>lua MiniGit.show_at_cursor()<CR>'
 vim.keymap.set({ 'n', 'x' }, '<leader>gs', rhs, { desc = 'Git show at cursor' })
 
 -- Copilot / AI
-vim.keymap.set({"n"}, "<leader>cc", require("codecompanion").chat(), { desc = "New AI chat" })
-vim.keymap.set({"n"}, "<leader>ct", require("codecompanion").toggle(), { desc = "Toggle AI chat" })
+vim.keymap.set({"n"}, "<leader>cc", function() require("codecompanion").chat() end, { desc = "New AI chat" })
+vim.keymap.set({"n"}, "<leader>ct", function() require("codecompanion").toggle() end, { desc = "Toggle AI chat" })
 
 -- Formatting Markdown table in visual mode
 vim.keymap.set("v", "<leader>ft", ":'<,'>EasyAlign *|<CR>", { desc = "Align Markdown table" })
@@ -82,6 +82,20 @@ _G.cr_action = function()
 end
 
 vim.keymap.set('i', '<CR>', 'v:lua._G.cr_action()', { expr = true })
+
+-- Reload nvim
+vim.keymap.set('n', '<leader>sr', function()
+    -- Clear module cache
+    for name,_ in pairs(package.loaded) do
+        if name:match('jujutsu') then
+            package.loaded[name] = nil
+        end
+    end
+
+    -- Source init file
+    vim.cmd('source ' .. vim.fn.stdpath('config') .. '/init.lua')
+    vim.notify('Neovim config reloaded!', vim.log.levels.INFO)
+end, { noremap = true, silent = true, desc = 'Reload neovim config' })
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
