@@ -14,8 +14,16 @@ export EDITOR=editor
 # Podman should ignore that we use cgroups v1
 export PODMAN_IGNORE_CGROUPSV1_WARNING=1
 
+# fzf (^T, ^e)
+source <(fzf --zsh)
+function fuzzyvim() {
+  fzf --reverse --multi --select-1 --exit-0 --bind 'enter:become(nvim {})'
+}
+bindkey -s '^E' "fuzzyvim\n"
+
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
 
+source <(COMPLETE=zsh jj)
 source $HOME/.aliases
