@@ -12,6 +12,7 @@ front_end = "WebGL"
 -- config.font = wezterm.font("Codelia")
 config.font = wezterm.font("Comic Code")
 config.font_size = 16.0
+config.warn_about_missing_glyphs = false
 
 config.color_scheme = "Gruvbox Dark (Gogh)"
 
