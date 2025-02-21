@@ -2,6 +2,10 @@
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
 now(function()
+	add('nvim-lua/plenary.nvim')
+end)
+
+now(function()
 	-- mini modules
 	require('mini.cursorword').setup({})
 	require('mini.completion').setup({})

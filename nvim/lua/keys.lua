@@ -48,8 +48,16 @@ vim.keymap.set({ 'n', 'x' }, '<leader>gs', rhs, { desc = 'Git show at cursor' })
 vim.keymap.set({"n"}, "<leader>cc", function() require("codecompanion").chat() end, { desc = "New AI chat" })
 vim.keymap.set({"n"}, "<leader>ct", function() require("codecompanion").toggle() end, { desc = "Toggle AI chat" })
 
--- Formatting Markdown table in visual mode
-vim.keymap.set("v", "<leader>ft", ":'<,'>EasyAlign *|<CR>", { desc = "Align Markdown table" })
+-- Formatting and preview Markdown
+local function preview_markdown()
+    local file_path = vim.api.nvim_buf_get_name(0)
+    require('plenary.job'):new({
+        command = 'inlyne',  -- Replace 'xdg-open' with the external tool you want to use
+        args = { file_path },
+    }):start()
+end
+vim.keymap.set("v", "<leader>ft", ":'<,'>EasyAlign *|<CR>", { desc = "Markdown align table" })
+vim.keymap.set('n', '<leader>pm', preview_markdown, { desc = "Markdown preview file" })
 
 -- Escape in terminal mode
 vim.keymap.set('t', [[<Esc>]], [[<C-\><C-n>]], { desc = "Escape terminal mode" } )

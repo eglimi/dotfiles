@@ -19,7 +19,7 @@ local later = MiniDeps.later
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamed"
 
 -- Global options
 vim.opt.termguicolors = true
