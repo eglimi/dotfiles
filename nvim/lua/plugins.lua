@@ -71,6 +71,7 @@ now(function()
 			},
 		},
 	})
+	require('fzf-lua').register_ui_select()
 end)
 
 now(function()
@@ -103,45 +104,21 @@ now(function()
 end)
 
 later(function()
-	add("zbirenbaum/copilot.lua")
-	require("copilot").setup({
-		panel = { enabled = false, },
-		suggestion = {
-			enabled = false,
-			auto_trigger = false,
-			hide_during_completion = false,
-			keymap = {
-				accept = "<tab>",
-			}
-		}
-	})
-
 	add({
-		source = 'olimorris/codecompanion.nvim',
-		depends = {
-			'nvim-lua/plenary.nvim',
-			'nvim-treesitter/nvim-treesitter',
+		source = 'CopilotC-Nvim/CopilotChat.nvim',
+		depends = { { source = 'zbirenbaum/copilot.lua' }, { source = 'nvim-lua/plenary.nvim'}, },
+		hooks = {
+			post_install = function(opts) vim.system({'make', 'tiktoken'}, { cwd = opts.path }) end,
+		},
+	})
+	require("CopilotChat").setup {
+		agent = "copilot",
+		model = "claude-3.7-sonnet",
+		chat_autocomplete = false,
+		providers = {
+			copilot = {},
 		}
-	})
-	require('codecompanion').setup({
-		strategies = {
-			chat = {
-				adapter = "copilot"
-			},
-			inline = nil,
-		},
-		adapters = {
-			copilot = function()
-				return require("codecompanion.adapters").extend("copilot", {
-					schema = {
-						model = {
-							default = "claude-3.5-sonnet"
-						},
-					},
-				})
-			end,
-		},
-	})
+	}
 
 	add('neovim/nvim-lspconfig')
 	require('user/lsp')

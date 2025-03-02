@@ -45,8 +45,9 @@ local rhs = '<cmd>lua MiniGit.show_at_cursor()<CR>'
 vim.keymap.set({ 'n', 'x' }, '<leader>gs', rhs, { desc = 'Git show at cursor' })
 
 -- Copilot / AI
-vim.keymap.set({"n"}, "<leader>cc", function() require("codecompanion").chat() end, { desc = "New AI chat" })
-vim.keymap.set({"n"}, "<leader>ct", function() require("codecompanion").toggle() end, { desc = "Toggle AI chat" })
+vim.keymap.set({"n"}, "<leader>ac", function() require("CopilotChat").open() end, { desc = "New AI chat" })
+vim.keymap.set({"n"}, "<leader>at", function() require("CopilotChat").toggle() end, { desc = "Toggle AI chat" })
+vim.keymap.set({"n"}, "<leader>am", function() require("CopilotChat").select_model() end, { desc = "Select AI model" })
 
 -- Formatting and preview Markdown
 local function preview_markdown()
