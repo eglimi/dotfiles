@@ -9,8 +9,21 @@ cursor-color = E91E63
 cursor-style-blink = false
 shell-integration-features = no-cursor
 
-gtk-titlebar = false
+gtk-titlebar = true
 gtk-tabs-location = bottom
 gtk-wide-tabs = false
 
 keybind = ctrl+j>c=new_tab
+keybind = ctrl+j>l=last_tab
+keybind = ctrl+j>p=previous_tab
+keybind = ctrl+j>n=next_tab
+keybind = ctrl+j>o=toggle_tab_overview
+keybind = ctrl+j>1=goto_tab:1
+keybind = ctrl+j>2=goto_tab:2
+keybind = ctrl+j>3=goto_tab:3
+keybind = ctrl+j>4=goto_tab:4
+keybind = ctrl+j>5=goto_tab:5
+keybind = ctrl+j>6=goto_tab:6
+keybind = ctrl+j>7=goto_tab:7
+keybind = ctrl+j>8=goto_tab:8
+keybind = ctrl+j>9=goto_tab:9
