@@ -5,7 +5,9 @@ local mux = wezterm.mux
 
 config.default_prog = { "/bin/zsh" }
 
-front_end = "WebGL"
+front_end = "WebGpu"
+
+config.max_fps = 30;
 
 -- config.font = wezterm.font("Hack")
 -- config.font = wezterm.font("MonoLisa")
