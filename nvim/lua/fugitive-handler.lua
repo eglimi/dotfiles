@@ -25,7 +25,7 @@ function FugitiveHandler.roche_gitlab(opts)
 	end
 
 	-- Main url
-	url = string.gsub(opts.remote, "^(git@ssh.code.roche.com):(%w+)/([%w-]+).git", "https://code.roche.com/%2/%3")
+	url = string.gsub(opts.remote, "^(git@ssh.code.roche.com):([%w-]+/[%w/-]+).git", "https://code.roche.com/%2")
 
 	-- branch
 	url = url .. "/-/tree/" .. opts.commit
