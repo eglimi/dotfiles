@@ -122,7 +122,6 @@ later(function()
 
 	add('neovim/nvim-lspconfig')
 	require('user/lsp')
-	require('user/go')
 end)
 
 later(function()
