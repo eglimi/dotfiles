@@ -14,6 +14,7 @@ now(function()
 	require('mini.align').setup({})
 	require('mini.bracketed').setup({})
 	require('mini.icons').setup({})
+	-- require('mini.snippets').setup({})
 	local indentscope = require('mini.indentscope')
 	indentscope.setup({
 		draw = {
@@ -120,8 +121,7 @@ later(function()
 		}
 	}
 
-	add('neovim/nvim-lspconfig')
-	require('user/lsp')
+	require('lsp')
 end)
 
 later(function()
