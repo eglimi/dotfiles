@@ -1,6 +1,15 @@
 -- General LSP config
 vim.lsp.config("*", {
   root_markers = { ".git" },
+  capabilities = {
+    textDocument = {
+      completion = {
+        completionItem = {
+          snippetSupport = false
+        }
+      }
+    }
+  }
 })
 
 -- Mappings.
