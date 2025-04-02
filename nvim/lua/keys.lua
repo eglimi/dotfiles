@@ -49,6 +49,10 @@ vim.keymap.set({"n"}, "<leader>ac", function() require("CopilotChat").open() end
 vim.keymap.set({"n"}, "<leader>at", function() require("CopilotChat").toggle() end, { desc = "Toggle AI chat" })
 vim.keymap.set({"n"}, "<leader>am", function() require("CopilotChat").select_model() end, { desc = "Select AI model" })
 
+-- Toggles
+vim.keymap.set({"n"}, "<leader>th", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({0}),{0}) end, { desc = "Toggle inlay Hints" })
+
+
 -- Formatting and preview Markdown
 local function preview_markdown()
     local file_path = vim.api.nvim_buf_get_name(0)
