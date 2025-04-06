@@ -1,15 +1,25 @@
 -- General LSP config
+
+vim.lsp.config('*', {
+  capabilities = MiniCompletion.get_lsp_capabilities()
+})
+
 vim.lsp.config("*", {
   root_markers = { ".git" },
   capabilities = {
     textDocument = {
       completion = {
         completionItem = {
-          snippetSupport = false
+          snippetSupport = false,
+          labelDetailsSupport = false,
         }
       }
     }
   }
+})
+
+vim.diagnostic.config({
+  virtual_text = { current_line = true }
 })
 
 -- Mappings.

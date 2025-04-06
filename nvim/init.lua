@@ -55,6 +55,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.laststatus = 3
 vim.opt.winbar = '%=%m %t%='
 
+vim.opt.completeopt = "menuone,noselect,popup"
+
 require('plugins')
 
 -- Colorscheme

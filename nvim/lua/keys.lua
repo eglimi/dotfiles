@@ -81,21 +81,6 @@ local keys = {
 vim.keymap.set("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
 vim.keymap.set("n", "<leader>jj", "<cmd>lua _lazyjj_toggle()<CR>", {noremap = true, silent = true})
 
-_G.cr_action = function()
-  if vim.fn.pumvisible() ~= 0 then
-    -- If popup is visible, confirm selected item or add new line otherwise
-    local item_selected = vim.fn.complete_info()['selected'] ~= -1
-    return item_selected and keys['ctrl-y'] or keys['ctrl-y_cr']
-  else
-    -- If popup is not visible, use plain `<CR>`. You might want to customize
-    -- according to other plugins. For example, to use 'mini.pairs', replace
-    -- next line with `return require('mini.pairs').cr()`
-    return keys['cr']
-  end
-end
-
-vim.keymap.set('i', '<CR>', 'v:lua._G.cr_action()', { expr = true })
-
 -- Reload nvim
 vim.keymap.set('n', '<leader>sr', function()
     -- Clear module cache
