@@ -98,6 +98,15 @@ now(function()
 			end,
 		},
 		indent = { enable = true },
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = false,
+				node_incremental = "v",
+				scope_incremental = false,
+				node_decremental = "V",
+			},
+		},
 	})
 end)
 
