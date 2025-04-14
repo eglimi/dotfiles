@@ -111,6 +111,11 @@ now(function()
 end)
 
 later(function()
+	if vim.env.WORKENV == "roche" then
+		-- Load Roche specific AI plugins
+	else
+		-- Load personal AI plugins
+	end
 	add({
 		source = 'CopilotC-Nvim/CopilotChat.nvim',
 		depends = { { source = 'zbirenbaum/copilot.lua' }, { source = 'nvim-lua/plenary.nvim'}, },
