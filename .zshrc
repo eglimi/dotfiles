@@ -27,3 +27,6 @@ eval "$(mise activate zsh)"
 
 source <(COMPLETE=zsh jj)
 source $HOME/.aliases
+if [[ -f $HOME/.env ]]; then
+  source $HOME/.env
+fi
