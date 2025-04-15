@@ -111,7 +111,7 @@ now(function()
 end)
 
 later(function()
-	if vim.env.WORKENV == "roche" then
+	if vim.env.NVIM_AI == "copilot" then
 		-- Load Roche specific AI plugins
 	else
 		-- Load personal AI plugins
