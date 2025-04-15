@@ -113,24 +113,39 @@ end)
 later(function()
 	if vim.env.NVIM_AI == "copilot" then
 		-- Load Roche specific AI plugins
-	else
-		-- Load personal AI plugins
-	end
-	add({
-		source = 'CopilotC-Nvim/CopilotChat.nvim',
-		depends = { { source = 'zbirenbaum/copilot.lua' }, { source = 'nvim-lua/plenary.nvim'}, },
-		hooks = {
-			post_install = function(opts) vim.system({'make', 'tiktoken'}, { cwd = opts.path }) end,
-		},
-	})
-	require("CopilotChat").setup {
-		agent = "copilot",
-		model = "claude-3.7-sonnet",
-		chat_autocomplete = false,
-		providers = {
-			copilot = {},
+		add({
+			source = 'CopilotC-Nvim/CopilotChat.nvim',
+			depends = { { source = 'zbirenbaum/copilot.lua' }, { source = 'nvim-lua/plenary.nvim'}, },
+			hooks = {
+				post_install = function(opts) vim.system({'make', 'tiktoken'}, { cwd = opts.path }) end,
+			},
+		})
+		require("CopilotChat").setup {
+			agent = "copilot",
+			model = "claude-3.7-sonnet",
+			chat_autocomplete = false,
+			providers = {
+				copilot = {},
+			}
 		}
-	}
+	elseif vim.env.NVIM_AI == "gemini" then
+		-- Load personal AI plugins
+		add({
+			source = 'olimorris/codecompanion.nvim',
+			depends = {
+				'nvim-lua/plenary.nvim',
+				'nvim-treesitter/nvim-treesitter',
+			}
+		})
+		require('codecompanion').setup({
+			strategies = {
+				chat = {
+					adapter = "gemini"
+				},
+				inline = nil,
+			},
+		})
+	end
 
 	require('lsp')
 end)
