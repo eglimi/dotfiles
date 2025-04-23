@@ -15,12 +15,6 @@ vim.keymap.set('n', '<leader>/', require('fzf-lua').live_grep_native, { desc = "
 vim.keymap.set('n', '<leader>sw', require('fzf-lua').grep_cword, { desc = "fzf search word under cursor" })
 vim.keymap.set('n', '<leader>sf', function() require('fzf-lua').files({ query = vim.fn.expand("<cword>") }) end, { desc = "fzf search filename under the cursor" })
 
--- vim.keymap.set('n', '<leader>f', function() require('mini.pick').builtin.files() end, { desc = "mini.pick find files" })
--- vim.keymap.set('n', '<leader>b', function() require('mini.pick').builtin.buffers() end, { desc = "mini.pick buffer" })
--- vim.keymap.set('n', '<leader>r', function() require('mini.pick').builtin.resume() end, { desc = "mini.pick resume" })
--- vim.keymap.set('n', '<leader>/', function() require('mini.pick').builtin.grep_live() end, { desc = "mini.pick live grep" })
--- vim.keymap.set('n', '<leader>sw', function() require('mini.pick').builtin.grep({ pattern = vim.fn.expand("<cword>") }) end, { desc = "mini.pick find word under cursor" })
-
 -- nvim-window
 vim.keymap.set('n', '<leader>w', function() require('nvim-window').pick() end, { desc = "Telescope pick window" })
 
