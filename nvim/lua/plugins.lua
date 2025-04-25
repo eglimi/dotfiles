@@ -118,15 +118,13 @@ later(function()
 			'nvim-treesitter/nvim-treesitter',
 		}
 	})
-	require('codecompanion').setup({
-		strategies = { inline = nil }
-	})
 
 	if vim.env.NVIM_AI == "copilot" then
 		-- Configure Copilot
 		require('codecompanion').setup({
 			strategies = {
 				chat = { adapter = "copilot" },
+				inline = { adapter = "copilot" },
 			},
 			adapters = {
 				copilot = function()
@@ -141,6 +139,7 @@ later(function()
 		require('codecompanion').setup({
 			strategies = {
 				chat = { adapter = "gemini" },
+				inline = { adapter = "gemini" },
 			},
 		})
 	end
