@@ -65,10 +65,6 @@ local keys = {
   ['ctrl-y_cr'] = keycode('<C-y><CR>'),
 }
 
--- lazygit / lazyjj
-vim.keymap.set("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>jj", "<cmd>lua _lazyjj_toggle()<CR>", {noremap = true, silent = true})
-
 -- Reload nvim
 vim.keymap.set('n', '<leader>sr', function()
     -- Clear module cache
