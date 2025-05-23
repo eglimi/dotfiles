@@ -3,6 +3,39 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
 now(function()
 	add('nvim-lua/plenary.nvim')
+	add({
+		source = 'nvim-treesitter/nvim-treesitter',
+		-- Use 'master' while monitoring updates in 'main'
+		checkout = 'master',
+		monitor = 'main',
+		-- Perform action after every checkout
+		hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+	})
+	add('nvim-treesitter/nvim-treesitter-textobjects')
+	require('nvim-treesitter.configs').setup({
+		ensure_installed = { "cpp","markdown","cmake","css","dockerfile","elixir","go","html","javascript","json","lua","rust","toml","vimdoc" },
+		highlight = {
+			enable = true,
+			additional_vim_regex_highlighting = false,
+			disable = function(lang, buf)
+				local max_filesize = 200 * 1024 -- 200 KB
+				local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+				if ok and stats and stats.size > max_filesize then
+					return true
+				end
+			end,
+		},
+		indent = { enable = true },
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = false,
+				node_incremental = "v",
+				scope_incremental = false,
+				node_decremental = "V",
+			},
+		},
+	})
 end)
 
 now(function()
@@ -29,7 +62,14 @@ now(function()
 	require('mini.notify').setup({})
 	require('mini.diff').setup({})
 	require('mini.git').setup({})
-	require('mini.ai').setup({})
+
+	local spec_treesitter = require('mini.ai').gen_spec.treesitter
+	require('mini.ai').setup({
+		custom_textobjects = {
+			f = spec_treesitter({ a = '@function.outer', i = '@function.inner' }),
+			c = spec_treesitter({ a = '@class.outer', i = '@class.inner' }),
+		}
+	})
 
 end)
 
@@ -75,41 +115,6 @@ now(function()
 	require('fzf-lua').register_ui_select()
 end)
 
-now(function()
-	add({
-		source = 'nvim-treesitter/nvim-treesitter',
-		-- Use 'master' while monitoring updates in 'main'
-		checkout = 'master',
-		monitor = 'main',
-		-- Perform action after every checkout
-		hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
-	})
-	require('nvim-treesitter.configs').setup({
-		ensure_installed = { "cpp","markdown","cmake","css","dockerfile","elixir","go","html","javascript","json","lua","rust","toml","vimdoc" },
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = false,
-			disable = function(lang, buf)
-				local max_filesize = 200 * 1024 -- 200 KB
-				local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-				if ok and stats and stats.size > max_filesize then
-					return true
-				end
-			end,
-		},
-		indent = { enable = true },
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				init_selection = false,
-				node_incremental = "v",
-				scope_incremental = false,
-				node_decremental = "V",
-			},
-		},
-	})
-end)
-
 later(function()
 	add({
 		source = 'olimorris/codecompanion.nvim',
@@ -117,6 +122,24 @@ later(function()
 			'nvim-lua/plenary.nvim',
 			'nvim-treesitter/nvim-treesitter',
 		}
+	})
+	require('codecompanion').setup({
+		opts = {
+			system_prompt = function(opts)
+				return string.format(
+					[[You are a code-focused AI programming assistant that is an expert in this programming language.
+
+					You must
+					- Keep your answers short.
+					- Don't repeat code, just show the changes.
+					- Only return code that's directly relevant to the task at hand. You may omit code that isn’t necessary for the solution.
+					- Never ask a follow-up question at the end.
+					- Never praise the user about the question.
+					- Use Markdown formatting.
+					- Minimize additional prose unless clarification is needed.
+				    ]])
+			end,
+		},
 	})
 
 	if vim.env.NVIM_AI == "copilot" then
