@@ -33,29 +33,7 @@ end)
 
 now(function()
 	-- mini modules
-	require('mini.cursorword').setup({})
-	require('mini.completion').setup({})
-	require('mini.surround').setup({})
-	require('mini.trailspace').setup({})
-	require('mini.align').setup({})
-	require('mini.bracketed').setup({})
-	require('mini.icons').setup({})
-	-- require('mini.snippets').setup({})
-	local indentscope = require('mini.indentscope')
-	indentscope.setup({
-		draw = {
-			delay = 50,
-			animation = indentscope.gen_animation.none(),
-		},
-		symbol = '⋮',
-	})
-	require('mini.statusline').setup({
-		set_vim_settings = false
-	})
-	require('mini.notify').setup({})
-	require('mini.diff').setup({})
-	require('mini.git').setup({})
-
+	-- text editing
 	local spec_treesitter = require('mini.ai').gen_spec.treesitter
 	require('mini.ai').setup({
 		custom_textobjects = {
@@ -63,7 +41,30 @@ now(function()
 			c = spec_treesitter({ a = '@class.outer', i = '@class.inner' }),
 		}
 	})
+	require('mini.align').setup({})
+	require('mini.completion').setup({})
+	require('mini.splitjoin').setup()
+	require('mini.surround').setup({})
 
+	-- general workflow
+	require('mini.bracketed').setup({})
+	require('mini.diff').setup({})
+	require('mini.files').setup()
+	require('mini.git').setup({})
+
+	-- appearance
+	require('mini.cursorword').setup({})
+	-- require('mini.snippets').setup({})
+	require('mini.indentscope').setup({
+		draw = { delay = 50, },
+		symbol = '⋮',
+	})
+	require('mini.icons').setup({})
+	require('mini.notify').setup({})
+	require('mini.statusline').setup({
+		set_vim_settings = false
+	})
+	require('mini.trailspace').setup({})
 end)
 
 now(function()
