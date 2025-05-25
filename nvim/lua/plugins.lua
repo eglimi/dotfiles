@@ -56,7 +56,10 @@ now(function()
 	require('mini.cursorword').setup({})
 	-- require('mini.snippets').setup({})
 	require('mini.indentscope').setup({
-		draw = { delay = 50, },
+		draw = {
+			delay = 50,
+			animation = function() return 0 end,
+		},
 		symbol = '⋮',
 	})
 	require('mini.icons').setup({})
