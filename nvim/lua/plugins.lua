@@ -5,29 +5,14 @@ now(function()
 	add('nvim-lua/plenary.nvim')
 	add({
 		source = 'nvim-treesitter/nvim-treesitter',
-		-- Use 'master' while monitoring updates in 'main'
-		checkout = 'master',
-		monitor = 'main',
+		checkout = 'main',
 		-- Perform action after every checkout
 		hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 	})
-	add('nvim-treesitter/nvim-treesitter-textobjects')
-	require('nvim-treesitter.configs').setup({
-		ensure_installed = { "cpp","markdown","cmake","css","dockerfile","elixir","go","html","javascript","json","lua","rust","toml","vimdoc" },
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = false,
-		},
-		indent = { enable = true },
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				init_selection = false,
-				node_incremental = "v",
-				scope_incremental = false,
-				node_decremental = "V",
-			},
-		},
+	require('nvim-treesitter').install( { "cpp","markdown","cmake","css","dockerfile","elixir","go","html","javascript","json","lua","rust","toml" } )
+	add({
+		source = 'nvim-treesitter/nvim-treesitter-textobjects',
+		checkout = 'main',
 	})
 end)
 

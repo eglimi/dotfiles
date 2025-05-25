@@ -88,11 +88,13 @@ autocmd("FileType", {
 })
 
 autocmd("FileType", {
-    pattern = { "markdown", "c", "cpp" },
-    callback = function()
-        vim.wo.foldmethod = "expr"
-        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    callback = function(details)
+        local bufnr = details.buf
+        if not pcall(vim.treesitter.start, bufnr) then return end
+        vim.wo.foldmethod = 'expr'
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
         vim.wo.foldlevel = 5
+        vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
 })
 autocmd("FileType", {
