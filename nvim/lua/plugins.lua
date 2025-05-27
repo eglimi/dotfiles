@@ -105,28 +105,22 @@ later(function()
 			'nvim-treesitter/nvim-treesitter',
 		}
 	})
-	require('codecompanion').setup({
-		opts = {
-			system_prompt = function(opts)
-				return string.format(
-					[[You are a code-focused AI programming assistant that is an expert in this programming language.
 
-					You must
-					- Keep your answers short.
-					- Don't repeat code, just show the changes.
-					- Only return code that's directly relevant to the task at hand. You may omit code that isn’t necessary for the solution.
-					- Never ask a follow-up question at the end.
-					- Never praise the user about the question.
-					- Use Markdown formatting.
-					- Minimize additional prose unless clarification is needed.
-				    ]])
-			end,
-		},
-	})
+	local prompt = [[You are a code-focused AI programming assistant that is an expert in this programming language.
+You must
+- Keep your answers short.
+- Don't repeat code, just show the changes.
+- Only return code that's directly relevant to the task at hand. You may omit code that isn’t necessary for the solution.
+- Never ask a follow-up question at the end.
+- Never praise the user about the question.
+- Use Markdown formatting.
+- Minimize additional prose unless clarification is needed.
+]]
 
 	if vim.env.NVIM_AI == "copilot" then
 		-- Configure Copilot
 		require('codecompanion').setup({
+			opts = { system_prompt = prompt },
 			strategies = {
 				chat = { adapter = "copilot" },
 				inline = { adapter = "copilot" },
@@ -142,6 +136,7 @@ later(function()
 	elseif vim.env.NVIM_AI == "gemini" then
 		-- Configure Gemini
 		require('codecompanion').setup({
+			opts = { system_prompt = prompt },
 			strategies = {
 				chat = { adapter = "gemini" },
 				inline = { adapter = "gemini" },
