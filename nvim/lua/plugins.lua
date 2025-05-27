@@ -9,7 +9,16 @@ now(function()
 		-- Perform action after every checkout
 		hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 	})
-	require('nvim-treesitter').install( { "cpp","markdown","cmake","css","dockerfile","elixir","go","html","javascript","json","lua","rust","toml" } )
+
+	-- Install parsers and avoid annyoing install message.
+	-- See https://github.com/nvim-treesitter/nvim-treesitter/issues/7872
+	local ensureInstalled = { "cpp","markdown","cmake","css","dockerfile","elixir","go","html","javascript","json","lua","rust","toml" }
+	local alreadyInstalled = require("nvim-treesitter.config").installed_parsers()
+	local parsersToInstall = vim.iter(ensureInstalled)
+		:filter(function(parser) return not vim.tbl_contains(alreadyInstalled, parser) end)
+		:totable()
+	require("nvim-treesitter").install(parsersToInstall)
+
 	add({
 		source = 'nvim-treesitter/nvim-treesitter-textobjects',
 		checkout = 'main',
