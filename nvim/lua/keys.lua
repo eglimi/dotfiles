@@ -40,6 +40,13 @@ vim.keymap.set({"n"}, "<leader>at", function() require("codecompanion").toggle()
 -- Toggles
 vim.keymap.set({"n"}, "<leader>th", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({0}),{0}) end, { desc = "Toggle inlay Hints" })
 
+-- Treesitter
+vim.keymap.set({ "n", "x", "o" }, "]m", function()
+  require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+end)
+vim.keymap.set({ "n", "x", "o" }, "[m", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+end)
 
 -- Formatting and preview Markdown
 local function preview_markdown()
