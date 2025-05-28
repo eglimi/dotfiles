@@ -30,4 +30,4 @@ end
 nmap('<space>cf', function() vim.lsp.buf.format { async = true } end, 'LSP format buffer')
 
 -- Enable lsp servers
-vim.lsp.enable({ "typos", "rust_analyzer", "clangd", "elixir" })
+vim.lsp.enable({ "typos", "harper", "rust_analyzer", "clangd", "elixir" })
