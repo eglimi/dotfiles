@@ -11,13 +11,7 @@ now(function()
 	})
 
 	-- Install parsers and avoid annyoing install message.
-	-- See https://github.com/nvim-treesitter/nvim-treesitter/issues/7872
-	local ensureInstalled = { "cpp","cmake","css","dockerfile","elixir","go","html","javascript","json","rust","toml" }
-	local alreadyInstalled = require("nvim-treesitter.config").installed_parsers()
-	local parsersToInstall = vim.iter(ensureInstalled)
-		:filter(function(parser) return not vim.tbl_contains(alreadyInstalled, parser) end)
-		:totable()
-	require("nvim-treesitter").install(parsersToInstall)
+	require("nvim-treesitter").install( { "cpp","cmake","css","dockerfile","elixir","go","html","javascript","json","rust","toml" } )
 
 	add({
 		source = 'nvim-treesitter/nvim-treesitter-textobjects',
