@@ -11,7 +11,7 @@ now(function()
 	})
 
 	-- Install parsers and avoid annyoing install message.
-	require("nvim-treesitter").install( { "cpp","cmake","css","dockerfile","elixir","go","html","javascript","json","rust","toml" } )
+	require("nvim-treesitter").install( { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","toml","cmake" } )
 
 	add({
 		source = 'nvim-treesitter/nvim-treesitter-textobjects',

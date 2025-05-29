@@ -96,6 +96,7 @@ autocmd("FileType", {
 })
 
 autocmd("FileType", {
+    pattern = { "*" },
     callback = function(details)
         local bufnr = details.buf
         if not pcall(vim.treesitter.start, bufnr) then return end
