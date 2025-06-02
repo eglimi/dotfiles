@@ -91,11 +91,6 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd("FileType", {
-    pattern = { "git" },
-    command = "setlocal foldmethod=syntax",
-})
-
-autocmd("FileType", {
     pattern = { "*" },
     callback = function(details)
         local bufnr = details.buf
@@ -110,7 +105,13 @@ autocmd("FileType", {
     pattern = { "minideps-confirm" },
     command = "setlocal foldlevel=0"
 })
-
+autocmd("FileType", {
+    pattern = { "git" },
+    callback = function(details)
+        vim.wo.foldmethod = 'syntax'
+        vim.wo.foldlevel = 1
+    end
+})
 autocmd("FileType", {
     pattern = { "json" },
     command = "set formatprg=jq",
