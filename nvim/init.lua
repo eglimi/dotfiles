@@ -63,7 +63,8 @@ require('plugins')
 -- require('mini.hues').setup({ background = '#10262c', foreground = '#c0c8cb' })
 later(function()
   vim.o.background = "dark"
-  vim.cmd [[ colorscheme gruvbox-material ]]
+  -- vim.cmd [[ colorscheme gruvbox-material ]]
+  vim.cmd [[ colorscheme everforest ]]
 end)
 
 require("keys")
