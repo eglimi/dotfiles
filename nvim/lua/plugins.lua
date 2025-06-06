@@ -151,6 +151,16 @@ You must
 end)
 
 later(function()
+	add("akinsho/toggleterm.nvim")
+	require("toggleterm").setup({ size = function() return vim.o.lines * 0.8 end })
+	local Terminal  = require('toggleterm.terminal').Terminal
+	local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+	local lazyjj = Terminal:new({ cmd = "lazyjj", hidden = true })
+	function _lazygit_toggle() lazygit:toggle() end
+	function _lazyjj_toggle() lazyjj:toggle() end
+end)
+
+later(function()
 	add('tpope/vim-fugitive')
 	require("fugitive-handler")
 	add('junegunn/gv.vim')
