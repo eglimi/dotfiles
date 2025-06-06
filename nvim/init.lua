@@ -64,7 +64,8 @@ require('plugins')
 later(function()
   vim.o.background = "dark"
   -- vim.cmd [[ colorscheme gruvbox-material ]]
-  vim.cmd [[ colorscheme everforest ]]
+  -- vim.cmd [[ colorscheme everforest ]]
+  vim.cmd [[ colorscheme evergarden-spring ]]
 end)
 
 require("keys")

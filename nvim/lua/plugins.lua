@@ -159,15 +159,19 @@ end)
 
 later(function()
 	-- Colorscheme
-	--add("rmehri01/onenord.nvim")
-	--add("EdenEast/nightfox.nvim")
+	-- add({ source = "catppuccin/nvim", name = "catppuccin" })
+	add("neanias/everforest-nvim")
+	add( { source = "everviolet/nvim", name = "evergarden" })
+	require("evergarden").setup({
+		theme = { variant = "spring" } -- spring, summer, fall, winter
+	})
+	add("sainnhe/gruvbox-material")
+	require("everforest").setup({ background = "hard", italics = true,  })
 	-- add("rebelot/kanagawa.nvim")
 	-- require("kanagawa").setup({ theme = "all" })
-	add("sainnhe/gruvbox-material")
-	add("neanias/everforest-nvim")
-	require("everforest").setup({ background = "hard", italics = true,  })
+	--add("EdenEast/nightfox.nvim")
+	--add("rmehri01/onenord.nvim")
 	--add("folke/tokyonight.nvim")
-	-- add({ source = "catppuccin/nvim", name = "catppuccin" })
 end)
 
 now(function()
