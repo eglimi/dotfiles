@@ -17,6 +17,9 @@ now(function()
 		source = 'nvim-treesitter/nvim-treesitter-textobjects',
 		checkout = 'main',
 	})
+
+	add({ source = "daliusd/incr.nvim", name = "incr" })
+	require("incr").setup({})
 end)
 
 now(function()
@@ -155,7 +158,7 @@ later(function()
 	require("toggleterm").setup({ size = function() return vim.o.lines * 0.8 end })
 	local Terminal  = require('toggleterm.terminal').Terminal
 	local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-	local lazyjj = Terminal:new({ cmd = "lazyjj", hidden = true })
+	local lazyjj = Terminal:new({ cmd = "jjui", hidden = true })
 	function _lazygit_toggle() lazygit:toggle() end
 	function _lazyjj_toggle() lazyjj:toggle() end
 end)
