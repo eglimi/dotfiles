@@ -101,7 +101,7 @@ autocmd("FileType", {
         if not pcall(vim.treesitter.start, bufnr) then return end
         vim.wo.foldmethod = 'expr'
         vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.wo.foldlevel = 5
+        vim.wo.foldlevel = 6
         vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
 })
