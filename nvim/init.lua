@@ -57,6 +57,8 @@ vim.opt.winbar = '%=%m %t%='
 
 vim.opt.completeopt = "menuone,noselect,popup"
 
+vim.opt.winborder = "rounded"
+
 require('plugins')
 
 -- Colorscheme
@@ -67,12 +69,13 @@ now(function()
 	-- add("sainnhe/gruvbox-material")
 	add( { source = "everviolet/nvim", name = "evergarden" })
 	require("evergarden").setup({
-		theme = { variant = "fall" }, -- spring, summer, fall, winter
-		style = { search = {"standout"}, incsearch = {"standout", "italic"}, comment = {} },
+		theme = {variant = "spring"}, -- spring, summer, fall, winter
+		style = {search = {"standout"}, incsearch = {"standout", "italic"}, comment = {}},
+		editor = {float = {invert_border = false}},
 		overrides = function(colors)
 			return {
-				WinSeparator = { fg = colors.blue },
-				WinBar = { style = {"italic", "bold"} },
+				WinSeparator = {fg = colors.blue},
+				WinBar = {style = {"italic", "bold"}},
 			}
 		end,
 	})
