@@ -14,7 +14,7 @@ end
 -- Set up 'mini.deps' (customize to your liking)
 require('mini.deps').setup({ path = { package = path_package } })
 
-local later = MiniDeps.later
+local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
@@ -60,12 +60,25 @@ vim.opt.completeopt = "menuone,noselect,popup"
 require('plugins')
 
 -- Colorscheme
--- require('mini.hues').setup({ background = '#10262c', foreground = '#c0c8cb' })
-later(function()
-  vim.o.background = "dark"
-  -- vim.cmd [[ colorscheme gruvbox-material ]]
-  -- vim.cmd [[ colorscheme everforest ]]
-  vim.cmd [[ colorscheme evergarden-spring ]]
+now(function()
+  -- Some favorites
+	-- add("neanias/everforest-nvim")
+	-- require("everforest").setup({ background = "hard", italics = true,  })
+	-- add("sainnhe/gruvbox-material")
+	add( { source = "everviolet/nvim", name = "evergarden" })
+	require("evergarden").setup({
+		theme = { variant = "fall" }, -- spring, summer, fall, winter
+		style = { search = {"standout"}, incsearch = {"standout", "italic"}, comment = {} },
+		overrides = function(colors)
+			return {
+				WinSeparator = { fg = colors.blue },
+				WinBar = { style = {"italic", "bold"} },
+			}
+		end,
+	})
+
+	vim.o.background = "dark"
+  vim.cmd('colorscheme evergarden')
 end)
 
 require("keys")

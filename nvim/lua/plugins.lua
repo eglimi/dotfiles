@@ -170,23 +170,6 @@ later(function()
 	add('yorickpeterse/nvim-window')
 end)
 
-later(function()
-	-- Colorscheme
-	-- add({ source = "catppuccin/nvim", name = "catppuccin" })
-	add("neanias/everforest-nvim")
-	add( { source = "everviolet/nvim", name = "evergarden" })
-	require("evergarden").setup({
-		theme = { variant = "spring" } -- spring, summer, fall, winter
-	})
-	add("sainnhe/gruvbox-material")
-	require("everforest").setup({ background = "hard", italics = true,  })
-	-- add("rebelot/kanagawa.nvim")
-	-- require("kanagawa").setup({ theme = "all" })
-	--add("EdenEast/nightfox.nvim")
-	--add("rmehri01/onenord.nvim")
-	--add("folke/tokyonight.nvim")
-end)
-
 now(function()
 	add('jamessan/vim-gnupg')
 	add('junegunn/vim-easy-align')
