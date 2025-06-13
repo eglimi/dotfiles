@@ -7,6 +7,10 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
+-- Lsp
+vim.keymap.set('x', '<tab>', function() vim.lsp.buf.selection_range('outer') end, { desc = "vim.lsp.buf.selection_range('outer')" })
+vim.keymap.set('x', '<s-tab>', function() vim.lsp.buf.selection_range('inner') end, { desc = "vim.lsp.buf.selection_range('inner')" })
+
 -- fzf
 vim.keymap.set('n', 'tt', ':FzfLua<CR>', { desc = "Open FzfLua" } )
 vim.keymap.set('n', '<leader>f', require('fzf-lua').files, { desc = "fzf find files" })

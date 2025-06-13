@@ -17,9 +17,6 @@ now(function()
 		source = 'nvim-treesitter/nvim-treesitter-textobjects',
 		checkout = 'main',
 	})
-
-	add({ source = "daliusd/incr.nvim", name = "incr" })
-	require("incr").setup({})
 end)
 
 now(function()
