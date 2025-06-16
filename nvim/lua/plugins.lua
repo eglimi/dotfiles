@@ -61,11 +61,11 @@ end)
 now(function()
 	add('stevearc/oil.nvim')
 	require('oil').setup({
+		watch_for_changes = true,
 		keymaps = {
 			["."] = "actions.open_cmdline",
-		},
-		win_options = {
-			conceallevel = 0,
+			["<C-p>"] = {"actions.preview", opts = {split = "belowright"} },
+			["<C-s>"] = {"actions.select", opts = {vertical = true, split = "belowright"} },
 		},
 	})
 	add('stevearc/quicker.nvim')
