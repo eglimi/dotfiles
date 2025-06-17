@@ -152,7 +152,7 @@ end)
 
 later(function()
 	add("akinsho/toggleterm.nvim")
-	require("toggleterm").setup({ size = function() return vim.o.lines * 0.8 end })
+	require("toggleterm").setup({ direction = "tab" })
 	local Terminal  = require('toggleterm.terminal').Terminal
 	local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 	local lazyjj = Terminal:new({ cmd = "jjui", hidden = true })
