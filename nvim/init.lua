@@ -60,6 +60,7 @@ vim.opt.completeopt = "menuone,noselect,popup"
 vim.opt.winborder = "rounded"
 
 require('plugins')
+require('custom')
 
 -- Colorscheme
 now(function()
