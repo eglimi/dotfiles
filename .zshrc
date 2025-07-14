@@ -7,13 +7,16 @@ bindkey -e
 
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/programs/zig:$PATH
+export PATH=$HOME/programs/podman/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 export EDITOR=editor
 
 # Podman should ignore that we use cgroups v1
 export PODMAN_IGNORE_CGROUPSV1_WARNING=1
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # fzf (^T, ^e)
 source <(fzf --zsh)
 function fuzzyvim() {
