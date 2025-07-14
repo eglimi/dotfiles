@@ -32,7 +32,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.colorcolumn = "100"
 vim.opt.signcolumn = "yes"
-vim.opt.foldcolumn = "auto:1"
+vim.opt.foldcolumn = "0"
 vim.opt.breakindent = true
 
 vim.opt.list = true
