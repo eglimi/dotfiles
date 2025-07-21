@@ -96,6 +96,16 @@ link_starship()
 	echo "successfully created link for starship"
 }
 
+link_fish()
+{
+	check_existing "fish"
+	if [[ $? -ne 0 ]]
+	then
+		ln -sf ~/.config/dotfiles/fish ~/.config/
+		echo "successfully created link for fish"
+	fi
+}
+
 if [[ "$*" == "kitty" ]]; then link_kitty "YES"; fi
 if [[ "$*" == "nvim" ]]; then link_nvim "YES"; fi
 if [[ "$*" == "wezterm" ]]; then link_wezterm "YES"; fi
@@ -104,6 +114,7 @@ if [[ "$*" == "tmux" ]]; then link_tmux "YES"; fi
 if [[ "$*" == "zsh" ]]; then link_zsh "YES"; fi
 if [[ "$*" == "sheldon" ]]; then link_sheldon "YES"; fi
 if [[ "$*" == "starship" ]]; then link_starship "YES"; fi
+if [[ "$*" == "fish" ]]; then link_fish "YES"; fi
 
 if [[ "$*" == "all" ]]
 then
@@ -115,5 +126,6 @@ then
 	link_zsh
 	link_sheldon
 	link_starship
+	link_fish
 fi
 
