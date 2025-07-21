@@ -65,7 +65,7 @@ vim.keymap.set("v", "<leader>ft", ":'<,'>EasyAlign *|<CR>", { desc = "Markdown a
 vim.keymap.set('n', '<leader>pm', preview_markdown, { desc = "Markdown preview file" })
 
 -- Escape in terminal mode
-vim.keymap.set('t', "<esc><esc>", [[<C-\><C-n>]], { desc = "Escape terminal mode" } )
+-- vim.keymap.set('t', "<esc><esc>", [[<C-\><C-n>]], { desc = "Escape terminal mode" } )
 
 -- More consistent behaviour of cr
 local keycode = vim.keycode or function(x)
