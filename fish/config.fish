@@ -5,7 +5,9 @@ if status is-interactive
 
     starship init fish | source
 	fzf --fish | source
-    mise activate fish | source
+    if command -q mise
+        mise activate fish | source
+    end
     atuin init fish --disable-up-arrow | source
 
     source $HOME/.aliases
