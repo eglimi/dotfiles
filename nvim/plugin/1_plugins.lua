@@ -1,4 +1,21 @@
 -- We use mini.deps for dependency management
+
+-- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
+local path_package = vim.fn.stdpath('data') .. '/site/'
+local mini_path = path_package .. 'pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+  vim.cmd('echo "Installing `mini.nvim`" | redraw')
+  local clone_cmd = {
+    'git', 'clone', '--filter=blob:none',
+    'https://github.com/echasnovski/mini.nvim', mini_path
+  }
+  vim.fn.system(clone_cmd)
+  vim.cmd('packadd mini.nvim | helptags ALL')
+end
+
+-- Set up 'mini.deps' (customize to your liking)
+require('mini.deps').setup({ path = { package = path_package } })
+
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
 now(function()
@@ -146,8 +163,6 @@ You must
 			},
 		})
 	end
-
-	require('lsp')
 end)
 
 later(function()
@@ -162,9 +177,9 @@ end)
 
 later(function()
 	add('tpope/vim-fugitive')
-	require("fugitive-handler")
 	add('junegunn/gv.vim')
 	add('yorickpeterse/nvim-window')
+	add('martintrojer/jj-fugitive')
 end)
 
 now(function()
@@ -173,3 +188,27 @@ now(function()
 	add('nmac427/guess-indent.nvim')
 	require('guess-indent').setup({})
 end)
+
+-- Colorscheme
+now(function()
+  -- Some favorites
+	-- add("neanias/everforest-nvim")
+	-- require("everforest").setup({ background = "hard", italics = true,  })
+	-- add("sainnhe/gruvbox-material")
+	add( { source = "everviolet/nvim", name = "evergarden" })
+	require("evergarden").setup({
+		theme = {variant = "spring"}, -- spring, summer, fall, winter
+		style = {search = {"standout"}, incsearch = {"standout", "italic"}, comment = {}},
+		editor = {float = {invert_border = false}},
+		overrides = function(colors)
+			return {
+				WinSeparator = {fg = colors.blue},
+				WinBar = {style = {"italic", "bold"}},
+			}
+		end,
+	})
+
+	vim.o.background = "dark"
+  vim.cmd('colorscheme evergarden')
+end)
+
