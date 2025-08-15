@@ -41,3 +41,5 @@ vim.opt.completeopt = "menuone,noselect,popup"
 
 vim.opt.winborder = "rounded"
 
+vim.opt.background = "dark"
+vim.cmd('colorscheme evergarden')

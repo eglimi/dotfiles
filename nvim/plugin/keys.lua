@@ -1,3 +1,8 @@
+-- Package management
+vim.api.nvim_create_user_command("PackUpdate", function()
+    vim.pack.update()
+end, { desc = "Update plugins" })
+
 -- General keymaps
 vim.keymap.set('n', '<esc>', "<cmd>nohlsearch<cr>", { desc = "Cancel hlsearch" })
 

@@ -1,4 +1,30 @@
--- We use mini.deps for dependency management
+-- Move to native package management
+
+vim.pack.add({
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/stevearc/oil.nvim" },
+	{ src = "https://github.com/stevearc/quicker.nvim" },
+	{ src = "https://github.com/tpope/vim-fugitive" },
+	{ src = "https://github.com/martintrojer/jj-fugitive" },
+	{ src = "https://github.com/junegunn/gv.vim" },
+	{ src = "https://github.com/yorickpeterse/nvim-window" },
+	{ src = "https://github.com/jamessan/vim-gnupg" },
+	{ src = "https://github.com/junegunn/vim-easy-align" },
+	{ src = "https://github.com/nmac427/guess-indent.nvim" },
+}, { load = true })
+
+require('oil').setup({
+	watch_for_changes = true,
+	keymaps = {
+		["."] = "actions.open_cmdline",
+		["<C-p>"] = {"actions.preview", opts = {split = "belowright"} },
+		["<C-s>"] = {"actions.select", opts = {vertical = true, split = "belowright"} },
+	},
+})
+require('quicker').setup()
+require('guess-indent').setup({})
+
+-- For the remainder, we use mini.deps for dependency management
 
 -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
 local path_package = vim.fn.stdpath('data') .. '/site/'
@@ -19,7 +45,6 @@ require('mini.deps').setup({ path = { package = path_package } })
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
 now(function()
-	add('nvim-lua/plenary.nvim')
 	add({
 		source = 'nvim-treesitter/nvim-treesitter',
 		checkout = 'main',
@@ -73,20 +98,6 @@ now(function()
 		set_vim_settings = false
 	})
 	require('mini.trailspace').setup({})
-end)
-
-now(function()
-	add('stevearc/oil.nvim')
-	require('oil').setup({
-		watch_for_changes = true,
-		keymaps = {
-			["."] = "actions.open_cmdline",
-			["<C-p>"] = {"actions.preview", opts = {split = "belowright"} },
-			["<C-s>"] = {"actions.select", opts = {vertical = true, split = "belowright"} },
-		},
-	})
-	add('stevearc/quicker.nvim')
-	require('quicker').setup()
 end)
 
 now(function()
@@ -175,20 +186,6 @@ later(function()
 	function _lazyjj_toggle() lazyjj:toggle() end
 end)
 
-later(function()
-	add('tpope/vim-fugitive')
-	add('junegunn/gv.vim')
-	add('yorickpeterse/nvim-window')
-	add('martintrojer/jj-fugitive')
-end)
-
-now(function()
-	add('jamessan/vim-gnupg')
-	add('junegunn/vim-easy-align')
-	add('nmac427/guess-indent.nvim')
-	require('guess-indent').setup({})
-end)
-
 -- Colorscheme
 now(function()
   -- Some favorites
@@ -207,8 +204,5 @@ now(function()
 			}
 		end,
 	})
-
-	vim.o.background = "dark"
-  vim.cmd('colorscheme evergarden')
 end)
 
