@@ -1,22 +1,50 @@
--- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
-local path_package = vim.fn.stdpath('data') .. '/site/'
-local mini_path = path_package .. 'pack/deps/start/mini.nvim'
-if not vim.loop.fs_stat(mini_path) then
-  vim.cmd('echo "Installing `mini.nvim`" | redraw')
-  local clone_cmd = {
-    'git', 'clone', '--filter=blob:none',
-    'https://github.com/echasnovski/mini.nvim', mini_path
-  }
-  vim.fn.system(clone_cmd)
-  vim.cmd('packadd mini.nvim | helptags ALL')
+vim.pack.add({
+	-- libs
+	"https://github.com/nvim-lua/plenary.nvim",
+	-- treesitter
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
+	-- mini
+	"https://github.com/echasnovski/mini.nvim",
+	-- nav, picker, etc
+	"https://github.com/stevearc/oil.nvim",
+	"https://github.com/ibhagwan/fzf-lua",
+	"https://github.com/stevearc/quicker.nvim",
+	-- vcs
+	"https://github.com/tpope/vim-fugitive",
+	"https://github.com/martintrojer/jj-fugitive",
+	"https://github.com/junegunn/gv.vim",
+	-- utils
+	"https://github.com/akinsho/toggleterm.nvim",
+	"https://github.com/yorickpeterse/nvim-window",
+	"https://github.com/jamessan/vim-gnupg",
+	"https://github.com/junegunn/vim-easy-align",
+	"https://github.com/nmac427/guess-indent.nvim",
+	-- ai
+	"https://github.com/olimorris/codecompanion.nvim",
+	-- theme
+	{ src = "https://github.com/everviolet/nvim", name = "evergarden" },
+}, { load = true })
+
+
+local function setup_treesitter()
+	local ts_parsers = { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","toml","cmake" }
+	local ts = require("nvim-treesitter")
+	ts.install(ts_parsers)
+	local autocmd = vim.api.nvim_create_autocmd
+	autocmd("PackChanged", { -- update treesitter parsers/queries with plugin updates
+		callback = function(args)
+			local spec = args.data.spec
+			if spec and spec.name == "nvim-treesitter" and args.data.kind == "update" then
+				vim.schedule(function()
+					ts.update()
+				end)
+			end
+		end,
+	})
 end
 
--- Set up 'mini.deps' (customize to your liking)
-require('mini.deps').setup({ path = { package = path_package } })
-
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-
-now(function()
+local function setup_mini()
 	-- mini modules
 	-- text editing
 	local spec_treesitter = require('mini.ai').gen_spec.treesitter
@@ -53,81 +81,36 @@ now(function()
 		set_vim_settings = false
 	})
 	require('mini.trailspace').setup({})
-end)
+end
 
-
--- Native package management
-
-vim.pack.add({
-	-- libs
-	"https://github.com/nvim-lua/plenary.nvim",
-	-- treesitter
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
-	-- nav, picker, etc
-	"https://github.com/stevearc/oil.nvim",
-	"https://github.com/ibhagwan/fzf-lua",
-	"https://github.com/stevearc/quicker.nvim",
-	-- vcs
-	"https://github.com/tpope/vim-fugitive",
-	"https://github.com/martintrojer/jj-fugitive",
-	"https://github.com/junegunn/gv.vim",
-	-- utils
-	"https://github.com/akinsho/toggleterm.nvim",
-	"https://github.com/yorickpeterse/nvim-window",
-	"https://github.com/jamessan/vim-gnupg",
-	"https://github.com/junegunn/vim-easy-align",
-	"https://github.com/nmac427/guess-indent.nvim",
-	-- ai
-	"https://github.com/olimorris/codecompanion.nvim",
-	-- theme
-	{ src = "https://github.com/everviolet/nvim", name = "evergarden" },
-}, { load = true })
-
-require('oil').setup({
-	watch_for_changes = true,
-	keymaps = {
-		["."] = "actions.open_cmdline",
-		["<C-p>"] = {"actions.preview", opts = {split = "belowright"} },
-		["<C-s>"] = {"actions.select", opts = {vertical = true, split = "belowright"} },
-	},
-})
-require('quicker').setup()
-require('guess-indent').setup({})
-
-require("fzf-lua").setup({
-	winopts = {
-		height = 0.95,
-		width = 0.90,
-		preview = {
-			vertical = "down:70%",
-			layout = "vertical",
+local function setup_nav()
+	require('oil').setup({
+		watch_for_changes = true,
+		keymaps = {
+			["."] = "actions.open_cmdline",
+			["<C-p>"] = {"actions.preview", opts = {split = "belowright"} },
+			["<C-s>"] = {"actions.select", opts = {vertical = true, split = "belowright"} },
 		},
-	},
-	keymap = {
-		fzf = {
-			["ctrl-q"] = "select-all",
-		},
-	},
-})
-require('fzf-lua').register_ui_select()
-
-local function setup_treesitter()
-	local ts_parsers = { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","toml","cmake" }
-	local nts = require("nvim-treesitter")
-	nts.install(ts_parsers)
-	local autocmd = vim.api.nvim_create_autocmd
-	autocmd("PackChanged", { -- update treesitter parsers/queries with plugin updates
-		group = augroup,
-		callback = function(args)
-			local spec = args.data.spec
-			if spec and spec.name == "nvim-treesitter" and args.data.kind == "update" then
-				vim.schedule(function()
-					nts.update()
-				end)
-			end
-		end,
 	})
+	require('quicker').setup()
+	require('guess-indent').setup({})
+
+	require("fzf-lua").setup({
+		winopts = {
+			height = 0.95,
+			width = 0.90,
+			preview = {
+				vertical = "down:70%",
+				layout = "vertical",
+			},
+		},
+		keymap = {
+			fzf = {
+				["ctrl-q"] = "select-all",
+			},
+		},
+	})
+	require('fzf-lua').register_ui_select()
 end
 
 local function setup_utils()
@@ -193,6 +176,8 @@ local function setup_theme()
 end
 
 setup_treesitter()
+setup_mini()
+setup_nav()
 setup_utils()
 setup_ai()
 setup_theme()
