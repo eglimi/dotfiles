@@ -2,6 +2,8 @@
 
 vim.pack.add({
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/stevearc/quicker.nvim" },
 	{ src = "https://github.com/tpope/vim-fugitive" },
@@ -61,23 +63,6 @@ end
 require('mini.deps').setup({ path = { package = path_package } })
 
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-
-now(function()
-	add({
-		source = 'nvim-treesitter/nvim-treesitter',
-		checkout = 'main',
-		-- Perform action after every checkout
-		hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
-	})
-
-	-- Install parsers and avoid annyoing install message.
-	require("nvim-treesitter").install( { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","toml","cmake" } )
-
-	add({
-		source = 'nvim-treesitter/nvim-treesitter-textobjects',
-		checkout = 'main',
-	})
-end)
 
 now(function()
 	-- mini modules
@@ -196,3 +181,22 @@ now(function()
 	})
 end)
 
+local function setup_treesitter()
+	local ts_parsers = { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","toml","cmake" }
+	local nts = require("nvim-treesitter")
+	nts.install(ts_parsers)
+	local autocmd = vim.api.nvim_create_autocmd
+	autocmd("PackChanged", { -- update treesitter parsers/queries with plugin updates
+		group = augroup,
+		callback = function(args)
+			local spec = args.data.spec
+			if spec and spec.name == "nvim-treesitter" and args.data.kind == "update" then
+				vim.schedule(function()
+					nts.update()
+				end)
+			end
+		end,
+	})
+end
+
+setup_treesitter()
