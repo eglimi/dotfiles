@@ -11,6 +11,7 @@ vim.pack.add({
 	{ src = "https://github.com/jamessan/vim-gnupg" },
 	{ src = "https://github.com/junegunn/vim-easy-align" },
 	{ src = "https://github.com/nmac427/guess-indent.nvim" },
+	{ src = "https://github.com/ibhagwan/fzf-lua" },
 }, { load = true })
 
 require('oil').setup({
@@ -23,6 +24,23 @@ require('oil').setup({
 })
 require('quicker').setup()
 require('guess-indent').setup({})
+
+require("fzf-lua").setup({
+	winopts = {
+		height = 0.95,
+		width = 0.90,
+		preview = {
+			vertical = "down:70%",
+			layout = "vertical",
+		},
+	},
+	keymap = {
+		fzf = {
+			["ctrl-q"] = "select-all",
+		},
+	},
+})
+require('fzf-lua').register_ui_select()
 
 -- For the remainder, we use mini.deps for dependency management
 
@@ -98,34 +116,6 @@ now(function()
 		set_vim_settings = false
 	})
 	require('mini.trailspace').setup({})
-end)
-
-now(function()
-	add({
-		source = 'junegunn/fzf',
-		checkout = 'master',
-		hooks = {
-			post_install = function(opts) vim.fn.system(string.format('%s/install --bin', opts.path)) end,
-			post_checkout = function(opts) vim.fn.system(string.format('%s/install --bin', opts.path)) end,
-		},
-	})
-	add('ibhagwan/fzf-lua')
-	require("fzf-lua").setup({
-		winopts = {
-			height = 0.95,
-			width = 0.90,
-			preview = {
-				vertical = "down:70%",
-				layout = "vertical",
-			},
-		},
-		keymap = {
-			fzf = {
-				["ctrl-q"] = "select-all",
-			},
-		},
-	})
-	require('fzf-lua').register_ui_select()
 end)
 
 later(function()

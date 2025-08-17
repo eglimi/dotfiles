@@ -5,7 +5,7 @@ vim.lsp.config('*', {
 })
 
 vim.lsp.config("*", {
-  root_markers = { ".git" },
+  root_markers = { ".git", ".jj" },
   capabilities = {
     textDocument = {
       completion = {
