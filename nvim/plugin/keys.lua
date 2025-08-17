@@ -83,7 +83,6 @@ local keys = {
 }
 
 -- lazygit / lazyjj
-vim.keymap.set("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
 vim.keymap.set("n", "<leader>jj", "<cmd>lua _lazyjj_toggle()<CR>", {noremap = true, silent = true})
 
 -- Reload nvim

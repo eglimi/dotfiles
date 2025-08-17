@@ -1,67 +1,3 @@
--- Move to native package management
-
-vim.pack.add({
-	"https://github.com/nvim-lua/plenary.nvim",
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
-	"https://github.com/stevearc/oil.nvim",
-	"https://github.com/ibhagwan/fzf-lua",
-	"https://github.com/stevearc/quicker.nvim",
-	"https://github.com/tpope/vim-fugitive",
-	"https://github.com/martintrojer/jj-fugitive",
-	"https://github.com/junegunn/gv.vim",
-	"https://github.com/yorickpeterse/nvim-window",
-	"https://github.com/jamessan/vim-gnupg",
-	"https://github.com/junegunn/vim-easy-align",
-	"https://github.com/nmac427/guess-indent.nvim",
-	{ src = "https://github.com/everviolet/nvim", name = "evergarden" },
-}, { load = true })
-
-require('oil').setup({
-	watch_for_changes = true,
-	keymaps = {
-		["."] = "actions.open_cmdline",
-		["<C-p>"] = {"actions.preview", opts = {split = "belowright"} },
-		["<C-s>"] = {"actions.select", opts = {vertical = true, split = "belowright"} },
-	},
-})
-require('quicker').setup()
-require('guess-indent').setup({})
-
-require("fzf-lua").setup({
-	winopts = {
-		height = 0.95,
-		width = 0.90,
-		preview = {
-			vertical = "down:70%",
-			layout = "vertical",
-		},
-	},
-	keymap = {
-		fzf = {
-			["ctrl-q"] = "select-all",
-		},
-	},
-})
-require('fzf-lua').register_ui_select()
-
-local function setup_theme()
-	-- alternatives: everforest, gruvbox-material
-	require("evergarden").setup({
-		theme = {variant = "spring"}, -- spring, summer, fall, winter
-		style = {search = {"standout"}, incsearch = {"standout", "italic"}, comment = {}},
-		editor = {float = {invert_border = false}},
-		overrides = function(colors)
-			return {
-				WinSeparator = {fg = colors.blue},
-				WinBar = {style = {"italic", "bold"}},
-			}
-		end,
-	})
-end
-
--- For the remainder, we use mini.deps for dependency management
-
 -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
 local path_package = vim.fn.stdpath('data') .. '/site/'
 local mini_path = path_package .. 'pack/deps/start/mini.nvim'
@@ -119,15 +55,89 @@ now(function()
 	require('mini.trailspace').setup({})
 end)
 
-later(function()
-	add({
-		source = 'olimorris/codecompanion.nvim',
-		depends = {
-			'nvim-lua/plenary.nvim',
-			'nvim-treesitter/nvim-treesitter',
-		}
-	})
 
+-- Native package management
+
+vim.pack.add({
+	-- libs
+	"https://github.com/nvim-lua/plenary.nvim",
+	-- treesitter
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
+	-- nav, picker, etc
+	"https://github.com/stevearc/oil.nvim",
+	"https://github.com/ibhagwan/fzf-lua",
+	"https://github.com/stevearc/quicker.nvim",
+	-- vcs
+	"https://github.com/tpope/vim-fugitive",
+	"https://github.com/martintrojer/jj-fugitive",
+	"https://github.com/junegunn/gv.vim",
+	-- utils
+	"https://github.com/akinsho/toggleterm.nvim",
+	"https://github.com/yorickpeterse/nvim-window",
+	"https://github.com/jamessan/vim-gnupg",
+	"https://github.com/junegunn/vim-easy-align",
+	"https://github.com/nmac427/guess-indent.nvim",
+	-- ai
+	"https://github.com/olimorris/codecompanion.nvim",
+	-- theme
+	{ src = "https://github.com/everviolet/nvim", name = "evergarden" },
+}, { load = true })
+
+require('oil').setup({
+	watch_for_changes = true,
+	keymaps = {
+		["."] = "actions.open_cmdline",
+		["<C-p>"] = {"actions.preview", opts = {split = "belowright"} },
+		["<C-s>"] = {"actions.select", opts = {vertical = true, split = "belowright"} },
+	},
+})
+require('quicker').setup()
+require('guess-indent').setup({})
+
+require("fzf-lua").setup({
+	winopts = {
+		height = 0.95,
+		width = 0.90,
+		preview = {
+			vertical = "down:70%",
+			layout = "vertical",
+		},
+	},
+	keymap = {
+		fzf = {
+			["ctrl-q"] = "select-all",
+		},
+	},
+})
+require('fzf-lua').register_ui_select()
+
+local function setup_treesitter()
+	local ts_parsers = { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","toml","cmake" }
+	local nts = require("nvim-treesitter")
+	nts.install(ts_parsers)
+	local autocmd = vim.api.nvim_create_autocmd
+	autocmd("PackChanged", { -- update treesitter parsers/queries with plugin updates
+		group = augroup,
+		callback = function(args)
+			local spec = args.data.spec
+			if spec and spec.name == "nvim-treesitter" and args.data.kind == "update" then
+				vim.schedule(function()
+					nts.update()
+				end)
+			end
+		end,
+	})
+end
+
+local function setup_utils()
+	require("toggleterm").setup({ direction = "tab" })
+	local Terminal  = require('toggleterm.terminal').Terminal
+	local lazyjj = Terminal:new({ cmd = "jjui", hidden = true })
+	function _lazyjj_toggle() lazyjj:toggle() end
+end
+
+local function setup_ai()
 	local prompt = [[You are a code-focused AI programming assistant that is an expert in this programming language.
 You must
 - Keep your answers short.
@@ -165,35 +175,24 @@ You must
 			},
 		})
 	end
-end)
+end
 
-later(function()
-	add("akinsho/toggleterm.nvim")
-	require("toggleterm").setup({ direction = "tab" })
-	local Terminal  = require('toggleterm.terminal').Terminal
-	local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-	local lazyjj = Terminal:new({ cmd = "jjui", hidden = true })
-	function _lazygit_toggle() lazygit:toggle() end
-	function _lazyjj_toggle() lazyjj:toggle() end
-end)
-
-local function setup_treesitter()
-	local ts_parsers = { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","toml","cmake" }
-	local nts = require("nvim-treesitter")
-	nts.install(ts_parsers)
-	local autocmd = vim.api.nvim_create_autocmd
-	autocmd("PackChanged", { -- update treesitter parsers/queries with plugin updates
-		group = augroup,
-		callback = function(args)
-			local spec = args.data.spec
-			if spec and spec.name == "nvim-treesitter" and args.data.kind == "update" then
-				vim.schedule(function()
-					nts.update()
-				end)
-			end
+local function setup_theme()
+	-- alternatives: everforest, gruvbox-material
+	require("evergarden").setup({
+		theme = {variant = "spring"}, -- spring, summer, fall, winter
+		style = {search = {"standout"}, incsearch = {"standout", "italic"}, comment = {}},
+		editor = {float = {invert_border = false}},
+		overrides = function(colors)
+			return {
+				WinSeparator = {fg = colors.blue},
+				WinBar = {style = {"italic", "bold"}},
+			}
 		end,
 	})
 end
 
 setup_treesitter()
+setup_utils()
+setup_ai()
 setup_theme()
