@@ -1,19 +1,20 @@
 -- Move to native package management
 
 vim.pack.add({
-	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	"https://github.com/nvim-lua/plenary.nvim",
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
-	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/stevearc/quicker.nvim" },
-	{ src = "https://github.com/tpope/vim-fugitive" },
-	{ src = "https://github.com/martintrojer/jj-fugitive" },
-	{ src = "https://github.com/junegunn/gv.vim" },
-	{ src = "https://github.com/yorickpeterse/nvim-window" },
-	{ src = "https://github.com/jamessan/vim-gnupg" },
-	{ src = "https://github.com/junegunn/vim-easy-align" },
-	{ src = "https://github.com/nmac427/guess-indent.nvim" },
-	{ src = "https://github.com/ibhagwan/fzf-lua" },
+	"https://github.com/stevearc/oil.nvim",
+	"https://github.com/ibhagwan/fzf-lua",
+	"https://github.com/stevearc/quicker.nvim",
+	"https://github.com/tpope/vim-fugitive",
+	"https://github.com/martintrojer/jj-fugitive",
+	"https://github.com/junegunn/gv.vim",
+	"https://github.com/yorickpeterse/nvim-window",
+	"https://github.com/jamessan/vim-gnupg",
+	"https://github.com/junegunn/vim-easy-align",
+	"https://github.com/nmac427/guess-indent.nvim",
+	{ src = "https://github.com/everviolet/nvim", name = "evergarden" },
 }, { load = true })
 
 require('oil').setup({
@@ -43,6 +44,21 @@ require("fzf-lua").setup({
 	},
 })
 require('fzf-lua').register_ui_select()
+
+local function setup_theme()
+	-- alternatives: everforest, gruvbox-material
+	require("evergarden").setup({
+		theme = {variant = "spring"}, -- spring, summer, fall, winter
+		style = {search = {"standout"}, incsearch = {"standout", "italic"}, comment = {}},
+		editor = {float = {invert_border = false}},
+		overrides = function(colors)
+			return {
+				WinSeparator = {fg = colors.blue},
+				WinBar = {style = {"italic", "bold"}},
+			}
+		end,
+	})
+end
 
 -- For the remainder, we use mini.deps for dependency management
 
@@ -161,26 +177,6 @@ later(function()
 	function _lazyjj_toggle() lazyjj:toggle() end
 end)
 
--- Colorscheme
-now(function()
-  -- Some favorites
-	-- add("neanias/everforest-nvim")
-	-- require("everforest").setup({ background = "hard", italics = true,  })
-	-- add("sainnhe/gruvbox-material")
-	add( { source = "everviolet/nvim", name = "evergarden" })
-	require("evergarden").setup({
-		theme = {variant = "spring"}, -- spring, summer, fall, winter
-		style = {search = {"standout"}, incsearch = {"standout", "italic"}, comment = {}},
-		editor = {float = {invert_border = false}},
-		overrides = function(colors)
-			return {
-				WinSeparator = {fg = colors.blue},
-				WinBar = {style = {"italic", "bold"}},
-			}
-		end,
-	})
-end)
-
 local function setup_treesitter()
 	local ts_parsers = { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","toml","cmake" }
 	local nts = require("nvim-treesitter")
@@ -200,3 +196,4 @@ local function setup_treesitter()
 end
 
 setup_treesitter()
+setup_theme()
