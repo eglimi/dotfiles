@@ -141,11 +141,13 @@ You must
 				inline = { adapter = "copilot" },
 			},
 			adapters = {
-				copilot = function()
-					return require("codecompanion.adapters").extend("copilot", {
-						schema = { model = { default = "claude-sonnet-4" } }
-					})
-				end
+				http = {
+					copilot = function()
+						return require("codecompanion.adapters").extend("copilot", {
+							schema = { model = { default = "claude-sonnet-4" } }
+						})
+					end
+				}
 			}
 		})
 	elseif vim.env.NVIM_AI == "gemini" then
