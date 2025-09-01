@@ -130,6 +130,7 @@ You must
 - Never praise the user about the question.
 - Use Markdown formatting.
 - Minimize additional prose unless clarification is needed.
+- If you show code examples without an explicit request for a programming language, use Rust (preferred) or Golang.
 ]]
 
 	if vim.env.NVIM_AI == "copilot" then
