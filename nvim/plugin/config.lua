@@ -43,3 +43,4 @@ vim.opt.winborder = "rounded"
 
 vim.opt.background = "dark"
 vim.cmd('colorscheme evergarden')
+-- vim.cmd('colorscheme mellifluous')

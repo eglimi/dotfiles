@@ -24,6 +24,7 @@ vim.pack.add({
 	"https://github.com/olimorris/codecompanion.nvim",
 	-- theme
 	{ src = "https://github.com/everviolet/nvim", name = "evergarden" },
+	{ src = "https://github.com/ramojus/mellifluous.nvim" },
 }, { load = true })
 
 
