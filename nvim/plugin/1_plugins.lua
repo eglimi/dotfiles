@@ -109,6 +109,12 @@ local function setup_nav()
 				["ctrl-q"] = "select-all",
 			},
 		},
+		files = {
+			fd_opts = require('fzf-lua').defaults.files.fd_opts .. " --no-require-git",
+		},
+		grep = {
+			rg_opts = "--no-require-git " .. require('fzf-lua').defaults.grep.rg_opts,
+		}
 	})
 	require('fzf-lua').register_ui_select()
 end
