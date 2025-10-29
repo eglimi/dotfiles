@@ -1,15 +1,17 @@
 vim.pack.add({
 	-- libs
 	"https://github.com/nvim-lua/plenary.nvim",
-	-- treesitter
+	-- treesitter, lsp
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
+	"https://github.com/rachartier/tiny-inline-diagnostic.nvim",
 	-- mini
 	"https://github.com/echasnovski/mini.nvim",
 	-- nav, picker, etc
 	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
 	"https://github.com/stevearc/quicker.nvim",
+	"https://github.com/aaronik/treewalker.nvim",
 	-- vcs
 	"https://github.com/tpope/vim-fugitive",
 	"https://github.com/martintrojer/jj-fugitive",
@@ -24,7 +26,8 @@ vim.pack.add({
 	"https://github.com/olimorris/codecompanion.nvim",
 	-- theme
 	{ src = "https://github.com/everviolet/nvim", name = "evergarden" },
-	{ src = "https://github.com/ramojus/mellifluous.nvim" },
+	{ src = "https://github.com/sainnhe/gruvbox-material" },
+	{ src = "https://github.com/rebelot/kanagawa.nvim" },
 }, { load = true })
 
 
@@ -43,10 +46,11 @@ local function setup_treesitter()
 			end
 		end,
 	})
+
+	require("tiny-inline-diagnostic").setup()
 end
 
 local function setup_mini()
-	-- mini modules
 	-- text editing
 	local spec_treesitter = require('mini.ai').gen_spec.treesitter
 	require('mini.ai').setup({
@@ -59,6 +63,7 @@ local function setup_mini()
 	require('mini.completion').setup({})
 	require('mini.splitjoin').setup()
 	require('mini.surround').setup({})
+	require('mini.pick').setup({})
 
 	-- general workflow
 	require('mini.bracketed').setup({})

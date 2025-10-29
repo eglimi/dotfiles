@@ -42,5 +42,6 @@ vim.opt.completeopt = "menuone,noselect,popup"
 vim.opt.winborder = "rounded"
 
 vim.opt.background = "dark"
-vim.cmd('colorscheme evergarden')
--- vim.cmd('colorscheme mellifluous')
+-- vim.cmd('colorscheme evergarden')
+vim.cmd('colorscheme gruvbox-material')
+-- vim.cmd('colorscheme kanagawa')

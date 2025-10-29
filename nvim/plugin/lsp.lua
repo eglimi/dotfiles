@@ -19,7 +19,7 @@ vim.lsp.config("*", {
 })
 
 vim.diagnostic.config({
-  virtual_text = { current_line = true }
+  virtual_text = { current_line = false }
 })
 
 -- Mappings.
