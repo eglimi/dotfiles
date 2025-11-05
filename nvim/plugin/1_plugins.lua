@@ -32,11 +32,10 @@ vim.pack.add({
 
 
 local function setup_treesitter()
-	local ts_parsers = { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","toml","cmake" }
+	local ts_parsers = { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","typst","toml","cmake" }
 	local ts = require("nvim-treesitter")
 	ts.install(ts_parsers)
-	local autocmd = vim.api.nvim_create_autocmd
-	autocmd("PackChanged", { -- update treesitter parsers/queries with plugin updates
+	vim.api.nvim_create_autocmd("PackChanged", { -- update treesitter parsers/queries with plugin updates
 		callback = function(args)
 			local spec = args.data.spec
 			if spec and spec.name == "nvim-treesitter" and args.data.kind == "update" then
