@@ -5,8 +5,9 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 	"https://github.com/rachartier/tiny-inline-diagnostic.nvim",
-	-- mini
+	-- mini, snacks
 	"https://github.com/echasnovski/mini.nvim",
+	"https://github.com/folke/snacks.nvim",
 	-- nav, picker, etc
 	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
@@ -86,6 +87,36 @@ local function setup_mini()
 		set_vim_settings = false
 	})
 	require('mini.trailspace').setup({})
+end
+
+local function setup_snacks()
+	require('snacks').setup({
+		styles = {
+			input = {
+				keys = {
+					n_esc = { "<esc>", { "close" }, mode = "n", expr = true },
+					i_esc = { "<esc>", { "close" }, mode = "i", expr = true },
+				},
+			},
+		},
+		picker = {
+			enabled = true,
+			win = {
+				input = {
+					keys = {
+						["<Esc>"] = { "close", mode = { "n", "i" } },
+					},
+				},
+			},
+		},
+	})
+
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "snacks_picker_input",
+		callback = function()
+			vim.b.minicompletion_disable = true
+		end,
+})
 end
 
 local function setup_nav()
@@ -191,6 +222,7 @@ end
 
 setup_treesitter()
 setup_mini()
+setup_snacks()
 setup_nav()
 setup_utils()
 setup_ai()

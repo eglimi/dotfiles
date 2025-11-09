@@ -25,6 +25,9 @@ vim.keymap.set('n', '<leader>/', require('fzf-lua').live_grep_native, { desc = "
 vim.keymap.set('n', '<leader>sw', require('fzf-lua').grep_cword, { desc = "fzf search word under cursor" })
 vim.keymap.set('n', '<leader>sf', function() require('fzf-lua').files({ query = vim.fn.expand("<cword>") }) end, { desc = "fzf search filename under the cursor" })
 
+-- snacks picker
+vim.keymap.set('n', 'ss', function() Snacks.picker() end, {desc = "Show snacks picker" })
+
 -- treewalker
 vim.keymap.set({ 'n', 'v' }, '<A-k>', '<cmd>Treewalker Up<cr>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<A-j>', '<cmd>Treewalker Down<cr>', { silent = true })

@@ -1,7 +1,7 @@
 {
   "plugins": {
     "codecompanion.nvim": {
-      "rev": "6fe6b45",
+      "rev": "991dd81",
       "src": "https://github.com/olimorris/codecompanion.nvim"
     },
     "evergarden": {
@@ -9,11 +9,11 @@
       "src": "https://github.com/everviolet/nvim"
     },
     "fzf-lua": {
-      "rev": "6bb2a26",
+      "rev": "be1c28b",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gruvbox-material": {
-      "rev": "834dbf2",
+      "rev": "4bfc698",
       "src": "https://github.com/sainnhe/gruvbox-material"
     },
     "guess-indent.nvim": {
@@ -33,16 +33,16 @@
       "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "mini.nvim": {
-      "rev": "d1a9158",
+      "rev": "68d4478",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "nvim-treesitter": {
-      "rev": "645f42e8",
+      "rev": "d97d226c",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "1b2d85d",
+      "rev": "7024f86",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -62,8 +62,12 @@
       "rev": "12a2291",
       "src": "https://github.com/stevearc/quicker.nvim"
     },
+    "snacks.nvim": {
+      "rev": "c49c3f3",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
     "tiny-inline-diagnostic.nvim": {
-      "rev": "994c13d",
+      "rev": "63dd87d",
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "toggleterm.nvim": {
@@ -71,7 +75,7 @@
       "src": "https://github.com/akinsho/toggleterm.nvim"
     },
     "treewalker.nvim": {
-      "rev": "a3d49df",
+      "rev": "6b43602",
       "src": "https://github.com/aaronik/treewalker.nvim"
     },
     "vim-easy-align": {
