@@ -5,6 +5,9 @@ function fish_prompt --description 'Write out the prompt'
         set color_cwd $fish_color_cwd
         set suffix ' $'
 
+        # Battery warning
+        echo -n (fish_bat_prompt)
+
         # PWD
         set_color $color_cwd
         echo -n (prompt_pwd)
