@@ -106,6 +106,16 @@ link_fish()
 	fi
 }
 
+link_jj()
+{
+	check_existing "jj"
+	if [[ $? -ne 0 ]]
+	then
+		ln -sf ~/.config/dotfiles/jj ~/.config/
+		echo "successfully created link for jj"
+	fi
+}
+
 if [[ "$*" == "kitty" ]]; then link_kitty "YES"; fi
 if [[ "$*" == "nvim" ]]; then link_nvim "YES"; fi
 if [[ "$*" == "wezterm" ]]; then link_wezterm "YES"; fi
@@ -115,6 +125,7 @@ if [[ "$*" == "zsh" ]]; then link_zsh "YES"; fi
 if [[ "$*" == "sheldon" ]]; then link_sheldon "YES"; fi
 if [[ "$*" == "starship" ]]; then link_starship "YES"; fi
 if [[ "$*" == "fish" ]]; then link_fish "YES"; fi
+if [[ "$*" == "jj" ]]; then link_jj "YES"; fi
 
 if [[ "$*" == "all" ]]
 then
@@ -127,5 +138,6 @@ then
 	link_sheldon
 	link_starship
 	link_fish
+	link_jj
 fi
 
