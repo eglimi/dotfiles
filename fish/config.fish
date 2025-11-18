@@ -9,6 +9,8 @@ if status is-interactive
         mise activate fish | source
     end
     atuin init fish --disable-up-arrow | source
+    devbox completion fish | source
+    devbox global shellenv --init-hook | source
 
     source $HOME/.aliases
 
