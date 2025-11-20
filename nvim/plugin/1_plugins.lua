@@ -14,8 +14,8 @@ vim.pack.add({
 	"https://github.com/stevearc/quicker.nvim",
 	"https://github.com/aaronik/treewalker.nvim",
 	-- vcs
+	"https://github.com/NicolasGB/jj.nvim",
 	"https://github.com/tpope/vim-fugitive",
-	"https://github.com/martintrojer/jj-fugitive",
 	"https://github.com/junegunn/gv.vim",
 	-- utils
 	"https://github.com/akinsho/toggleterm.nvim",
@@ -160,6 +160,8 @@ local function setup_utils()
 	local Terminal  = require('toggleterm.terminal').Terminal
 	local lazyjj = Terminal:new({ cmd = "jjui", hidden = true })
 	function _lazyjj_toggle() lazyjj:toggle() end
+	require("jj").setup({})
+
 end
 
 local function setup_ai()

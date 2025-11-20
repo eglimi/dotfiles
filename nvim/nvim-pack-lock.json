@@ -1,15 +1,15 @@
 {
   "plugins": {
     "codecompanion.nvim": {
-      "rev": "991dd81",
+      "rev": "9cc2933a735a238c586c267e07f4992f039c1027",
       "src": "https://github.com/olimorris/codecompanion.nvim"
     },
     "evergarden": {
-      "rev": "951d0c4",
+      "rev": "00038117170681c0b488001e29bb7125f3be7a94",
       "src": "https://github.com/everviolet/nvim"
     },
     "fzf-lua": {
-      "rev": "be1c28b",
+      "rev": "123cc546c4618f5fd90d5db2da5643e76979162c",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gruvbox-material": {
@@ -24,25 +24,25 @@
       "rev": "b6bb666",
       "src": "https://github.com/junegunn/gv.vim"
     },
-    "jj-fugitive": {
-      "rev": "2e91b7b",
-      "src": "https://github.com/martintrojer/jj-fugitive"
+    "jj.nvim": {
+      "rev": "eb29992d019ea88544d962c18bcae0ffbc575570",
+      "src": "https://github.com/NicolasGB/jj.nvim"
     },
     "kanagawa.nvim": {
       "rev": "aef7f5c",
       "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "mini.nvim": {
-      "rev": "68d4478",
+      "rev": "b409fd1d8b9ea7ec7c0923eb2562b52ed5d1ab0a",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "nvim-treesitter": {
-      "rev": "d97d226c",
+      "rev": "bb83a676128d95c865e40ba71376d883bdadec14",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "7024f86",
+      "rev": "227165aaeb07b567fb9c066f224816aa8f3ce63f",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -63,11 +63,11 @@
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "snacks.nvim": {
-      "rev": "c49c3f3",
+      "rev": "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
       "src": "https://github.com/folke/snacks.nvim"
     },
     "tiny-inline-diagnostic.nvim": {
-      "rev": "63dd87d",
+      "rev": "71f998696a4d63a1fa42a6c70d5931a2001e485b",
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "toggleterm.nvim": {
@@ -75,7 +75,7 @@
       "src": "https://github.com/akinsho/toggleterm.nvim"
     },
     "treewalker.nvim": {
-      "rev": "6b43602",
+      "rev": "fb93a6cd02a0445da7976ef5646b7fbd3c2d7ee3",
       "src": "https://github.com/aaronik/treewalker.nvim"
     },
     "vim-easy-align": {
