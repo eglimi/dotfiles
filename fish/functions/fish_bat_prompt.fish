@@ -8,4 +8,6 @@ function fish_bat_prompt
         end
     end
 
+    return 0
+
 end
