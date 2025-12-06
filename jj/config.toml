@@ -19,13 +19,15 @@ log = "custom_log_oneline"
 format_bookmarks = 'format_bookmarks(self)'
 'format_bookmarks(commit)' = '''
   concat(
-    commit.bookmarks().map(|bookmark| concat(
+    commit.local_bookmarks().map(|bookmark| concat(
         label("bookmark", bookmark.name()),
         if(!bookmark.synced(), "*")
       )
     ),
     commit.remote_bookmarks().map(|bookmark|
-        if(bookmark.synced(), "@=", "*")
+      if(bookmark.synced(), "@=",
+        label("bookmark", bookmark.name() ++ "@*"),
+      )
     )
   )
 '''
@@ -46,6 +48,7 @@ if(commit.root(),
         format_short_signature_oneline(commit.author()),
         format_timestamp(commit_timestamp(commit)),
         format_bookmarks(commit),
+        commit.tags(),
         commit.working_copies(),
         if(commit.git_head(), label("git_head", "git_head()")),
         format_short_commit_id(commit.commit_id()),
