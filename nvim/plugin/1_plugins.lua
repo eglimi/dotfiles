@@ -9,7 +9,6 @@ vim.pack.add({
 	"https://github.com/echasnovski/mini.nvim",
 	-- nav, picker, etc
 	"https://github.com/stevearc/oil.nvim",
-	"https://github.com/ibhagwan/fzf-lua",
 	"https://github.com/stevearc/quicker.nvim",
 	"https://github.com/aaronik/treewalker.nvim",
 	-- utils
@@ -92,29 +91,6 @@ local function setup_nav()
 		},
 	})
 	require('quicker').setup()
-
-	require("fzf-lua").setup({
-		winopts = {
-			height = 0.95,
-			width = 0.90,
-			preview = {
-				vertical = "down:70%",
-				layout = "vertical",
-			},
-		},
-		keymap = {
-			fzf = {
-				["ctrl-q"] = "select-all",
-			},
-		},
-		files = {
-			fd_opts = require('fzf-lua').defaults.files.fd_opts .. " --no-require-git",
-		},
-		grep = {
-			rg_opts = "--no-require-git " .. require('fzf-lua').defaults.grep.rg_opts,
-		}
-	})
-	require('fzf-lua').register_ui_select()
 end
 
 local function setup_utils()
