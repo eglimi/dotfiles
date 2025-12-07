@@ -5,24 +5,17 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 	"https://github.com/rachartier/tiny-inline-diagnostic.nvim",
-	-- mini, snacks
+	-- mini
 	"https://github.com/echasnovski/mini.nvim",
-	"https://github.com/folke/snacks.nvim",
 	-- nav, picker, etc
 	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
 	"https://github.com/stevearc/quicker.nvim",
 	"https://github.com/aaronik/treewalker.nvim",
-	-- vcs
-	"https://github.com/NicolasGB/jj.nvim",
-	"https://github.com/tpope/vim-fugitive",
-	"https://github.com/junegunn/gv.vim",
 	-- utils
 	"https://github.com/akinsho/toggleterm.nvim",
 	"https://github.com/yorickpeterse/nvim-window",
 	"https://github.com/jamessan/vim-gnupg",
-	"https://github.com/junegunn/vim-easy-align",
-	"https://github.com/nmac427/guess-indent.nvim",
 	-- ai
 	"https://github.com/olimorris/codecompanion.nvim",
 	-- theme
@@ -89,36 +82,6 @@ local function setup_mini()
 	require('mini.trailspace').setup({})
 end
 
-local function setup_snacks()
-	require('snacks').setup({
-		styles = {
-			input = {
-				keys = {
-					n_esc = { "<esc>", { "close" }, mode = "n", expr = true },
-					i_esc = { "<esc>", { "close" }, mode = "i", expr = true },
-				},
-			},
-		},
-		picker = {
-			enabled = true,
-			win = {
-				input = {
-					keys = {
-						["<Esc>"] = { "close", mode = { "n", "i" } },
-					},
-				},
-			},
-		},
-	})
-
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = "snacks_picker_input",
-		callback = function()
-			vim.b.minicompletion_disable = true
-		end,
-})
-end
-
 local function setup_nav()
 	require('oil').setup({
 		watch_for_changes = true,
@@ -129,7 +92,6 @@ local function setup_nav()
 		},
 	})
 	require('quicker').setup()
-	require('guess-indent').setup({})
 
 	require("fzf-lua").setup({
 		winopts = {
@@ -160,7 +122,6 @@ local function setup_utils()
 	local Terminal  = require('toggleterm.terminal').Terminal
 	local lazyjj = Terminal:new({ cmd = "jjui", hidden = true })
 	function _lazyjj_toggle() lazyjj:toggle() end
-	require("jj").setup({})
 
 end
 
@@ -180,6 +141,7 @@ You must
 	if vim.env.NVIM_AI == "copilot" then
 		-- Configure Copilot
 		require('codecompanion').setup({
+			ignore_warnings = true,
 			opts = { system_prompt = prompt },
 			strategies = {
 				chat = { adapter = "copilot" },
@@ -224,7 +186,6 @@ end
 
 setup_treesitter()
 setup_mini()
-setup_snacks()
 setup_nav()
 setup_utils()
 setup_ai()

@@ -1,48 +1,36 @@
 {
   "plugins": {
     "codecompanion.nvim": {
-      "rev": "9cc2933a735a238c586c267e07f4992f039c1027",
+      "rev": "8ad65eef735b31bb47d76f59d878ee1bac4bdc85",
       "src": "https://github.com/olimorris/codecompanion.nvim"
     },
     "evergarden": {
-      "rev": "00038117170681c0b488001e29bb7125f3be7a94",
+      "rev": "9c7e117da6fc3ce5a94fc2051e6de21912ae09c6",
       "src": "https://github.com/everviolet/nvim"
     },
     "fzf-lua": {
-      "rev": "123cc546c4618f5fd90d5db2da5643e76979162c",
+      "rev": "0284d640fd88c56f100a43f41103c5b564699e15",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gruvbox-material": {
-      "rev": "4bfc698",
+      "rev": "cc47341018320a2c82262958a1af889e5eeacd6e",
       "src": "https://github.com/sainnhe/gruvbox-material"
-    },
-    "guess-indent.nvim": {
-      "rev": "84a4987",
-      "src": "https://github.com/nmac427/guess-indent.nvim"
-    },
-    "gv.vim": {
-      "rev": "b6bb666",
-      "src": "https://github.com/junegunn/gv.vim"
-    },
-    "jj.nvim": {
-      "rev": "eb29992d019ea88544d962c18bcae0ffbc575570",
-      "src": "https://github.com/NicolasGB/jj.nvim"
     },
     "kanagawa.nvim": {
       "rev": "aef7f5c",
       "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "mini.nvim": {
-      "rev": "b409fd1d8b9ea7ec7c0923eb2562b52ed5d1ab0a",
+      "rev": "dca98843fab66d080779cd973e7139e258ff164c",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "nvim-treesitter": {
-      "rev": "bb83a676128d95c865e40ba71376d883bdadec14",
+      "rev": "9d47b2558b29fc8c0bce5f54b8424c5f8e2c80c7",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "227165aaeb07b567fb9c066f224816aa8f3ce63f",
+      "rev": "ee9cc6fc8674dadd79c757bff6d2a974dd66cf5b",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -51,7 +39,7 @@
       "src": "https://github.com/yorickpeterse/nvim-window"
     },
     "oil.nvim": {
-      "rev": "7e1cd77",
+      "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "plenary.nvim": {
@@ -59,15 +47,11 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "quicker.nvim": {
-      "rev": "12a2291",
+      "rev": "9983d4b28881e1df626e3682167b45c284d4da8c",
       "src": "https://github.com/stevearc/quicker.nvim"
     },
-    "snacks.nvim": {
-      "rev": "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
-      "src": "https://github.com/folke/snacks.nvim"
-    },
     "tiny-inline-diagnostic.nvim": {
-      "rev": "71f998696a4d63a1fa42a6c70d5931a2001e485b",
+      "rev": "38b06435305c30966b7ceb0a43e460dc43acaada",
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "toggleterm.nvim": {
@@ -75,16 +59,8 @@
       "src": "https://github.com/akinsho/toggleterm.nvim"
     },
     "treewalker.nvim": {
-      "rev": "fb93a6cd02a0445da7976ef5646b7fbd3c2d7ee3",
+      "rev": "ec116249e6fa3f00f20acc5b1723cc1b4eca2d6d",
       "src": "https://github.com/aaronik/treewalker.nvim"
-    },
-    "vim-easy-align": {
-      "rev": "9815a55",
-      "src": "https://github.com/junegunn/vim-easy-align"
-    },
-    "vim-fugitive": {
-      "rev": "61b51c0",
-      "src": "https://github.com/tpope/vim-fugitive"
     },
     "vim-gnupg": {
       "rev": "f9b608f",
