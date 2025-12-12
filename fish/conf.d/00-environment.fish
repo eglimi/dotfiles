@@ -8,6 +8,7 @@ fish_add_path $HOME/go/bin
 set -gx EDITOR editor
 set -gx SHELL fish
 set -gx LESS '--quit-if-one-screen --ignore-case --chop-long-lines --RAW-CONTROL-CHARS --no-init --tabs=4 --shift=4'
+set -gx RIPGREP_CONFIG_PATH $HOME/.config/ripgreprc
 
 if test -f $HOME/.env
 	source $HOME/.env
