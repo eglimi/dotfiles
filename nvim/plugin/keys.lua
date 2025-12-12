@@ -12,6 +12,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
+-- Picker
 vim.keymap.set('n', '<leader>f', function() require('mini.pick').builtin.files() end, { desc = "mini.pick find files" })
 vim.keymap.set('n', '<leader>b', function() require('mini.pick').builtin.buffers() end, { desc = "mini.pick buffer" })
 vim.keymap.set('n', '<leader>r', function() require('mini.pick').builtin.resume() end, { desc = "mini.pick resume" })
@@ -45,6 +46,9 @@ vim.keymap.set({"n"}, "<leader>at", function() require("codecompanion").toggle()
 
 -- Toggles
 vim.keymap.set({"n"}, "<leader>th", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({0}),{0}) end, { desc = "Toggle inlay Hints" })
+
+-- Utils
+vim.keymap.set({"n"}, "<leader>ut", function() require("mini.trailspace").trim() end, { desc = "Trim trailing whitespace" })
 
 -- Escape in terminal mode
 -- vim.keymap.set('t', "<esc><esc>", [[<C-\><C-n>]], { desc = "Escape terminal mode" } )
