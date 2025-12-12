@@ -10,6 +10,7 @@ vim.pack.add({
 	-- nav, picker, etc
 	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/stevearc/quicker.nvim",
+	"https://github.com/nmac427/guess-indent.nvim",
 	"https://github.com/aaronik/treewalker.nvim",
 	-- utils
 	"https://github.com/akinsho/toggleterm.nvim",
@@ -91,6 +92,7 @@ local function setup_nav()
 		},
 	})
 	require('quicker').setup()
+	require('guess-indent').setup()
 end
 
 local function setup_utils()
