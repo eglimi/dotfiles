@@ -1,7 +1,8 @@
 -- General LSP config
 
 vim.lsp.config('*', {
-  capabilities = MiniCompletion.get_lsp_capabilities()
+  capabilities = MiniCompletion.get_lsp_capabilities(),
+  jump = { float = true },
 })
 
 vim.lsp.config("*", {
