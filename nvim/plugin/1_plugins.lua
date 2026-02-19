@@ -120,9 +120,11 @@ You must
 		-- Configure Copilot
 		require('codecompanion').setup({
 			ignore_warnings = true,
-			opts = { system_prompt = prompt },
 			strategies = {
-				chat = { adapter = "copilot" },
+				chat = {
+					adapter = "copilot",
+					opts = { system_prompt = function() return prompt end },
+				},
 				inline = { adapter = "copilot" },
 			},
 			adapters = {
@@ -138,9 +140,11 @@ You must
 	elseif vim.env.NVIM_AI == "gemini" then
 		-- Configure Gemini
 		require('codecompanion').setup({
-			opts = { system_prompt = prompt },
 			strategies = {
-				chat = { adapter = "gemini" },
+				chat = {
+					adapter = "gemini",
+					opts = { system_prompt = function() return prompt end },
+				},
 				inline = { adapter = "gemini" },
 			},
 		})
