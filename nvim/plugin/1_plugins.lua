@@ -18,6 +18,8 @@ vim.pack.add({
 	"https://github.com/jamessan/vim-gnupg",
 	-- ai
 	"https://github.com/olimorris/codecompanion.nvim",
+	-- Run bun install -g mcp-hub@latest to update
+	"https://github.com/ravitemer/mcphub.nvim",
 	-- theme
 	{ src = "https://github.com/everviolet/nvim", name = "evergarden" },
 	{ src = "https://github.com/sainnhe/gruvbox-material" },
@@ -26,7 +28,7 @@ vim.pack.add({
 
 
 local function setup_treesitter()
-	local ts_parsers = { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","typst","toml","cmake" }
+	local ts_parsers = { "rust","elixir","cpp","zig","go","lua","javascript","json","html","css","dockerfile","markdown","typst","toml","cmake","yaml" }
 	local ts = require("nvim-treesitter")
 	ts.install(ts_parsers)
 	vim.api.nvim_create_autocmd("PackChanged", { -- update treesitter parsers/queries with plugin updates
@@ -80,6 +82,8 @@ local function setup_mini()
 		set_vim_settings = false
 	})
 	require('mini.trailspace').setup({})
+
+	vim.ui.select = require('mini.pick').ui_select
 end
 
 local function setup_nav()
@@ -117,13 +121,21 @@ You must
 ]]
 
 	if vim.env.NVIM_AI == "copilot" then
-		-- Configure Copilot
 		require('codecompanion').setup({
 			ignore_warnings = true,
-			strategies = {
+			interactions = {
 				chat = {
 					adapter = "copilot",
 					opts = { system_prompt = function() return prompt end },
+					tools = {
+						["run_command"] = {
+							opts = {
+								allowed_in_yolo_mode = true,   -- allow in yolo mode
+								require_approval_before = false, -- skip pre-approval entirely
+								require_cmd_approval = false,
+							},
+						},
+					},
 				},
 				inline = { adapter = "copilot" },
 			},
@@ -131,16 +143,30 @@ You must
 				http = {
 					copilot = function()
 						return require("codecompanion.adapters").extend("copilot", {
-							schema = { model = { default = "claude-opus-4.6" } }
+							schema = { model = { default = "claude-sonnet-4.6" } }
 						})
 					end
+				}
+			},
+			extensions = {
+				mcphub = {
+					callback = "mcphub.extensions.codecompanion",
+					opts = {
+						make_tools = false,                -- Make individual tools (@server__tool) and server groups (@server) from MCP servers
+						show_server_tools_in_chat = false, -- Show individual tools in chat completion (when make_tools=true)
+						add_mcp_prefix_to_tool_names = false, -- Add mcp__ prefix (e.g `@mcp__github`, `@mcp__neovim__list_issues`)
+						show_result_in_chat = true,      -- Show tool results directly in chat buffer
+						format_tool = nil,               -- function(tool_name:string, tool: CodeCompanion.Agent.Tool) : string Function to format tool names to show in the chat buffer
+						make_vars = false,               -- Convert MCP resources to #variables for prompts (disabled: removed from codecompanion)
+						make_slash_commands = true,      -- Add MCP prompts as /slash commands
+					}
 				}
 			}
 		})
 	elseif vim.env.NVIM_AI == "gemini" then
 		-- Configure Gemini
 		require('codecompanion').setup({
-			strategies = {
+			interactions = {
 				chat = {
 					adapter = "gemini",
 					opts = { system_prompt = function() return prompt end },
@@ -149,6 +175,8 @@ You must
 			},
 		})
 	end
+
+	require("mcphub").setup({})
 end
 
 local function setup_theme()
