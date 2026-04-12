@@ -32,23 +32,3 @@ autocmd("FileType", {
     command = "set formatprg=jq",
 })
 
--- Automatically trigger completion for certain characters with mini.completion
-autocmd("FileType", {
-    pattern = "codecompanion",
-    callback = function()
-        vim.b.minicompletion_config = {
-            fallback_action = "<C-x><C-o>",
-        }
-
-        vim.api.nvim_create_autocmd("InsertCharPre", {
-            buffer = 0,
-            callback = function()
-                if vim.v.char == "#" or vim.v.char == "@" or vim.v.char == "/" then
-                    vim.schedule(function()
-                        MiniCompletion.complete_twostage()
-                    end)
-                end
-            end,
-        })
-    end,
-})

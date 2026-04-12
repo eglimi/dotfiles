@@ -1,6 +1,16 @@
+--require("vim._extui").enable({
+--	enable = true,
+--	msg = { target = "msg", }
+--})
+
 vim.pack.add({
-	-- libs
+	-- libs, utils
 	"https://github.com/nvim-lua/plenary.nvim",
+	"https://github.com/MunifTanjim/nui.nvim",
+	"https://github.com/akinsho/toggleterm.nvim",
+	"https://github.com/yorickpeterse/nvim-window",
+	"https://github.com/jamessan/vim-gnupg",
+	"https://github.com/clabby/difftastic.nvim",
 	-- treesitter, lsp
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
@@ -8,18 +18,17 @@ vim.pack.add({
 	-- mini
 	"https://github.com/echasnovski/mini.nvim",
 	-- nav, picker, etc
+	-- "https://github.com/comfysage/artio.nvim",
 	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/stevearc/quicker.nvim",
 	"https://github.com/nmac427/guess-indent.nvim",
 	"https://github.com/aaronik/treewalker.nvim",
-	-- utils
-	"https://github.com/akinsho/toggleterm.nvim",
-	"https://github.com/yorickpeterse/nvim-window",
-	"https://github.com/jamessan/vim-gnupg",
+	-- vcs
+	-- "https://github.com/yannvanhalewyn/jujutsu.nvim",
 	-- ai
 	"https://github.com/olimorris/codecompanion.nvim",
 	-- Run bun install -g mcp-hub@latest to update
-	"https://github.com/ravitemer/mcphub.nvim",
+	-- "https://github.com/ravitemer/mcphub.nvim",
 	-- theme
 	{ src = "https://github.com/everviolet/nvim", name = "evergarden" },
 	{ src = "https://github.com/sainnhe/gruvbox-material" },
@@ -99,25 +108,42 @@ local function setup_nav()
 	require('guess-indent').setup()
 end
 
+local function setup_vcs()
+end
+
 local function setup_utils()
 	require("toggleterm").setup({ direction = "tab" })
 	local Terminal  = require('toggleterm.terminal').Terminal
 	local lazyjj = Terminal:new({ cmd = "jjui", hidden = true })
 	function _lazyjj_toggle() lazyjj:toggle() end
 
+	require("gitportal").setup({
+		git_provider_map = {
+			["git@ssh.code.roche.com"] = {
+				provider = "gitlab",
+				base_url = "https://code.roche.com/"
+			}
+		}
+	})
+	require("difftastic-nvim").setup({
+		download = true, -- Auto-download pre-built binary
+	})
 end
 
 local function setup_ai()
 	local prompt = [[You are a code-focused AI programming assistant that is an expert in this programming language.
 You must
 - Keep your answers short.
+- Use Markdown formatting.
+- When writing text or documentation, don't use bold text and don't use colons in prose.
 - Don't repeat code, just show the changes.
 - Only return code that's directly relevant to the task at hand. You may omit code that isn’t necessary for the solution.
 - Never ask a follow-up question at the end.
+- Post a concise task summary only when clearly useful. In all other cases, just show "Done" as a summary. In all cases, keep it minimal.
 - Never praise the user about the question.
-- Use Markdown formatting.
 - Minimize additional prose unless clarification is needed.
 - If you show code examples without an explicit request for a programming language, use Rust (preferred) or Golang.
+- I almost always work with jj instead of Git. Try jj first and Git second if you need VCS info.
 ]]
 
 	if vim.env.NVIM_AI == "copilot" then
@@ -135,6 +161,9 @@ You must
 								require_cmd_approval = false,
 							},
 						},
+						["ask_questions"] = {
+							enabled = false,
+						},
 					},
 				},
 				inline = { adapter = "copilot" },
@@ -143,25 +172,28 @@ You must
 				http = {
 					copilot = function()
 						return require("codecompanion.adapters").extend("copilot", {
-							schema = { model = { default = "claude-sonnet-4.6" } }
+							schema = { model = { default = "claude-opus-4.6" } }
 						})
-					end
-				}
+					end,
+					anthropic = function()
+						return require("codecompanion.adapters").extend("anthropic", {
+							url = "https://eu.build-cli.roche.com/proxy/v1/messages",
+							env = {
+								api_key = "cmd:~/.local/bin/build-cli auth token",
+							},
+							headers = {
+								["x-api-key"] = "",
+								["Authorization"] = "Bearer ${api_key}",
+								["x-build-cli-tool"] = "claude",
+							},
+							schema = {
+								model = { default = "claude-opus-4-6" },
+							},
+						})
+					end,
+				},
 			},
-			extensions = {
-				mcphub = {
-					callback = "mcphub.extensions.codecompanion",
-					opts = {
-						make_tools = false,                -- Make individual tools (@server__tool) and server groups (@server) from MCP servers
-						show_server_tools_in_chat = false, -- Show individual tools in chat completion (when make_tools=true)
-						add_mcp_prefix_to_tool_names = false, -- Add mcp__ prefix (e.g `@mcp__github`, `@mcp__neovim__list_issues`)
-						show_result_in_chat = true,      -- Show tool results directly in chat buffer
-						format_tool = nil,               -- function(tool_name:string, tool: CodeCompanion.Agent.Tool) : string Function to format tool names to show in the chat buffer
-						make_vars = false,               -- Convert MCP resources to #variables for prompts (disabled: removed from codecompanion)
-						make_slash_commands = true,      -- Add MCP prompts as /slash commands
-					}
-				}
-			}
+			extensions = { }
 		})
 	elseif vim.env.NVIM_AI == "gemini" then
 		-- Configure Gemini
@@ -175,8 +207,6 @@ You must
 			},
 		})
 	end
-
-	require("mcphub").setup({})
 end
 
 local function setup_theme()
@@ -194,9 +224,10 @@ local function setup_theme()
 	})
 end
 
+setup_utils()
 setup_treesitter()
 setup_mini()
 setup_nav()
-setup_utils()
+setup_vcs()
 setup_ai()
 setup_theme()

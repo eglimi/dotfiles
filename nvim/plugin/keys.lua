@@ -15,6 +15,13 @@ vim.keymap.set('n', '<leader>b', function() require('mini.pick').builtin.buffers
 vim.keymap.set('n', '<leader>r', function() require('mini.pick').builtin.resume() end, { desc = "mini.pick resume" })
 vim.keymap.set('n', '<leader>/', function() require('mini.pick').builtin.grep_live() end, { desc = "mini.pick live grep" })
 vim.keymap.set('n', '<leader>sw', function() require('mini.pick').builtin.grep({ pattern = vim.fn.expand("<cword>") }) end, { desc = "mini.pick find word under cursor" })
+vim.keymap.set("n", "<leader>gs", "<Plug>(artio-smart)", { desc = "artio smart"})
+vim.keymap.set("n", "<leader>gf", function()
+  require("artio.builtins").files({
+    findprg = "rg --files --color=never$*"
+  }, { desc = "artio files" })
+end)
+vim.keymap.set("n", "<leader>gb", "<Plug>(artio-buffers)", { desc = "artio buffers"})
 
 -- treewalker
 vim.keymap.set({ 'n', 'v' }, '<A-k>', '<cmd>Treewalker Up<cr>', { silent = true })
@@ -35,7 +42,7 @@ vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" }
 vim.keymap.set("n", "+", require("mini.files").open, { desc = "Open mini.files explorer" })
 
 -- GitPortal
-vim.keymap.set("n", "<leader>gb", function() require("gitportal").open_file_in_browser() end, { desc = "Open file in browser" })
+vim.keymap.set("n", "<leader>go", function() require("gitportal").open_file_in_browser() end, { desc = "Open file in browser" })
 
 -- Copilot / AI
 vim.keymap.set({"n"}, "<leader>ac", function() require("codecompanion").chat() end, { desc = "New AI chat" })
@@ -55,10 +62,11 @@ local keycode = vim.keycode or function(x)
   return vim.api.nvim_replace_termcodes(x, true, true, true)
 end
 local keys = {
-  ['cr']        = keycode('<CR>'),
+  ['cr']        = keycode('<cr>'),
   ['ctrl-y']    = keycode('<C-y>'),
-  ['ctrl-y_cr'] = keycode('<C-y><CR>'),
+  ['ctrl-y_cr'] = keycode('<C-y><cr>'),
 }
 
--- jjui
-vim.keymap.set("n", "<leader>jj", "<cmd>lua _lazyjj_toggle()<CR>", {noremap = true, silent = true})
+-- vcs
+vim.keymap.set("n", "<leader>jj", "<cmd>lua _lazyjj_toggle()<cr>", {noremap = true, silent = true})
+-- vim.keymap.set("n", "<leader>jj", "<cmd>JJ<cr>", {noremap = true, silent = true})
