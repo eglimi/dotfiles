@@ -2,10 +2,9 @@ fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/programs/zig
 fish_add_path $HOME/.local/bin
 fish_add_path /usr/local/go/bin
-fish_add_path $HOME/go/bin
 
 # Environment variables
-set -gx EDITOR editor
+set -gx EDITOR nvim
 set -gx SHELL fish
 set -gx LESS '--quit-if-one-screen --ignore-case --chop-long-lines --RAW-CONTROL-CHARS --no-init --tabs=4 --shift=4'
 set -gx RIPGREP_CONFIG_PATH $HOME/.config/ripgreprc
