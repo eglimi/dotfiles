@@ -5,11 +5,16 @@ email = "michael.egli@contractors.roche.com"
 [git]
 colocate = false
 
+[revsets]
+log = "ancestors(@, 10) | ancestors(bookmarks(), 3)"
+
 [ui]
 #paginate = "never"
+pager = "bat"
 editor = "nvim"
 merge-editor = "mergiraf"
-diff-formatter = "difft"
+#diff-formatter = "difft"
+default-command = "log"
 
 [templates]
 log = "custom_log_oneline"
