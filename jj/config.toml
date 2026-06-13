@@ -16,6 +16,9 @@ merge-editor = "mergiraf"
 #diff-formatter = "difft"
 default-command = "log"
 
+[merge-tools.kdiff3]
+merge-args = ["$base", "$left", "$right", "-o", "$output"]
+
 [templates]
 log = "custom_log_oneline"
 
