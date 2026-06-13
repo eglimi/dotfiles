@@ -116,6 +116,19 @@ link_jj()
 	fi
 }
 
+link_keyd()
+{
+	check_existing "keyd"
+	if [[ $? -ne 0 ]]
+	then
+		ln -sf ~/.config/dotfiles/keyd ~/.config/
+		echo "successfully created link for keyd"
+	fi
+	# keyd's daemon only reads /etc/keyd, and that needs root. Run manually:
+	echo "  -> run with sudo to finish keyd setup:"
+	echo "     sudo ln -sf ~/.config/keyd/default.conf /etc/keyd/default.conf && sudo keyd reload"
+}
+
 if [[ "$*" == "kitty" ]]; then link_kitty "YES"; fi
 if [[ "$*" == "nvim" ]]; then link_nvim "YES"; fi
 if [[ "$*" == "wezterm" ]]; then link_wezterm "YES"; fi
@@ -126,6 +139,7 @@ if [[ "$*" == "sheldon" ]]; then link_sheldon "YES"; fi
 if [[ "$*" == "starship" ]]; then link_starship "YES"; fi
 if [[ "$*" == "fish" ]]; then link_fish "YES"; fi
 if [[ "$*" == "jj" ]]; then link_jj "YES"; fi
+if [[ "$*" == "keyd" ]]; then link_keyd "YES"; fi
 
 if [[ "$*" == "all" ]]
 then
@@ -139,5 +153,6 @@ then
 	link_starship
 	link_fish
 	link_jj
+	link_keyd
 fi
 
