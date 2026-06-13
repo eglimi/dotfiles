@@ -19,6 +19,8 @@ function fish_prompt --description 'Write out the prompt'
         echo -n $prompt_status
         set_color normal
 
+        printf '%s' (fish_vcs_prompt)
+
         echo -n "$suffix "
 end
 
@@ -33,5 +35,4 @@ function fish_right_prompt --description 'My custom prompt, right side'
         set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
         set -g __fish_git_prompt_color_cleanstate green --bold
 
-        printf '%s ' (fish_vcs_prompt)
 end
