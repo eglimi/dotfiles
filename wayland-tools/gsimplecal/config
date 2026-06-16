@@ -1,0 +1,36 @@
+maincss {
+  window {
+    background-color: #1d2021;
+    color: #ebdbb2;
+    font-size: 12px;
+  }
+
+  calendar {
+    background-color: #1d2021;
+    color: #ebdbb2;
+    padding: 6px;
+  }
+
+  calendar:selected {
+    background-color: #458588;
+    color: #1d2021;
+  }
+
+  calendar.header {
+    color: #fabd2f;
+    font-weight: bold;
+  }
+
+  calendar.button {
+    color: #83a598;
+  }
+
+  calendar.highlight {
+    background-color: #b8bb26;
+    color: #1d2021;
+  }
+
+  calendar:indeterminate {
+    color: #665c54;
+  }
+}

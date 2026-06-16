@@ -1,0 +1,92 @@
+/* Gruvbox dark — matches former mako theme */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+}
+
+.notification-row {
+    outline: none;
+}
+
+.notification {
+    border-radius: 2px;
+    margin: 6px 8px;
+    border: 2px solid #458588;
+    background: #282828;
+}
+
+.notification.critical {
+    border-color: #fb4934;
+}
+
+.notification-content {
+    padding: 10px;
+    color: #ebdbb2;
+}
+
+.summary {
+    color: #ebdbb2;
+    font-weight: bold;
+}
+
+.body {
+    color: #d5c4a1;
+}
+
+.close-button {
+    background: transparent;
+    color: #ebdbb2;
+    border: none;
+    margin: 0;
+    padding: 0 4px;
+}
+
+.close-button:hover {
+    background: #fb4934;
+    color: #282828;
+}
+
+/* Control center */
+.control-center {
+    background: #282828;
+    border: 2px solid #458588;
+    border-radius: 2px;
+    color: #ebdbb2;
+}
+
+.control-center .notification {
+    margin: 6px;
+}
+
+.widget-title {
+    color: #ebdbb2;
+    font-weight: bold;
+    margin: 8px;
+}
+
+.widget-title > button {
+    background: #3c3836;
+    color: #ebdbb2;
+    border: 1px solid #458588;
+    border-radius: 2px;
+    padding: 2px 10px;
+}
+
+.widget-title > button:hover {
+    background: #458588;
+    color: #282828;
+}
+
+.widget-dnd {
+    color: #ebdbb2;
+    margin: 8px;
+}
+
+.widget-dnd > switch {
+    background: #3c3836;
+    border-radius: 2px;
+}
+
+.widget-dnd > switch:checked {
+    background: #fb4934;
+}

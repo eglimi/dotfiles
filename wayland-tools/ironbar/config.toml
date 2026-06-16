@@ -1,0 +1,148 @@
+position = "top"
+height = 34
+margin.top = 6
+margin.left = 8
+margin.right = 8
+
+# ─────────────── Left ───────────────
+
+[[start]]
+type = "custom"
+class = "launcher"
+[[start.bar]]
+type = "button"
+name = "launcher-btn"
+label = ""
+on_click = "!fuzzel"
+
+[[start]]
+type = "workspaces"
+name = "workspaces"
+
+[[start]]
+type = "sys_info"
+class = "sysinfo"
+format = ["  {cpu_percent}%", "  {temp_c}°C", "  {memory_percent}%"]
+[start.interval]
+cpu = 2
+memory = 5
+temps = 5
+
+[[start]]
+type = "launcher"
+name = "taskbar"
+show_names = false
+show_icons = true
+reversed = false
+
+[[start]]
+type = "focused"
+name = "window"
+show_icon = false
+truncate.mode = "end"
+truncate.length = 60
+
+# ─────────────── Center ───────────────
+
+[[center]]
+type = "clock"
+format = "    %a %d %b   %H:%M"
+
+# ─────────────── Right ───────────────
+
+[[end]]
+type = "tray"
+
+[[end]]
+type = "notifications"
+name = "notifications"
+[end.icons]
+closed_none = "󰂜"
+closed_some = "󰂚"
+closed_dnd = "󰂛"
+open_none = "󰂜"
+open_some = "󰂚"
+open_dnd = "󰂛"
+
+[[end]]
+type = "inhibit"
+name = "inhibit"
+icon_on = ""
+icon_off = ""
+
+[[end]]
+type = "brightness"
+name = "brightness"
+format = " {percentage}%"
+use_default_profiles = false
+
+[[end]]
+type = "volume"
+name = "volume"
+format = "{icon} {percentage}%"
+[end.icons]
+volume_high = ""
+volume_medium = ""
+volume_low = ""
+muted = " muted"
+
+[[end]]
+type = "custom"
+class = "network"
+[[end.bar]]
+type = "button"
+name = "network-btn"
+label = ""
+on_click = "!nm-connection-editor"
+
+[[end]]
+type = "bluetooth"
+name = "bluetooth"
+
+[[end]]
+type = "battery"
+name = "battery"
+
+[[end]]
+type = "custom"
+class = "power"
+
+[[end.bar]]
+type = "button"
+name = "power-btn"
+label = ""
+on_click = "popup:toggle"
+
+[[end.popup]]
+type = "box"
+orientation = "vertical"
+
+[[end.popup.widgets]]
+type = "button"
+class = "power-item"
+label = "  Lock"
+on_click = "!swaylock"
+
+[[end.popup.widgets]]
+type = "button"
+class = "power-item"
+label = "  Logout"
+on_click = "!niri msg action quit"
+
+[[end.popup.widgets]]
+type = "button"
+class = "power-item"
+label = "  Suspend"
+on_click = "!systemctl suspend"
+
+[[end.popup.widgets]]
+type = "button"
+class = "power-item"
+label = "  Reboot"
+on_click = "!systemctl reboot"
+
+[[end.popup.widgets]]
+type = "button"
+class = "power-item"
+label = "  Shutdown"
+on_click = "!systemctl poweroff"

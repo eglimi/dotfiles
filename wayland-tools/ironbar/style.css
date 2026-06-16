@@ -1,0 +1,4 @@
+/* Minimal: set Nerd Font so glyphs render; otherwise keep ironbar default theme. */
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono";
+}

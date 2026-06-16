@@ -1,0 +1,139 @@
+/* Gruvbox — floating pills */
+@define-color bg       #282828;
+@define-color bg1      #3c3836;
+@define-color fg       #ebdbb2;
+@define-color gray     #928374;
+@define-color red      #fb4934;
+@define-color green    #b8bb26;
+@define-color yellow   #fabd2f;
+@define-color blue     #83a598;
+@define-color aqua     #8ec07c;
+@define-color orange   #fe8019;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* each module = floating pill */
+#custom-launcher,
+#custom-workspaces,
+#custom-window,
+#clock,
+#tray,
+#idle_inhibitor,
+#backlight,
+#pulseaudio,
+#network,
+#bluetooth,
+#battery,
+#custom-power,
+#sysmon {
+    background: @bg;
+    color: @fg;
+    padding: 0 12px;
+    margin: 0 1px;
+    border-radius: 10px;
+}
+
+/* grouped sysmon pill: one background, children transparent */
+#sysmon {
+    padding: 0 6px;
+}
+
+#sysmon #cpu,
+#sysmon #temperature,
+#sysmon #memory {
+    background: transparent;
+    padding: 0 6px;
+    margin: 0;
+    border-radius: 0;
+}
+
+#custom-launcher {
+    color: @blue;
+    font-size: 16px;
+    padding: 0 14px;
+}
+
+#custom-power {
+    color: @red;
+    font-size: 15px;
+    padding: 0 14px;
+}
+
+#clock {
+    color: @yellow;
+    font-weight: bold;
+}
+
+#custom-window {
+    color: @gray;
+    background: transparent;
+}
+
+#taskbar {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+#taskbar button {
+    background: @bg;
+    padding: 0 6px;
+    margin: 0 1px;
+    border-radius: 8px;
+}
+
+#taskbar button.active {
+    background: @bg1;
+}
+
+#backlight   { color: @orange; }
+#pulseaudio  { color: @aqua; }
+#network     { color: @blue; }
+#bluetooth   { color: @blue; }
+#bluetooth.connected { color: @aqua; }
+#bluetooth.disabled, #bluetooth.off { color: @gray; }
+#temperature { color: @green; }
+#cpu         { color: @green; }
+#memory      { color: @aqua; }
+#battery     { color: @green; }
+
+#temperature.critical { color: @red; }
+#battery.warning  { color: @yellow; }
+#battery.critical {
+    color: @bg;
+    background: @red;
+    animation: battery-pulse 0.8s steps(2) infinite alternate;
+}
+
+/* don't pulse while plugged in */
+#battery.charging,
+#battery.plugged {
+    color: @green;
+    background: @bg;
+    animation: none;
+}
+
+@keyframes battery-pulse {
+    to {
+        background: @bg;
+        color: @red;
+    }
+}
+#pulseaudio.muted { color: @gray; }
+#network.disconnected { color: @red; }
+
+#idle_inhibitor.activated { color: @yellow; }
+#idle_inhibitor.deactivated { color: @gray; }
+
+#tray menu {
+    background: @bg;
+    color: @fg;
+}

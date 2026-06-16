@@ -3,7 +3,10 @@
 // You will have to remove "/-" and edit it before it takes effect.
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 
-/- output "DP-1" {
-    mode "2560x1440@359.979" // Set resolution and refresh rate
-    scale 1 // No scaling (use 2 for HiDPI)
+// Pin the laptop panel at origin; any external output is auto-placed to its
+// right (niri appends unpositioned outputs to the right of positioned ones).
+// This keeps "external on the right" stable regardless of the external's
+// resolution/scale and without relying on the unstable connector name.
+output "eDP-1" {
+    position x=0 y=0
 }

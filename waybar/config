@@ -1,0 +1,175 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "spacing": 2,
+    "margin-top": 6,
+    "margin-left": 8,
+    "margin-right": 8,
+    "modules-left": [
+        "custom/launcher",
+        "custom/workspaces",
+        "group/sysmon",
+        "wlr/taskbar"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "idle_inhibitor",
+        "backlight",
+        "pulseaudio",
+        "network",
+        "bluetooth",
+        "battery",
+        "custom/swaync",
+        "custom/power"
+    ],
+    "group/sysmon": {
+        "orientation": "horizontal",
+        "modules": [
+            "cpu",
+            "temperature",
+            "memory"
+        ]
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 18,
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "ignore-list": []
+    },
+    "custom/launcher": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "fuzzel"
+    },
+    "custom/workspaces": {
+        "exec": "~/.config/waybar/niri-workspaces.sh",
+        "return-type": "json",
+        "tooltip": false
+    },
+    "clock": {
+        "format": "    {:%a %d %b   %H:%M}",
+        "tooltip": false,
+        "on-click": "gsimplecal"
+    },
+    "custom/swaync": {
+        "tooltip": false,
+        "format": "{icon} {}",
+        "format-icons": {
+            "notification": "<span foreground='#fb4934'>󰂚</span>",
+            "none": "󰂜",
+            "dnd-notification": "<span foreground='#fb4934'>󰂛</span>",
+            "dnd-none": "󰂛",
+            "inhibited-notification": "<span foreground='#fb4934'>󰂚</span>",
+            "inhibited-none": "󰂜",
+            "dnd-inhibited-notification": "<span foreground='#fb4934'>󰂛</span>",
+            "dnd-inhibited-none": "󰂛"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": [
+            "",
+            "",
+            ""
+        ],
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "on-click-right": "gnome-control-center display"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": " muted",
+        "format-icons": {
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    },
+    "network": {
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "  {ipaddr}",
+        "format-disconnected": " offline",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "on-click": "nm-connection-editor",
+        "on-click-right": "nm-connection-editor"
+    },
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-connected": "󰂱 {num_connections}",
+        "tooltip-format": "{controller_alias}\n{status}",
+        "tooltip-format-connected": "{controller_alias}\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "on-click": "blueman-manager",
+        "on-click-right": "blueman-manager"
+    },
+    "temperature": {
+        "thermal-zone": 19,
+        "critical-threshold": 85,
+        "format": " {temperatureC}°C",
+        "format-critical": " {temperatureC}°C",
+        "on-click-right": "gnome-system-monitor"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "interval": 2,
+        "on-click-right": "gnome-system-monitor"
+    },
+    "memory": {
+        "format": " {percentage}%",
+        "interval": 5,
+        "on-click-right": "gnome-system-monitor"
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "on-click-right": "gnome-control-center power"
+    },
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "~/.config/waybar/powermenu.sh"
+    }
+}

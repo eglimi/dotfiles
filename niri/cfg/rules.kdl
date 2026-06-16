@@ -16,7 +16,8 @@
        open-focused false
     }
 
-    layer-rule {
-        match namespace="^noctalia-wallpaper*"
-        place-within-backdrop true
+    window-rule {
+       match app-id="gsimplecal"
+       open-floating true
+       default-floating-position x=0 y=1 relative-to="top"
     }

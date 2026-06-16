@@ -136,6 +136,37 @@ link_noctalia()
 	fi
 }
 
+link_waybar()
+{
+	check_existing "waybar"
+	if [[ $? -ne 0 ]]
+	then
+		ln -sf ~/.config/dotfiles/waybar ~/.config/
+		echo "successfully created link for waybar"
+	fi
+}
+
+link_wayland_tools()
+{
+	for tool in swaync gsimplecal fuzzel swaylock ironbar
+	do
+		check_existing "$tool"
+		if [[ $? -ne 0 ]]
+		then
+			ln -sf ~/.config/dotfiles/wayland-tools/$tool ~/.config/
+			echo "successfully created link for $tool"
+		fi
+	done
+
+	# waybar systemd user unit (overrides the distro unit; Restart=always,
+	# no graphical-session.target dep). niri autostart does `systemctl --user
+	# start waybar.service`.
+	mkdir -p ~/.config/systemd/user
+	ln -sf ~/.config/dotfiles/wayland-tools/systemd/waybar.service ~/.config/systemd/user/waybar.service
+	systemctl --user daemon-reload 2>/dev/null
+	echo "successfully created link for waybar.service (systemd user unit)"
+}
+
 link_keyd()
 {
 	check_existing "keyd"
@@ -161,6 +192,8 @@ if [[ "$*" == "fish" ]]; then link_fish "YES"; fi
 if [[ "$*" == "jj" ]]; then link_jj "YES"; fi
 if [[ "$*" == "niri" ]]; then link_niri "YES"; fi
 if [[ "$*" == "noctalia" ]]; then link_noctalia "YES"; fi
+if [[ "$*" == "waybar" ]]; then link_waybar "YES"; fi
+if [[ "$*" == "wayland-tools" ]]; then link_wayland_tools "YES"; fi
 if [[ "$*" == "keyd" ]]; then link_keyd "YES"; fi
 
 if [[ "$*" == "all" ]]
@@ -177,6 +210,8 @@ then
 	link_jj
 	link_niri
 	link_noctalia
+	link_waybar
+	link_wayland_tools
 	link_keyd
 fi
 

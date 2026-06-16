@@ -1,5 +1,10 @@
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
-    spawn-sh-at-startup "noctalia-shell"
+    // waybar is started by systemd via graphical-session.target (niri.service
+    // BindsTo it), not spawned here. See `systemctl --user status waybar`.
+    spawn-at-startup "swaync"
+    spawn-at-startup "nm-applet" "--indicator"
+    // spawn-at-startup "blueman-applet"
+    spawn-at-startup "warp-taskbar"
     spawn-at-startup "/usr/libexec/xdg-desktop-portal-gnome"
