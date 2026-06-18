@@ -5,7 +5,7 @@ fish_add_path /usr/local/go/bin
 
 # Environment variables
 set -gx EDITOR nvim
-set -gx SHELL fish
+set -gx SHELL /usr/bin/fish
 set -gx LESS '--quit-if-one-screen --ignore-case --chop-long-lines --RAW-CONTROL-CHARS --no-init --tabs=4 --shift=4'
 set -gx RIPGREP_CONFIG_PATH $HOME/.config/ripgreprc
 
