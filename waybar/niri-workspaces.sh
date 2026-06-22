@@ -22,9 +22,9 @@ for w in mine:
     if w.get("is_active"):
         parts.append(f"<span foreground=\"#fabd2f\"><b>{label}</b></span>")
     elif w.get("is_urgent"):
-        parts.append(f"<span foreground=\"#fb4934\">{label}</span>")
+        parts.append(f"<span foreground=\"#fb4934\" size=\"small\">{label}</span>")
     else:
-        parts.append(f"<span foreground=\"#928374\">{label}</span>")
+        parts.append(f"<span foreground=\"#928374\" size=\"small\">{label}</span>")
 
 print(json.dumps({"text": "  ".join(parts)}))
 '

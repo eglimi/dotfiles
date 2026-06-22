@@ -17,7 +17,6 @@
     ],
     "modules-right": [
         "tray",
-        "idle_inhibitor",
         "backlight",
         "pulseaudio",
         "network",
@@ -59,15 +58,15 @@
     },
     "custom/swaync": {
         "tooltip": false,
-        "format": "{icon} {}",
+        "format": "{icon}<sup><span foreground='#fabd2f'> {}</span></sup>",
         "format-icons": {
-            "notification": "<span foreground='#fb4934'>󰂚</span>",
+            "notification": "<span foreground='#fabd2f'>󰂚</span>",
             "none": "󰂜",
-            "dnd-notification": "<span foreground='#fb4934'>󰂛</span>",
+            "dnd-notification": "<span foreground='#fabd2f'>󰂛</span>",
             "dnd-none": "󰂛",
-            "inhibited-notification": "<span foreground='#fb4934'>󰂚</span>",
+            "inhibited-notification": "<span foreground='#fabd2f'>󰂚</span>",
             "inhibited-none": "󰂜",
-            "dnd-inhibited-notification": "<span foreground='#fb4934'>󰂛</span>",
+            "dnd-inhibited-notification": "<span foreground='#fabd2f'>󰂛</span>",
             "dnd-inhibited-none": "󰂛"
         },
         "return-type": "json",
@@ -80,13 +79,6 @@
     "tray": {
         "icon-size": 16,
         "spacing": 8
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
     },
     "backlight": {
         "format": "{icon} {percent}%",

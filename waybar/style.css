@@ -12,7 +12,7 @@
 
 * {
     font-family: "JetBrainsMono Nerd Font", "JetBrains Mono";
-    font-size: 13px;
+    font-size: 14px;
     min-height: 0;
 }
 
@@ -26,7 +26,6 @@ window#waybar {
 #custom-window,
 #clock,
 #tray,
-#idle_inhibitor,
 #backlight,
 #pulseaudio,
 #network,
@@ -53,6 +52,9 @@ window#waybar {
     padding: 0 6px;
     margin: 0;
     border-radius: 0;
+    /* fixed width sized for 0-99%, so single<->double digit doesn't shift neighbors
+       (100% is rare and allowed to expand slightly) */
+    min-width: 42px;
 }
 
 #custom-launcher {
@@ -129,9 +131,6 @@ window#waybar {
 }
 #pulseaudio.muted { color: @gray; }
 #network.disconnected { color: @red; }
-
-#idle_inhibitor.activated { color: @yellow; }
-#idle_inhibitor.deactivated { color: @gray; }
 
 #tray menu {
     background: @bg;
