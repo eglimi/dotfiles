@@ -1,10 +1,17 @@
 // ────────────── Startup Applications ──────────────
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
-
-    // waybar is started by systemd via graphical-session.target (niri.service
-    // BindsTo it), not spawned here. See `systemctl --user status waybar`.
-    spawn-at-startup "swaync"
-    spawn-at-startup "nm-applet" "--indicator"
-    // spawn-at-startup "blueman-applet"
-    spawn-at-startup "warp-taskbar"
-    spawn-at-startup "/usr/libexec/xdg-desktop-portal-gnome"
+// Nothing is spawned here. niri runs as `niri.service` and BindsTo
+// graphical-session.target, so startup apps are managed by systemd instead
+// of spawn-at-startup (see https://github.com/YaLTeR/niri/wiki/Example-systemd-Setup).
+//
+// Already covered, so intentionally NOT spawned here:
+//   swaync       -> swaync.service, enabled (graphical-session.target.wants)
+//   nm-applet    -> app-nm\x2dapplet@autostart.service (xdg-autostart generator)
+//   warp-taskbar -> app-com.cloudflare.WarpTaskbar@autostart.service (xdg-autostart)
+//   xdg-desktop-portal-gnome -> D-Bus activated on demand
+//   waybar       -> waybar.service (graphical-session.target.wants)
+//
+// To add a new startup app:
+//   - has a packaged unit:  systemctl --user add-wants niri.service <name>.service
+//   - no unit: drop a custom unit in ~/.config/systemd/user/ with
+//       [Unit] PartOf=graphical-session.target / After=graphical-session.target
+//       [Install] WantedBy=graphical-session.target   then enable it.

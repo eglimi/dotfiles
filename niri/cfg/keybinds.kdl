@@ -12,7 +12,7 @@ binds {
     Mod+ALT+L                           hotkey-overlay-title="Power Menu" { spawn "/home/eglim1/.config/waybar/powermenu.sh"; }
 
     // Please choose your own file manager.
-    Mod+E                               hotkey-overlay-title="File Manager: Nautilus" { spawn "nautilus"; }
+    Mod+E                               hotkey-overlay-title="File Manager: yazi" { spawn "/home/eglim1/.local/bin/kitty" "--class" "expanded" "-e" "yazi"; }
 
     // ─── Media Controls ───
     XF86AudioRaiseVolume                allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"; }
@@ -59,13 +59,9 @@ binds {
 
     Mod+Shift+Left                      { focus-monitor-left; }
     Mod+Shift+Right                     { focus-monitor-right; }
-    Mod+Shift+UP                        { focus-monitor-up; }
-    Mod+Shift+Down                      { focus-monitor-down; }
 
     Mod+Shift+CTRL+Left                 { move-column-to-monitor-left; }
     Mod+Shift+CTRL+Right                { move-column-to-monitor-right; }
-    Mod+Shift+CTRL+UP                   { move-column-to-monitor-up; }
-    Mod+Shift+CTRL+Down                 { move-column-to-monitor-down; }
 
     // ─── Workspace Switching ───
     Mod+Shift+WheelScrollDown           cooldown-ms=150 { focus-workspace-down; }
@@ -102,6 +98,14 @@ binds {
     Mod+CTRL+7                          { move-column-to-workspace 7; }
     Mod+CTRL+8                          { move-column-to-workspace 8; }
     Mod+CTRL+9                          { move-column-to-workspace 9; }
+    Mod+Shift+UP                        { focus-workspace-up; }
+    Mod+Shift+K                         { focus-workspace-up; }
+    Mod+Shift+Down                      { focus-workspace-down; }
+    Mod+Shift+J                         { focus-workspace-down; }
+    Mod+Shift+CTRL+UP                   { move-column-to-workspace-up; }
+    Mod+Shift+CTRL+K                    { move-column-to-workspace-up; }
+    Mod+Shift+CTRL+Down                 { move-column-to-workspace-down; }
+    Mod+Shift+CTRL+J                    { move-column-to-workspace-down; }
 
     Mod+TAB                             { focus-workspace-previous; }
 

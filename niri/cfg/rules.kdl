@@ -21,3 +21,9 @@
        open-floating true
        default-floating-position x=0 y=1 relative-to="top"
     }
+
+    window-rule {
+        match app-id=r#"^google-chrome$"#
+        match app-id=r#"^expanded$"#
+        default-column-width { proportion 0.9; }
+    }
