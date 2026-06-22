@@ -148,7 +148,7 @@ link_waybar()
 
 link_wayland_tools()
 {
-	for tool in swaync gsimplecal fuzzel swaylock ironbar
+	for tool in swaync gsimplecal fuzzel swaylock swayidle ironbar
 	do
 		check_existing "$tool"
 		if [[ $? -ne 0 ]]
@@ -158,13 +158,24 @@ link_wayland_tools()
 		fi
 	done
 
-	# waybar systemd user unit (overrides the distro unit; Restart=always,
-	# no graphical-session.target dep). niri autostart does `systemctl --user
-	# start waybar.service`.
+	# Startup apps are managed by systemd, not niri spawn-at-startup. niri runs
+	# as niri.service and BindsTo graphical-session.target, so we wire startup
+	# units into niri.service via `add-wants`.
 	mkdir -p ~/.config/systemd/user
-	ln -sf ~/.config/dotfiles/wayland-tools/systemd/waybar.service ~/.config/systemd/user/waybar.service
+
+	# nm-applet has no packaged unit -> ship our own.
+	ln -sf ~/.config/dotfiles/wayland-tools/systemd/nm-applet.service ~/.config/systemd/user/nm-applet.service
+	# swayidle (idle lock + DPMS) -> ship our own unit.
+	ln -sf ~/.config/dotfiles/wayland-tools/systemd/swayidle.service ~/.config/systemd/user/swayidle.service
 	systemctl --user daemon-reload 2>/dev/null
-	echo "successfully created link for waybar.service (systemd user unit)"
+
+	# Tie startup units to the niri session.
+	# swaync.service / waybar.service are distro units enabled separately.
+	systemctl --user add-wants niri.service nm-applet.service swayidle.service warp-taskbar.service 2>/dev/null
+
+	# Mask the xdg-autostart generator's nm-applet dup so it doesn't race ours.
+	systemctl --user mask 'app-nm\x2dapplet@autostart.service' 2>/dev/null
+	echo "successfully wired systemd startup units (nm-applet, swayidle, warp-taskbar) into niri.service"
 }
 
 link_keyd()

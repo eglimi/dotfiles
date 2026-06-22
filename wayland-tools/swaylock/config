@@ -1,7 +1,6 @@
 # Gruvbox dark
 color=1d2021
 ignore-empty-password
-indicator
 indicator-radius=110
 indicator-thickness=8
 font=JetBrainsMono Nerd Font

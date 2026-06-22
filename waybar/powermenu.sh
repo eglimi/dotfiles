@@ -12,7 +12,7 @@ chosen=$(printf '%s\n' "$lock" "$logout" "$suspend" "$reboot" "$shutdown" \
   | fuzzel --dmenu --prompt "Power: " --lines 5 --width 14)
 
 case "$chosen" in
-  "$lock")     swaylock ;;
+  "$lock")     swaylock -f ;;
   "$logout")   niri msg action quit ;;
   "$suspend")  systemctl suspend ;;
   "$reboot")   systemctl reboot ;;
