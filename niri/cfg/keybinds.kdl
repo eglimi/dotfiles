@@ -3,10 +3,10 @@ binds {
     // ────────────── Keybindings ──────────────
     // https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings
 
-    Mod+Shift+ESCAPE                    { show-hotkey-overlay; }
+    Mod+Shift+Slash                     { show-hotkey-overlay; }
 
     // ─── Applications ───
-    Mod+Return                          hotkey-overlay-title="Open Terminal: Kitty" { spawn "/home/eglim1/.local/bin/kitty"; }
+    Mod+T                               hotkey-overlay-title="Open Terminal: Kitty" { spawn "/home/eglim1/.local/bin/kitty"; }
     Mod+Space                           hotkey-overlay-title="Open App Launcher: fuzzel" { spawn "fuzzel"; }
     Mod+B                               hotkey-overlay-title="Open Browser: chrome" { spawn "google-chrome-stable"; }
     Mod+ALT+L                           hotkey-overlay-title="Power Menu" { spawn "/home/eglim1/.config/waybar/powermenu.sh"; }
@@ -25,8 +25,8 @@ binds {
     XF86AudioPause                      allow-when-locked=true { spawn "playerctl" "play-pause"; }
 
     // ─── Brightness Controls ───
-    XF86MonBrightnessUp                 allow-when-locked=true { spawn "brightnessctl" "set" "5%+"; }
-    XF86MonBrightnessDown               allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
+    XF86MonBrightnessUp                 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%+"; }
+    XF86MonBrightnessDown               allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
 
     // ─── Window Movement and Focus ───
     Mod+Q                               { close-window; }
@@ -120,8 +120,9 @@ binds {
     Mod+R                               { switch-preset-column-width; }
 
     // ─── Modes ───
-    Mod+T                               { toggle-window-floating; }
+    Mod+V                               { toggle-window-floating; }
     Mod+F                               { fullscreen-window; }
+    Mod+M                               { maximize-column; }
     Mod+W                               { toggle-column-tabbed-display; }
 
     // ─── Screenshots ───
