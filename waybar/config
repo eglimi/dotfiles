@@ -17,11 +17,7 @@
     ],
     "modules-right": [
         "tray",
-        "backlight",
-        "pulseaudio",
-        "network",
-        "bluetooth",
-        "battery",
+        "group/controls",
         "custom/swaync",
         "custom/power"
     ],
@@ -31,6 +27,16 @@
             "cpu",
             "temperature",
             "memory"
+        ]
+    },
+    "group/controls": {
+        "orientation": "horizontal",
+        "modules": [
+            "backlight",
+            "pulseaudio",
+            "network",
+            "bluetooth",
+            "battery"
         ]
     },
     "wlr/taskbar": {

@@ -1,7 +1,7 @@
-/* Gruvbox — floating pills */
-@define-color bg       #282828;
+/* Gruvbox — floating pills (subtle teal, higher contrast bg) */
+@define-color bg       #1d2021;
 @define-color bg1      #3c3836;
-@define-color fg       #ebdbb2;
+@define-color fg       #83a598;
 @define-color gray     #928374;
 @define-color red      #fb4934;
 @define-color green    #b8bb26;
@@ -26,12 +26,9 @@ window#waybar {
 #custom-window,
 #clock,
 #tray,
-#backlight,
-#pulseaudio,
-#network,
-#bluetooth,
-#battery,
+#custom-swaync,
 #custom-power,
+#controls,
 #sysmon {
     background: @bg;
     color: @fg;
@@ -57,14 +54,30 @@ window#waybar {
     min-width: 42px;
 }
 
+/* grouped controls pill: one background, children transparent */
+#controls {
+    padding: 0 6px;
+}
+
+#controls #backlight,
+#controls #pulseaudio,
+#controls #network,
+#controls #bluetooth,
+#controls #battery {
+    background: transparent;
+    padding: 0 8px;
+    margin: 0;
+    border-radius: 0;
+}
+
 #custom-launcher {
-    color: @blue;
+    color: @yellow;
     font-size: 16px;
     padding: 0 14px;
 }
 
 #custom-power {
-    color: @red;
+    color: @orange;
     font-size: 15px;
     padding: 0 14px;
 }
@@ -96,17 +109,19 @@ window#waybar {
     background: @bg1;
 }
 
-#backlight   { color: @orange; }
-#pulseaudio  { color: @aqua; }
-#network     { color: @blue; }
-#bluetooth   { color: @blue; }
-#bluetooth.connected { color: @aqua; }
+/* monochrome by default: status modules are plain fg.
+   color appears only to signal state (see below). */
+#backlight   { color: @fg; }
+#pulseaudio  { color: @fg; }
+#network     { color: @fg; }
+#bluetooth   { color: @fg; }
 #bluetooth.disabled, #bluetooth.off { color: @gray; }
-#temperature { color: @green; }
-#cpu         { color: @green; }
-#memory      { color: @aqua; }
-#battery     { color: @green; }
+#temperature { color: @fg; }
+#cpu         { color: @fg; }
+#memory      { color: @fg; }
+#battery     { color: @fg; }
 
+/* state signals */
 #temperature.critical { color: @red; }
 #battery.warning  { color: @yellow; }
 #battery.critical {
@@ -118,7 +133,7 @@ window#waybar {
 /* don't pulse while plugged in */
 #battery.charging,
 #battery.plugged {
-    color: @green;
+    color: @fg;
     background: @bg;
     animation: none;
 }
