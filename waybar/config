@@ -37,8 +37,16 @@
             "pulseaudio#mic",
             "network",
             "bluetooth",
+            "custom/ppd",
             "battery"
         ]
+    },
+    "custom/ppd": {
+        "exec": "~/.config/waybar/ppd.sh",
+        "return-type": "json",
+        "interval": 5,
+        "signal": 8,
+        "on-click": "p=$(powerprofilesctl get); case $p in power-saver) powerprofilesctl set balanced;; balanced) powerprofilesctl set performance;; *) powerprofilesctl set power-saver;; esac; pkill -RTMIN+8 waybar"
     },
     "wlr/taskbar": {
         "format": "{icon}",
@@ -59,13 +67,13 @@
         "tooltip": false
     },
     "clock": {
-        "format": "    {:%a %d %b   %H:%M}",
+        "format": "  {:%a %d %b  %H:%M}",
         "tooltip": false,
         "on-click": "gsimplecal"
     },
     "custom/swaync": {
         "tooltip": false,
-        "format": "{icon}<sup><span foreground='#fabd2f'> {}</span></sup>",
+        "format": "{icon}<sup><span foreground='#fabd2f'>{}</span></sup>",
         "format-icons": {
             "notification": "<span foreground='#fabd2f'>󰂚</span>",
             "none": "󰂜",
@@ -99,7 +107,7 @@
         "on-click-right": "gnome-control-center display"
     },
     "pulseaudio": {
-        "format": "{icon}  {volume}%",
+        "format": "{icon} {volume}%",
         "format-muted": " muted",
         "format-icons": {
             "default": [
@@ -124,15 +132,15 @@
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 2%-"
     },
     "network": {
-        "format-wifi": "  {signalStrength}%",
-        "format-ethernet": "  {ipaddr}",
+        "format-wifi": " {signalStrength}%",
+        "format-ethernet": " {ipaddr}",
         "format-disconnected": " offline",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "on-click": "nm-connection-editor",
         "on-click-right": "nm-connection-editor"
     },
     "bluetooth": {
-        "format": "󰂯",
+        "format": "󰂯 {num_connections}",
         "format-disabled": "󰂲",
         "format-off": "󰂲",
         "format-connected": "󰂱 {num_connections}",

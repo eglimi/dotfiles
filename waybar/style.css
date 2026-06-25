@@ -11,7 +11,7 @@
 @define-color orange   #fe8019;
 
 * {
-    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono";
+    font-family: "Symbols Nerd Font", "JetBrainsMono Nerd Font", "JetBrains Mono";
     font-size: 14px;
     min-height: 0;
 }
@@ -63,12 +63,17 @@ window#waybar {
 #controls #pulseaudio,
 #controls #network,
 #controls #bluetooth,
+#controls #custom-ppd,
 #controls #battery {
     background: transparent;
     padding: 0 8px;
     margin: 0;
     border-radius: 0;
 }
+
+/* group power-profile tight against the battery */
+#controls #custom-ppd { padding-right: 3px; }
+#controls #battery    { padding-left: 3px; }
 
 #custom-launcher {
     color: @yellow;
