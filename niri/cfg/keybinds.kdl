@@ -35,6 +35,8 @@ binds {
     Mod+H                               { focus-column-left; }
     Mod+Right                           { focus-column-right; }
     Mod+L                               { focus-column-right; }
+    Mod+Shift+H                         { spawn "sh" "-c" "niri msg action focus-column-left; niri msg action center-column"; }
+    Mod+Shift+L                         { spawn "sh" "-c" "niri msg action focus-column-right; niri msg action center-column"; }
     Mod+Up                              { focus-window-up; }
     Mod+K                               { focus-window-up; }
     Mod+Down                            { focus-window-down; }
@@ -129,6 +131,7 @@ binds {
     CTRL+Shift+1                        { screenshot; }
     CTRL+Shift+2                        { screenshot-screen; }
     CTRL+Shift+3                        { screenshot-window; }
+    CTRL+Shift+4                        { spawn "sh" "-c" "wl-paste | satty --filename -"; }
 
     // ─── Emergency Escape Key ───
     // Use this when a fullscreen app blocks your keybinds.

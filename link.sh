@@ -148,7 +148,7 @@ link_waybar()
 
 link_wayland_tools()
 {
-	for tool in swaync gsimplecal fuzzel swaylock swayidle ironbar
+	for tool in swaync gsimplecal fuzzel swaylock swayidle ironbar satty
 	do
 		check_existing "$tool"
 		if [[ $? -ne 0 ]]
