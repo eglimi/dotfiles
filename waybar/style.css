@@ -144,7 +144,8 @@ window#waybar {
         color: @red;
     }
 }
-#pulseaudio.muted { color: @gray; }
+#pulseaudio.muted:not(.mic) { color: @yellow; }   /* speaker (sink) muted — stands out */
+#pulseaudio.mic.source-muted { color: @yellow; }  /* mic (source) muted — stands out */
 #network.disconnected { color: @red; }
 
 #tray menu {
