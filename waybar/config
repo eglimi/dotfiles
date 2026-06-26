@@ -73,7 +73,7 @@
     },
     "custom/swaync": {
         "tooltip": false,
-        "format": "{icon} <span foreground='#fabd2f' rise='2pt' size='8pt'>{}</span>",
+        "format": "{icon}<span foreground='#fabd2f' rise='3pt' size='7pt'>{}</span>",
         "format-icons": {
             "notification": "<span foreground='#fabd2f'>󰂚</span>",
             "none": "󰂜",
