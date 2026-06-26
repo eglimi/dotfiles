@@ -12,7 +12,9 @@
 
 * {
     font-family: "Symbols Nerd Font", "JetBrains Mono";
-    font-size: 14px;
+    /* baseline font size — every other size is an em multiple of this,
+       so changing this one value rescales the whole bar */
+    font-size: 16px;
     min-height: 0;
 }
 
@@ -77,14 +79,10 @@ window#waybar {
 
 #custom-launcher {
     color: @yellow;
-    font-size: 16px;
-    padding: 0 14px;
 }
 
 #custom-power {
     color: @orange;
-    font-size: 15px;
-    padding: 0 14px;
 }
 
 #clock {

@@ -42,6 +42,7 @@
         ]
     },
     "custom/ppd": {
+        "format": "<span rise='2pt' size='80%' foreground='#1b1e1f'>0</span>{}",
         "exec": "~/.config/waybar/ppd.sh",
         "return-type": "json",
         "interval": 5,
@@ -57,7 +58,7 @@
         "ignore-list": []
     },
     "custom/launcher": {
-        "format": "",
+        "format": "󰍜",
         "tooltip": false,
         "on-click": "fuzzel"
     },
@@ -67,22 +68,22 @@
         "tooltip": false
     },
     "clock": {
-        "format": "  {:%a %d %b  %H:%M}",
+        "format": "{:%a %d %b  %H:%M}",
         "tooltip": false,
         "on-click": "gsimplecal"
     },
     "custom/swaync": {
         "tooltip": false,
-        "format": "{icon}<span foreground='#fabd2f' rise='3pt' size='7pt'>{}</span>",
+        "format": "{icon}<span foreground='#fabd2f' rise='2pt' size='60%'>{}</span>",
         "format-icons": {
             "notification": "<span foreground='#fabd2f'>󰂚</span>",
-            "none": "󰂜",
+            "none": "<span foreground='#fabd2f'>󰂜</span>",
             "dnd-notification": "<span foreground='#fabd2f'>󰂛</span>",
-            "dnd-none": "󰂛",
+            "dnd-none": "<span foreground='#fabd2f'>󰂛</span>",
             "inhibited-notification": "<span foreground='#fabd2f'>󰂚</span>",
-            "inhibited-none": "󰂜",
+            "inhibited-none": "<span foreground='#fabd2f'>󰂜</span>",
             "dnd-inhibited-notification": "<span foreground='#fabd2f'>󰂛</span>",
-            "dnd-inhibited-none": "󰂛"
+            "dnd-inhibited-none": "<span foreground='#fabd2f'>󰂛</span>"
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
@@ -96,24 +97,24 @@
         "spacing": 8
     },
     "backlight": {
-        "format": "{icon} <span rise='1pt' size='9pt'>{percent}%</span>",
+        "format": "{icon} <span rise='2pt' size='80%'>{percent}%</span>",
         "format-icons": [
-            "",
-            "",
-            ""
+            "󰃞",
+            "󰃟",
+            "󰃠"
         ],
         "on-scroll-up": "brightnessctl set 5%+",
         "on-scroll-down": "brightnessctl set 5%-",
         "on-click-right": "gnome-control-center display"
     },
     "pulseaudio": {
-        "format": "{icon} <span rise='1pt' size='9pt'>{volume}%</span>",
-        "format-muted": " muted",
+        "format": "{icon} <span rise='2pt' size='80%'>{volume}%</span>",
+        "format-muted": "󰝟 muted",
         "format-icons": {
             "default": [
-                "",
-                "",
-                ""
+                "󰕿",
+                "󰖀",
+                "󰕾"
             ]
         },
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1 || wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0",
@@ -123,8 +124,8 @@
     },
     "pulseaudio#mic": {
         "format": "{format_source}",
-        "format-source": " <span rise='1pt' size='9pt'>{volume}%</span>",
-        "format-source-muted": " muted",
+        "format-source": "󰍬 <span rise='2pt' size='80%'>{volume}%</span>",
+        "format-source-muted": "󰍭 muted",
         "tooltip-format": "Mic: {source_volume}%",
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
         "on-click-right": "pavucontrol",
@@ -132,18 +133,18 @@
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 2%-"
     },
     "network": {
-        "format-wifi": " <span rise='1pt' size='9pt'>{signalStrength}%</span>",
-        "format-ethernet": " <span rise='1pt' size='9pt'>{ipaddr}</span>",
-        "format-disconnected": " offline",
+        "format-wifi": "󰖩 <span rise='2pt' size='80%'>{signalStrength}%</span>",
+        "format-ethernet": "󰈀 <span rise='2pt' size='80%'>{ipaddr}</span>",
+        "format-disconnected": "󰖪 offline",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "on-click": "nm-connection-editor",
         "on-click-right": "nm-connection-editor"
     },
     "bluetooth": {
-        "format": "󰂯 <span rise='1pt' size='9pt'>{num_connections}</span>",
+        "format": "󰂯 <span rise='2pt' size='80%'>{num_connections}</span>",
         "format-disabled": "󰂲",
         "format-off": "󰂲",
-        "format-connected": "󰂱 <span rise='1pt' size='9pt'>{num_connections}</span>",
+        "format-connected": "󰂱 <span rise='2pt' size='80%'>{num_connections}</span>",
         "tooltip-format": "{controller_alias}\n{status}",
         "tooltip-format-connected": "{controller_alias}\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}",
@@ -153,17 +154,17 @@
     "temperature": {
         "thermal-zone": 19,
         "critical-threshold": 85,
-        "format": " <span rise='1pt' size='9pt'>{temperatureC}°C</span>",
-        "format-critical": " <span rise='1pt' size='9pt'>{temperatureC}°C</span>",
+        "format": "󰔏 <span rise='2pt' size='80%'>{temperatureC}°C</span>",
+        "format-critical": "󰸁 <span rise='2pt' size='80%'>{temperatureC}°C</span>",
         "on-click-right": "gnome-system-monitor"
     },
     "cpu": {
-        "format": " <span rise='1pt' size='9pt'>{usage}%</span>",
+        "format": "󰻠 <span rise='2pt' size='80%'>{usage}%</span>",
         "interval": 2,
         "on-click-right": "gnome-system-monitor"
     },
     "memory": {
-        "format": " <span rise='1pt' size='9pt'>{percentage}%</span>",
+        "format": "󰍛 <span rise='2pt' size='80%'>{percentage}%</span>",
         "interval": 5,
         "on-click-right": "gnome-system-monitor"
     },
@@ -172,20 +173,20 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon} <span rise='1pt' size='9pt'>{capacity}%</span>",
-        "format-charging": " <span rise='1pt' size='9pt'>{capacity}%</span>",
-        "format-plugged": " <span rise='1pt' size='9pt'>{capacity}%</span>",
+        "format": "{icon} <span rise='2pt' size='80%'>{capacity}%</span>",
+        "format-charging": "󰂄 <span rise='2pt' size='80%'>{capacity}%</span>",
+        "format-plugged": "󰚥 <span rise='2pt' size='80%'>{capacity}%</span>",
         "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
+            "󰁺",
+            "󰁼",
+            "󰁾",
+            "󰂀",
+            "󰁹"
         ],
         "on-click-right": "gnome-control-center power"
     },
     "custom/power": {
-        "format": "",
+        "format": "󰐥",
         "tooltip": false,
         "on-click": "~/.config/waybar/powermenu.sh"
     }
