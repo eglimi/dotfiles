@@ -126,16 +126,6 @@ link_niri()
 	fi
 }
 
-link_noctalia()
-{
-	check_existing "noctalia"
-	if [[ $? -ne 0 ]]
-	then
-		ln -sf ~/.config/dotfiles/noctalia ~/.config/
-		echo "successfully created link for noctalia"
-	fi
-}
-
 link_waybar()
 {
 	check_existing "waybar"
@@ -202,7 +192,6 @@ if [[ "$*" == "starship" ]]; then link_starship "YES"; fi
 if [[ "$*" == "fish" ]]; then link_fish "YES"; fi
 if [[ "$*" == "jj" ]]; then link_jj "YES"; fi
 if [[ "$*" == "niri" ]]; then link_niri "YES"; fi
-if [[ "$*" == "noctalia" ]]; then link_noctalia "YES"; fi
 if [[ "$*" == "waybar" ]]; then link_waybar "YES"; fi
 if [[ "$*" == "wayland-tools" ]]; then link_wayland_tools "YES"; fi
 if [[ "$*" == "keyd" ]]; then link_keyd "YES"; fi
@@ -220,7 +209,6 @@ then
 	link_fish
 	link_jj
 	link_niri
-	link_noctalia
 	link_waybar
 	link_wayland_tools
 	link_keyd
