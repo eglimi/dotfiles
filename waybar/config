@@ -73,7 +73,7 @@
     },
     "custom/swaync": {
         "tooltip": false,
-        "format": "{icon}<sup><span foreground='#fabd2f'>{}</span></sup>",
+        "format": "{icon} <span foreground='#fabd2f' rise='2pt' size='8pt'>{}</span>",
         "format-icons": {
             "notification": "<span foreground='#fabd2f'>󰂚</span>",
             "none": "󰂜",
@@ -96,7 +96,7 @@
         "spacing": 8
     },
     "backlight": {
-        "format": "{icon} {percent}%",
+        "format": "{icon} <span rise='1pt' size='9pt'>{percent}%</span>",
         "format-icons": [
             "",
             "",
@@ -107,7 +107,7 @@
         "on-click-right": "gnome-control-center display"
     },
     "pulseaudio": {
-        "format": "{icon} {volume}%",
+        "format": "{icon} <span rise='1pt' size='9pt'>{volume}%</span>",
         "format-muted": " muted",
         "format-icons": {
             "default": [
@@ -123,7 +123,7 @@
     },
     "pulseaudio#mic": {
         "format": "{format_source}",
-        "format-source": " {volume}%",
+        "format-source": " <span rise='1pt' size='9pt'>{volume}%</span>",
         "format-source-muted": " muted",
         "tooltip-format": "Mic: {source_volume}%",
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
@@ -132,18 +132,18 @@
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 2%-"
     },
     "network": {
-        "format-wifi": " {signalStrength}%",
-        "format-ethernet": " {ipaddr}",
+        "format-wifi": " <span rise='1pt' size='9pt'>{signalStrength}%</span>",
+        "format-ethernet": " <span rise='1pt' size='9pt'>{ipaddr}</span>",
         "format-disconnected": " offline",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "on-click": "nm-connection-editor",
         "on-click-right": "nm-connection-editor"
     },
     "bluetooth": {
-        "format": "󰂯 {num_connections}",
+        "format": "󰂯 <span rise='1pt' size='9pt'>{num_connections}</span>",
         "format-disabled": "󰂲",
         "format-off": "󰂲",
-        "format-connected": "󰂱 {num_connections}",
+        "format-connected": "󰂱 <span rise='1pt' size='9pt'>{num_connections}</span>",
         "tooltip-format": "{controller_alias}\n{status}",
         "tooltip-format-connected": "{controller_alias}\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}",
@@ -153,17 +153,17 @@
     "temperature": {
         "thermal-zone": 19,
         "critical-threshold": 85,
-        "format": " {temperatureC}°C",
-        "format-critical": " {temperatureC}°C",
+        "format": " <span rise='1pt' size='9pt'>{temperatureC}°C</span>",
+        "format-critical": " <span rise='1pt' size='9pt'>{temperatureC}°C</span>",
         "on-click-right": "gnome-system-monitor"
     },
     "cpu": {
-        "format": " {usage}%",
+        "format": " <span rise='1pt' size='9pt'>{usage}%</span>",
         "interval": 2,
         "on-click-right": "gnome-system-monitor"
     },
     "memory": {
-        "format": " {percentage}%",
+        "format": " <span rise='1pt' size='9pt'>{percentage}%</span>",
         "interval": 5,
         "on-click-right": "gnome-system-monitor"
     },
@@ -172,9 +172,9 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
+        "format": "{icon} <span rise='1pt' size='9pt'>{capacity}%</span>",
+        "format-charging": " <span rise='1pt' size='9pt'>{capacity}%</span>",
+        "format-plugged": " <span rise='1pt' size='9pt'>{capacity}%</span>",
         "format-icons": [
             "",
             "",
