@@ -129,8 +129,8 @@ binds {
 
     // ─── Screenshots ───
     CTRL+Shift+1                        { screenshot; }
-    CTRL+Shift+2                        { screenshot-screen; }
-    CTRL+Shift+3                        { screenshot-window; }
+    CTRL+Shift+2                        { screenshot-window; }
+    CTRL+Shift+3                        { screenshot-screen; }
     CTRL+Shift+4                        { spawn "sh" "-c" "wl-paste | satty --filename -"; }
 
     // ─── Emergency Escape Key ───
