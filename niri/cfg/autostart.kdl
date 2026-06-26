@@ -9,6 +9,9 @@
 //   warp-taskbar -> app-com.cloudflare.WarpTaskbar@autostart.service (xdg-autostart)
 //   xdg-desktop-portal-gnome -> D-Bus activated on demand
 //   waybar       -> waybar.service (graphical-session.target.wants)
+//   polkit-agent -> polkit-agent.service (niri.service.wants), runs
+//                   polkit-gnome-authentication-agent-1; needed for sudo/pkexec
+//                   password dialogs (e.g. balenaEtcher) under niri
 //
 // To add a new startup app:
 //   - has a packaged unit:  systemctl --user add-wants niri.service <name>.service

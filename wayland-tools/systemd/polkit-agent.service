@@ -1,0 +1,11 @@
+[Unit]
+Description=Polkit authentication agent (polkit-mate)
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/libexec/polkit-mate-authentication-agent-1
+Restart=on-failure
+
+[Install]
+WantedBy=niri.service
