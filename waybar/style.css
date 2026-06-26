@@ -11,7 +11,7 @@
 @define-color orange   #fe8019;
 
 * {
-    font-family: "Symbols Nerd Font", "JetBrainsMono Nerd Font", "JetBrains Mono";
+    font-family: "Symbols Nerd Font", "JetBrains Mono";
     font-size: 14px;
     min-height: 0;
 }
