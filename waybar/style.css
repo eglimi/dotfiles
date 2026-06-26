@@ -1,5 +1,5 @@
 /* Gruvbox — floating pills (subtle teal, higher contrast bg) */
-@define-color bg       #1d2021;
+@define-color bg       #1b1e1f;
 @define-color bg1      #3c3836;
 @define-color fg       #83a598;
 @define-color gray     #928374;
@@ -89,7 +89,6 @@ window#waybar {
 
 #clock {
     color: @yellow;
-    font-weight: bold;
 }
 
 #custom-window {
